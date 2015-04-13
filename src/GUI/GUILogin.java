@@ -1,5 +1,8 @@
 package GUI;
 
-public class GUILogin {
+public class GUILogin extends GUIMyFrame{
 
+	public GUILogin() {
+		super.tremeTela();
+	}
 }
