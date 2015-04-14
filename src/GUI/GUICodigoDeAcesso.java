@@ -1,6 +1,6 @@
 package GUI;
 
-import java.awt.Event;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,9 +10,12 @@ import javax.swing.JButton;
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	private int[] codigo;
-	private int contadorDeClicks = 0;
+	private int contadorDeClicks = -1;
 	
 	private JButton bt12, bt34, bt56, bt78, bt90;
+	
+	private Font normal = new Font("Arial", Font.PLAIN, 12);
+	private Font nova = new Font("Arial", Font.BOLD, 15);
 
 	public GUICodigoDeAcesso() {
 		
@@ -23,6 +26,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		
 		bt34 = new JButton("3 ou 4");
 		bt34.addMouseListener(this);
+	
 		
 		bt56 = new JButton("5 ou 6");
 		bt56.addMouseListener(this);
@@ -54,28 +58,34 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		for (int i = 0; i < ordemDosBotoes.length; i++) {
 			switch (ordemDosBotoes[i]) {
 			case 0:
+				bt12.setFont(normal);
 				add(bt12);
 				break;
 				
 			case 1:
+				bt34.setFont(normal);
 				add(bt34);
 				break;
 				
 			case 2:
+				bt56.setFont(normal);
 				add(bt56);
 				break;
 				
 			case 3:
+				bt78.setFont(normal);
 				add(bt78);
 				break;
 				
 			case 4:
+				bt90.setFont(normal);
 				add(bt90);
 				break;
 
 			}
 		}
 		revalidate();
+		contadorDeClicks++;
 
 	}
 
@@ -105,23 +115,18 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == bt12){
 			adicionaBotoes();
-			contadorDeClicks++;
 			
 		} else if(e.getSource() == bt34){
 			adicionaBotoes();
-			contadorDeClicks++;
 			
 		} else if(e.getSource() == bt56){
 			adicionaBotoes();
-			contadorDeClicks++;
 			
 		} else if(e.getSource() == bt78){
 			adicionaBotoes();
-			contadorDeClicks++;
 			
 		} else if(e.getSource() == bt90){
 			adicionaBotoes();
-			contadorDeClicks++;
 			
 		}
 	}
@@ -139,14 +144,41 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == bt12){
+			bt12.setFont(nova);
+			
+		} else if(e.getSource() == bt34){
+			bt34.setFont(nova);
+			
+		} else if(e.getSource() == bt56){
+			bt56.setFont(nova);
+			
+		} else if(e.getSource() == bt78){
+			bt78.setFont(nova);
+			
+		} else if(e.getSource() == bt90){
+			bt90.setFont(nova);
+		}
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getSource() == bt12){
+			bt12.setFont(normal);
+			
+		} else if(e.getSource() == bt34){
+			bt34.setFont(normal);
+			
+		} else if(e.getSource() == bt56){
+			bt56.setFont(normal);
+			
+		} else if(e.getSource() == bt78){
+			bt78.setFont(normal);
+			
+		} else if(e.getSource() == bt90){
+			bt90.setFont(normal);
+		}
 	}
 
 }
