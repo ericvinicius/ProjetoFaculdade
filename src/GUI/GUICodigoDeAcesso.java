@@ -14,8 +14,6 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 	
 	private JButton bt12, bt34, bt56, bt78, bt90;
 
-	private int[] ordemDosBotoes = { 0, 1, 2, 3, 4 };
-
 	public GUICodigoDeAcesso() {
 		
 		configuraJanela();
@@ -36,8 +34,6 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		bt90.addMouseListener(this);
 
 		adcionaBotoes();
-		
-		
 
 	}
 
@@ -47,7 +43,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 	}
 
 	private void adcionaBotoes() {
-		randomizaOrdem();
+		int[] ordemDosBotoes = randomizaOrdem();
 		for (int i = 0; i < ordemDosBotoes.length; i++) {
 			switch (ordemDosBotoes[i]) {
 			case 0:
@@ -75,7 +71,9 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	}
 
-	private void randomizaOrdem() {
+	private int[] randomizaOrdem() {
+		int[] ordemDosBotoes = { 0, 1, 2, 3, 4 };
+		
 		for (int i = 0; i < ordemDosBotoes.length; i++) {
 			int posicaoAleatoria = (int) (Math.random() * (4 - 0) + 0);
 
@@ -83,6 +81,8 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 			ordemDosBotoes[i] = ordemDosBotoes[posicaoAleatoria];
 			ordemDosBotoes[posicaoAleatoria] = aux;
 		}
+		
+		return ordemDosBotoes;
 	}
 
 	public int[] getCodigo() {
