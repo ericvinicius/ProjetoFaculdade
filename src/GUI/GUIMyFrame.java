@@ -9,6 +9,7 @@ public class GUIMyFrame extends JFrame {
 		
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 	}
 
 	public void tremeTela() {
