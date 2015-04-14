@@ -33,7 +33,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		bt90 = new JButton("9 ou 0");
 		bt90.addMouseListener(this);
 
-		adcionaBotoes();
+		adicionaBotoes();
 
 	}
 
@@ -42,7 +42,14 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		setSize(300, 90);
 	}
 
-	private void adcionaBotoes() {
+	private void adicionaBotoes() {
+		remove(bt12);
+		remove(bt34);
+		remove(bt56);
+		remove(bt78);
+		remove(bt90);
+		revalidate();
+		
 		int[] ordemDosBotoes = randomizaOrdem();
 		for (int i = 0; i < ordemDosBotoes.length; i++) {
 			switch (ordemDosBotoes[i]) {
@@ -68,6 +75,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 			}
 		}
+		revalidate();
 
 	}
 
@@ -96,18 +104,23 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == bt12){
+			adicionaBotoes();
 			contadorDeClicks++;
 			
 		} else if(e.getSource() == bt34){
+			adicionaBotoes();
 			contadorDeClicks++;
 			
 		} else if(e.getSource() == bt56){
+			adicionaBotoes();
 			contadorDeClicks++;
 			
 		} else if(e.getSource() == bt78){
+			adicionaBotoes();
 			contadorDeClicks++;
 			
 		} else if(e.getSource() == bt90){
+			adicionaBotoes();
 			contadorDeClicks++;
 			
 		}
