@@ -95,19 +95,19 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(){
+		if(e.getSource() == bt12){
 			contadorDeClicks++;
 			
-		} else if(){
+		} else if(e.getSource() == bt34){
 			contadorDeClicks++;
 			
-		} else if(){
+		} else if(e.getSource() == bt56){
 			contadorDeClicks++;
 			
-		} else if(){
+		} else if(e.getSource() == bt78){
 			contadorDeClicks++;
 			
-		} else if(){
+		} else if(e.getSource() == bt90){
 			contadorDeClicks++;
 			
 		}
