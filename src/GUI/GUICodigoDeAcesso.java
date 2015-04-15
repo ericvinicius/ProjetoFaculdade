@@ -9,7 +9,7 @@ import javax.swing.JButton;
 
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
-	private int[] codigo;
+	private int[] codigo = new int[10];
 	private int contadorDeClicks = -1;
 
 	private JButton bt12, bt34, bt56, bt78, bt90;
@@ -92,7 +92,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		int[] ordemDosBotoes = { 0, 1, 2, 3, 4 };
 
 		for (int i = 0; i < ordemDosBotoes.length; i++) {
-			int posicaoAleatoria = (int) (Math.random() * (4 - 0) + 0);
+			int posicaoAleatoria = (int) (Math.random() * 4);
 
 			int aux = ordemDosBotoes[i];
 			ordemDosBotoes[i] = ordemDosBotoes[posicaoAleatoria];
@@ -106,25 +106,28 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		return codigo;
 	}
 
-	public void setCodigo(int[] codigo) {
-		this.codigo = codigo;
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		
 		if (e.getSource() == bt12) {
+			codigo[contadorDeClicks] = 12;
 			adicionaBotoes();
 
 		} else if (e.getSource() == bt34) {
+			codigo[contadorDeClicks] = 34;
 			adicionaBotoes();
+
 
 		} else if (e.getSource() == bt56) {
+			codigo[contadorDeClicks] = 56;
 			adicionaBotoes();
 
-		} else if (e.getSource() == bt78) {
+		} else if (e.getSource() == bt78) {	
+			codigo[contadorDeClicks] = 78;
 			adicionaBotoes();
 
 		} else if (e.getSource() == bt90) {
+			codigo[contadorDeClicks] = 90;
 			adicionaBotoes();
 
 		}
