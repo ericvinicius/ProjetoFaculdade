@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 public class GUILogin extends GUIMyFrame implements MouseListener{
 
 	private int conta;
-	private int agencia;
+	private int tentativaDeAgencia;
 	private int senha;
 	
 	private JLabel btlogin;
@@ -75,7 +75,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == btlogin){
-			agencia = txtagencia.getText().toString();
+			tentativaDeAgencia = Integer.parseInt(txtagencia.getText().toString());
 		}
 		
 	}
