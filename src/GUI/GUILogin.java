@@ -1,19 +1,23 @@
 package GUI;
 
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.ParseException;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class GUILogin extends GUIMyFrame implements MouseListener{
+public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener{
 
-	private int conta;
-	private int tentativaDeAgencia;
-	private int senha;
+	private String tentativaDeConta;
+	private String tentativaDeAgencia;
+	private String tentativaDeSenha;
 	
 	private JLabel btlogin;
 
@@ -24,42 +28,54 @@ public class GUILogin extends GUIMyFrame implements MouseListener{
 	private JLabel lblconta;
 	private JLabel lblagencia;
 	private JLabel lblsenha;
-	private JTextField txtconta;
-	private JTextField txtagencia;
+	private JFormattedTextField txtconta;
+	private JFormattedTextField txtagencia;
 	private JPasswordField txtsenha;
 	
 	public GUILogin() {
-		configuraJanela();
+		
 		carregaImagens();
 		
 		//Conta
 		lblconta = new JLabel("Conta   ");
-		getContentPane().add(lblconta);
+		add(lblconta);
 		
-		txtconta = new JTextField();
+		txtconta = new JFormattedTextField(criadorDeMascara("conta"));
+		txtconta.setSelectionStart(0);
 		txtconta.setColumns(12);
-		getContentPane().add(txtconta);
+		txtconta.addKeyListener(this);
+		add(txtconta);
 		
 		//Agencia
 		lblagencia = new JLabel("Agencia");
-		getContentPane().add(lblagencia);
+		add(lblagencia);
 		
-		txtagencia = new JTextField();
+		txtagencia = new JFormattedTextField(criadorDeMascara("agencia"));
+		txtagencia.setSelectionStart(0);
 		txtagencia.setColumns(12);
-		getContentPane().add(txtagencia);
+		txtagencia.addKeyListener(this);
+		add(txtagencia);
 		
 		//Senha
 		lblsenha = new JLabel("Senha    ");
-		getContentPane().add(lblsenha);
+		add(lblsenha);
 		
 		txtsenha = new JPasswordField();
 		txtsenha.setColumns(12);
-		getContentPane().add(txtsenha);
+		add(txtsenha);
 		
 		//botao login
 		btlogin = new JLabel(imageLock);
 		btlogin.addMouseListener(this);
-		getContentPane().add(btlogin);
+		add(btlogin);
+		
+		configuraPagina();
+	}
+
+	private void configuraPagina() {
+		setLayout(new FlowLayout());
+		setSize(250, 200);
+		setLocationRelativeTo(null);
 	}
 
 	private void carregaImagens() {
@@ -67,15 +83,14 @@ public class GUILogin extends GUIMyFrame implements MouseListener{
 		imageUnlock = new ImageIcon("src/images/unlocked.png");
 	}
 
-	private void configuraJanela() {
-		getContentPane().setLayout(new FlowLayout());
-		setSize(250, 200);
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == btlogin){
-			tentativaDeAgencia = Integer.parseInt(txtagencia.getText().toString());
+			tentativaDeAgencia = txtagencia.getValue().toString();
+			tentativaDeConta = txtconta.getValue().toString();
+			tentativaDeSenha = txtsenha.getPassword().toString();
+			
+			System.out.printf("agencia: %s conta: %s senha: %s", tentativaDeAgencia, tentativaDeConta, tentativaDeSenha);
 		}
 		
 	}
@@ -104,5 +119,26 @@ public class GUILogin extends GUIMyFrame implements MouseListener{
 		if(e.getSource() == btlogin){
 			btlogin.setIcon(imageLock);
 		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		//Se for uma letra
+		if(e.getKeyChar() > 'a' && e.getKeyChar() < 'Z' ){
+			//delete
+            e.consume();
+        }
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -146,14 +146,12 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		JButton botaoSelecionado = (JButton) e.getSource();
-		botaoSelecionado.setFont(nova);
+		((JButton)e.getSource()).setFont(nova);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		JButton botaoSelecionado = (JButton) e.getSource();
-		botaoSelecionado.setFont(normal);
+		((JButton) e.getSource()).setFont(normal);
 	}
 
 }
