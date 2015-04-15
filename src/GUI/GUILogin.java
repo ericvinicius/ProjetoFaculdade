@@ -6,6 +6,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class GUILogin extends GUIMyFrame implements MouseListener{
 
@@ -14,18 +16,50 @@ public class GUILogin extends GUIMyFrame implements MouseListener{
 	private int senha;
 	
 	private JLabel btlogin;
+
 	
 	private ImageIcon imageLock;
 	private ImageIcon imageUnlock;
+	
+	private JLabel lblconta;
+	private JLabel lblagencia;
+	private JLabel lblsenha;
+	private JTextField txtconta;
+	private JTextField txtagencia;
+	private JPasswordField txtsenha;
 	
 	public GUILogin() {
 		configuraJanela();
 		carregaImagens();
 		
+		//Conta
+		lblconta = new JLabel("Conta   ");
+		getContentPane().add(lblconta);
+		
+		txtconta = new JTextField();
+		txtconta.setColumns(12);
+		getContentPane().add(txtconta);
+		
+		//Agencia
+		lblagencia = new JLabel("Agencia");
+		getContentPane().add(lblagencia);
+		
+		txtagencia = new JTextField();
+		txtagencia.setColumns(12);
+		getContentPane().add(txtagencia);
+		
+		//Senha
+		lblsenha = new JLabel("Senha    ");
+		getContentPane().add(lblsenha);
+		
+		txtsenha = new JPasswordField();
+		txtsenha.setColumns(12);
+		getContentPane().add(txtsenha);
+		
+		//botao login
 		btlogin = new JLabel(imageLock);
 		btlogin.addMouseListener(this);
-		
-		add(btlogin);
+		getContentPane().add(btlogin);
 	}
 
 	private void carregaImagens() {
@@ -34,13 +68,15 @@ public class GUILogin extends GUIMyFrame implements MouseListener{
 	}
 
 	private void configuraJanela() {
-		setLayout(new FlowLayout());
-		setSize(200, 200);
+		getContentPane().setLayout(new FlowLayout());
+		setSize(250, 200);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == btlogin){
+			agencia = txtagencia.getText().toString();
+		}
 		
 	}
 
