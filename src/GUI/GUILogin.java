@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
@@ -88,12 +89,12 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 			try {
 				UsuarioTentativa.setAgencia(txtagencia.getValue().toString());
 				UsuarioTentativa.setConta(txtconta.getValue().toString());
-				UsuarioTentativa.setSenha(txtsenha.getPassword().toString());
+				UsuarioTentativa.setSenha(txtsenha.getPassword());
 
 				System.out.println("[Tentativa] conta{"
 						+ UsuarioTentativa.getConta() + "} --- agencia{"
 						+ UsuarioTentativa.getAgencia() + "} --- senha{"
-						+ UsuarioTentativa.getSenha() + "}");
+						+ UsuarioTentativa.getSenha() + "}\n");
 
 			} catch (Exception e1) {
 				System.out

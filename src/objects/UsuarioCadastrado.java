@@ -3,7 +3,7 @@ package objects;
 public class UsuarioCadastrado {
 	private static String conta;
 	private static String agencia;
-	private static String senha;
+	private static char[] senha;
 	private static int[] codigoDeAcesso = new int[4];
 
 	public static String getConta() {
@@ -22,11 +22,11 @@ public class UsuarioCadastrado {
 		UsuarioCadastrado.agencia = agencia;
 	}
 
-	public static String getSenha() {
+	public static char[] getSenha() {
 		return senha;
 	}
 
-	public static void setSenha(String senha) {
+	public static void setSenha(char[] senha) {
 		UsuarioCadastrado.senha = senha;
 	}
 
