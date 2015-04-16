@@ -100,7 +100,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 				
 			} finally {
 				if (loginOk()) {
-
+					
 				} else {
 					if (jaTremeuATelaDeLogin) {
 						Utilites.tremeTelaNormal(this);
@@ -114,20 +114,16 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 	}
 
 	private boolean loginOk() {
-
+		
 		return false;
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -155,13 +151,9 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 }

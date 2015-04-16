@@ -6,7 +6,6 @@ public class GUIMyFrame extends JFrame {
 
 	public GUIMyFrame() {
 		configuraTodasAsJanelas();
-
 	}
 
 	private void configuraTodasAsJanelas() {
