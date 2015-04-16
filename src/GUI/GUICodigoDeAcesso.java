@@ -6,10 +6,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+import utils.Utilites;
 
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
-	private int[] codigo = new int[10];
+	private int[] codigo = new int[4];
 	private int contadorDeClicks = -1;
 
 	private JButton bt12, bt34, bt56, bt78, bt90;
@@ -60,27 +63,22 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 				bt12.setFont(normal);
 				add(bt12);
 				break;
-
 			case 1:
 				bt34.setFont(normal);
 				add(bt34);
 				break;
-
 			case 2:
 				bt56.setFont(normal);
 				add(bt56);
 				break;
-
 			case 3:
 				bt78.setFont(normal);
 				add(bt78);
 				break;
-
 			case 4:
 				bt90.setFont(normal);
 				add(bt90);
 				break;
-
 			}
 		}
 		revalidate();
@@ -98,7 +96,6 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 			ordemDosBotoes[i] = ordemDosBotoes[posicaoAleatoria];
 			ordemDosBotoes[posicaoAleatoria] = aux;
 		}
-
 		return ordemDosBotoes;
 	}
 
@@ -108,40 +105,34 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
 		if (e.getSource() == bt12) {
 			codigo[contadorDeClicks] = 12;
-			adicionaBotoes();
-
 		} else if (e.getSource() == bt34) {
 			codigo[contadorDeClicks] = 34;
-			adicionaBotoes();
-
-
 		} else if (e.getSource() == bt56) {
 			codigo[contadorDeClicks] = 56;
-			adicionaBotoes();
-
 		} else if (e.getSource() == bt78) {	
 			codigo[contadorDeClicks] = 78;
-			adicionaBotoes();
-
 		} else if (e.getSource() == bt90) {
 			codigo[contadorDeClicks] = 90;
-			adicionaBotoes();
-
+		}
+		adicionaBotoes();
+		if(contadorDeClicks == 4){
+			if(Utilites.loginOK(codigo)){
+				JOptionPane.showMessageDialog(this, "Logado com sucesso!");
+			} else {
+				Utilites.tremeTelaNormal(this);
+			}
+			
 		}
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

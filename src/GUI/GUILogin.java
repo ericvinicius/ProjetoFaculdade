@@ -99,8 +99,8 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 				System.out.println("Usuario deixou os campos em branco na tela de login!");
 				
 			} finally {
-				if (loginOk()) {
-					
+				if (Utilites.loginOk(tentativaDeAgencia, tentativaDeConta, tentativaDeSenha)) {
+					new GUICodigoDeAcesso();
 				} else {
 					if (jaTremeuATelaDeLogin) {
 						Utilites.tremeTelaNormal(this);
@@ -111,11 +111,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 				}
 			}
 		}
-	}
-
-	private boolean loginOk() {
-		
-		return false;
 	}
 
 	@Override

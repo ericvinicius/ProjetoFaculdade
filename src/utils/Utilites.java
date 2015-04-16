@@ -97,4 +97,18 @@ public class Utilites {
 		janela.add(lblerro);
 		
 	}
+
+
+
+	public static boolean loginOK(int[] v) {
+		
+		return false;
+	}
+
+
+
+	public static boolean loginOk(String tentativaDeAgencia,
+			String tentativaDeConta, String tentativaDeSenha) {
+		return false;
+	}
 }
