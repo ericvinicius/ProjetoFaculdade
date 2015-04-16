@@ -6,8 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.MaskFormatter;
 
+import objects.Usuario;
+import textFile.ReadTextFile;
+
 public class Utilites {
-	
+
 	public static void tremeTelaNormal(JFrame janela) {
 		try {
 			int originalX = janela.getLocation().x;
@@ -37,8 +40,6 @@ public class Utilites {
 			System.out.println(ex.toString());
 		}
 	}
-	
-	
 
 	public static MaskFormatter criadorDeMascara(String paraOnde) {
 		MaskFormatter mascara = new MaskFormatter();
@@ -58,57 +59,63 @@ public class Utilites {
 
 	}
 
-
-
 	public static void tremeTelaLogin(JFrame janela) {
 		int originalX = janela.getLocation().x;
 		int originalY = janela.getLocation().y;
 		int originalHeight = janela.getHeight();
 		int originalWidth = janela.getWidth();
-		
+
 		long sleepTime = 30;
 		int aumento = 12;
-		
+
 		JLabel lblerro = new JLabel("Dados incorretos, tente novamente!");
 		lblerro.setForeground(Color.RED);
-		
+
 		try {
 			for (int i = 0; i <= 2; i++) {
-				janela.setBounds(originalX + 5, originalY, originalWidth, originalHeight + aumento);
+				janela.setBounds(originalX + 5, originalY, originalWidth,
+						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX + 5, originalY + 5, originalWidth, originalHeight + aumento);
+				janela.setBounds(originalX + 5, originalY + 5, originalWidth,
+						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX, originalY + 5, originalWidth, originalHeight + aumento);
+				janela.setBounds(originalX, originalY + 5, originalWidth,
+						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX, originalY, originalWidth, originalHeight + aumento);
+				janela.setBounds(originalX, originalY, originalWidth,
+						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX - 5, originalY, originalWidth, originalHeight + aumento);
+				janela.setBounds(originalX - 5, originalY, originalWidth,
+						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX - 5, originalY - 5, originalWidth, originalHeight + aumento);
+				janela.setBounds(originalX - 5, originalY - 5, originalWidth,
+						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX, originalY - 5, originalWidth, originalHeight + aumento);
+				janela.setBounds(originalX, originalY - 5, originalWidth,
+						originalHeight + aumento);
 				Thread.sleep(sleepTime);
 			}
 			janela.setLocation(originalX, originalY);
 		} catch (Exception ex) {
 			System.out.println(ex.toString());
 		}
-		
+
 		janela.add(lblerro);
-		
+
 	}
 
-
-
 	public static boolean loginOK(int[] v) {
-		
 		return false;
 	}
 
-
-
 	public static boolean loginOk(String tentativaDeAgencia,
 			String tentativaDeConta, String tentativaDeSenha) {
+		ReadTextFile leitorDeArquivo = new ReadTextFile();
+		Usuario user = leitorDeArquivo.lerArquivoParaLogin("ACESSO.txt");
+		
+		if(user.getAgencia().equals(tentativaDeAgencia) && user.getConta().equals(tentativaDeConta)){
+			return true;
+		}
 		return false;
 	}
 }
