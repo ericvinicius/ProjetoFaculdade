@@ -1,11 +1,13 @@
 package utils;
 
 import java.awt.Color;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.MaskFormatter;
 
+import objects.UsuarioTentativa;
 import textFile.ReadTextFile;
 
 public class Utilites {
@@ -73,26 +75,26 @@ public class Utilites {
 
 		try {
 			for (int i = 0; i <= 2; i++) {
-				janela.setBounds(originalX + movimento, originalY, originalWidth,
-						originalHeight + aumento);
+				janela.setBounds(originalX + movimento, originalY,
+						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX + movimento, originalY + movimento, originalWidth,
-						originalHeight + aumento);
+				janela.setBounds(originalX + movimento, originalY + movimento,
+						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX, originalY + movimento, originalWidth,
-						originalHeight + aumento);
+				janela.setBounds(originalX, originalY + movimento,
+						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
 				janela.setBounds(originalX, originalY, originalWidth,
 						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX - movimento, originalY, originalWidth,
-						originalHeight + aumento);
+				janela.setBounds(originalX - movimento, originalY,
+						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX - movimento, originalY - movimento, originalWidth,
-						originalHeight + aumento);
+				janela.setBounds(originalX - movimento, originalY - movimento,
+						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX, originalY - movimento, originalWidth,
-						originalHeight + aumento);
+				janela.setBounds(originalX, originalY - movimento,
+						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
 			}
 			janela.setLocation(originalX, originalY);
@@ -106,5 +108,16 @@ public class Utilites {
 
 	public static boolean loginOk() {
 		return ReadTextFile.lerArquivoParaLogin("ACESSO.txt");
+	}
+
+	public static boolean verificaAdmin() {
+		String zero = "000";
+		if (UsuarioTentativa.getConta().equals("00.000-0")
+				&& UsuarioTentativa.getAgencia().equals("0000-0")
+				&& Arrays.equals(UsuarioTentativa.getSenha(), zero.toCharArray())){
+			return true;
+			
+		}
+		return false;
 	}
 }

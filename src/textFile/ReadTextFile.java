@@ -38,6 +38,7 @@ public class ReadTextFile {
 							+ UsuarioCadastrado.getAgencia());
 					System.out.println("\n --- senha ---> "
 							+ UsuarioCadastrado.getSenha());
+					
 					leitor.close();
 					return true;
 				}

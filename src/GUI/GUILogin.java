@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.FlowLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -10,12 +12,15 @@ import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
 import objects.UsuarioTentativa;
 import utils.Utilites;
 
-public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
+public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener, ItemListener {
 
 	private JLabel btlogin;
 
@@ -68,6 +73,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 		btlogin = new JLabel(imageLock);
 		btlogin.addMouseListener(this);
 		add(btlogin);
+		
 
 		configuraPagina();
 	}
@@ -95,13 +101,18 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 						+ UsuarioTentativa.getConta() + "} --- agencia{"
 						+ UsuarioTentativa.getAgencia() + "} --- senha{"
 						+ UsuarioTentativa.getSenha() + "}\n");
-
+				
 			} catch (Exception e1) {
 				System.out
 						.println("Usuario deixou os campos em branco na tela de login!\n");
 
 			} finally {
-				if (Utilites.loginOk()) {
+				if(Utilites.verificaAdmin()){
+					System.out.println("Admin tentando entrar no sistema");
+					opcaoAdmin.setText("Quero ir para Bravus!");
+					opcaoAdmin.addItemListener(this);
+										
+				} else if (Utilites.loginOk()) {
 					new GUICodigoDeAcesso();
 				} else {
 					if (jaTremeuATelaDeLogin) {
@@ -112,11 +123,19 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 					}
 				}
 			}
-		}
+		} 
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		if(e.getSource() == opcaoAdmin){
+			System.out.println("Admin vai entrar com a senha!");
+			String passe = JOptionPane.showInputDialog(this, "Quem é voce? para ir para Bravus.");
+			
+			if(passe.equals("valar morghulis")){
+				JOptionPane.showMessageDialog(this, "Valar Dohaeris");
+			}
+		}
 	}
 
 	@Override
@@ -152,5 +171,18 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if(e.getSource() == opcaoAdmin){
+			System.out.println("Admin vai entrar com a senha!");
+			String passe = JOptionPane.showInputDialog(this, "Quem é voce? para ir para Bravus.");
+			
+			if(passe.equals("valar morghulis")){
+				JOptionPane.showMessageDialog(this, "Valar Dohaeris");
+			}
+		}
+		
 	}
 }
