@@ -5,70 +5,72 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.ParseException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
-public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener{
+import utils.Utilites;
+
+public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 
 	private String tentativaDeConta;
 	private String tentativaDeAgencia;
 	private String tentativaDeSenha;
-	
+
 	private JLabel btlogin;
 
-	
 	private ImageIcon imageLock;
 	private ImageIcon imageUnlock;
-	
+
 	private JLabel lblconta;
 	private JLabel lblagencia;
 	private JLabel lblsenha;
 	private JFormattedTextField txtconta;
 	private JFormattedTextField txtagencia;
 	private JPasswordField txtsenha;
-	
+
+	private boolean jaTremeuATelaDeLogin = false;
+
 	public GUILogin() {
-		
+
 		carregaImagens();
-		
-		//Conta
+
+		// Conta
 		lblconta = new JLabel("Conta   ");
 		add(lblconta);
-		
-		txtconta = new JFormattedTextField(criadorDeMascara("conta"));
+
+		txtconta = new JFormattedTextField(Utilites.criadorDeMascara("conta"));
 		txtconta.setSelectionStart(0);
 		txtconta.setColumns(12);
 		txtconta.addKeyListener(this);
 		add(txtconta);
-		
-		//Agencia
+
+		// Agencia
 		lblagencia = new JLabel("Agencia");
 		add(lblagencia);
-		
-		txtagencia = new JFormattedTextField(criadorDeMascara("agencia"));
+
+		txtagencia = new JFormattedTextField(
+				Utilites.criadorDeMascara("agencia"));
 		txtagencia.setSelectionStart(0);
 		txtagencia.setColumns(12);
 		txtagencia.addKeyListener(this);
 		add(txtagencia);
-		
-		//Senha
+
+		// Senha
 		lblsenha = new JLabel("Senha    ");
 		add(lblsenha);
-		
+
 		txtsenha = new JPasswordField();
 		txtsenha.setColumns(12);
 		add(txtsenha);
-		
-		//botao login
+
+		// botao login
 		btlogin = new JLabel(imageLock);
 		btlogin.addMouseListener(this);
 		add(btlogin);
-		
+
 		configuraPagina();
 	}
 
@@ -85,60 +87,81 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getSource() == btlogin){
-			tentativaDeAgencia = txtagencia.getValue().toString();
-			tentativaDeConta = txtconta.getValue().toString();
-			tentativaDeSenha = txtsenha.getPassword().toString();
-			
-			System.out.printf("agencia: %s conta: %s senha: %s", tentativaDeAgencia, tentativaDeConta, tentativaDeSenha);
+		if (e.getSource() == btlogin) {
+			try {
+				tentativaDeAgencia = txtagencia.getValue().toString();
+				tentativaDeConta = txtconta.getValue().toString();
+				tentativaDeSenha = txtsenha.getPassword().toString();
+
+				System.out.printf("agencia: %s conta: %s senha: %s",
+						tentativaDeAgencia, tentativaDeConta, tentativaDeSenha);
+			} catch(Exception e1){
+				System.out.println("Usuario deixou os campos em branco na tela de login!");
+				
+			} finally {
+				if (loginOk()) {
+
+				} else {
+					if (jaTremeuATelaDeLogin) {
+						Utilites.tremeTelaNormal(this);
+					} else {
+						jaTremeuATelaDeLogin = true;
+						Utilites.tremeTelaLogin(this);
+					}
+				}
+			}
 		}
-		
+	}
+
+	private boolean loginOk() {
+
+		return false;
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		if(e.getSource() == btlogin){
+		if (e.getSource() == btlogin) {
 			btlogin.setIcon(imageUnlock);
 		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		if(e.getSource() == btlogin){
+		if (e.getSource() == btlogin) {
 			btlogin.setIcon(imageLock);
 		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		//Se for uma letra
-		if(e.getKeyChar() > 'a' && e.getKeyChar() < 'Z' ){
-			//delete
-            e.consume();
-        }
+		// Se for uma letra
+		if (e.getKeyChar() > 'a' && e.getKeyChar() < 'Z') {
+			// delete
+			e.consume();
+		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

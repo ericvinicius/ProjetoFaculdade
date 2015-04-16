@@ -19,8 +19,6 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	public GUICodigoDeAcesso() {
 
-		configuraJanela();
-
 		bt12 = new JButton("1 ou 2");
 		bt12.addMouseListener(this);
 
@@ -37,12 +35,14 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		bt90.addMouseListener(this);
 
 		adicionaBotoes();
+		configuraJanela();
 
 	}
 
 	private void configuraJanela() {
 		setLayout(new GridLayout());
 		setSize(300, 90);
+		setLocationRelativeTo(null);
 	}
 
 	private void adicionaBotoes() {
