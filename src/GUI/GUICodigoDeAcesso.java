@@ -111,19 +111,19 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 			codigo[contadorDeClicks] = 34;
 		} else if (e.getSource() == bt56) {
 			codigo[contadorDeClicks] = 56;
-		} else if (e.getSource() == bt78) {	
+		} else if (e.getSource() == bt78) {
 			codigo[contadorDeClicks] = 78;
 		} else if (e.getSource() == bt90) {
 			codigo[contadorDeClicks] = 90;
 		}
 		adicionaBotoes();
-		if(contadorDeClicks == 4){
-			if(Utilites.loginOk()){
+		if (contadorDeClicks == 4) {
+			if (Utilites.loginOk()) {
 				JOptionPane.showMessageDialog(this, "Logado com sucesso!");
 			} else {
 				Utilites.tremeTelaNormal(this);
 			}
-			
+
 		}
 	}
 
@@ -137,7 +137,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		((JButton)e.getSource()).setFont(nova);
+		((JButton) e.getSource()).setFont(nova);
 	}
 
 	@Override

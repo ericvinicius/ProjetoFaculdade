@@ -105,6 +105,6 @@ public class Utilites {
 	}
 
 	public static boolean loginOk() {
-		return ReadTextFile.lerArquivoParaLogin("ACESSO.txt");		
+		return ReadTextFile.lerArquivoParaLogin("ACESSO.txt");
 	}
 }

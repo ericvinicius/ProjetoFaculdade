@@ -90,12 +90,16 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 				UsuarioTentativa.setConta(txtconta.getValue().toString());
 				UsuarioTentativa.setSenha(txtsenha.getPassword().toString());
 
-				System.out.printf("[Tentativa] conta: %s agencia: %s senha: %s \n\n",
-						UsuarioTentativa.getConta(), UsuarioTentativa.getAgencia(), UsuarioTentativa.getSenha());
-				
-			} catch(Exception e1){
-				System.out.println("Usuario deixou os campos em branco na tela de login!");
-				
+				System.out.printf(
+						"[Tentativa] conta: %s agencia: %s senha: %s \n\n",
+						UsuarioTentativa.getConta(),
+						UsuarioTentativa.getAgencia(),
+						UsuarioTentativa.getSenha());
+
+			} catch (Exception e1) {
+				System.out
+						.println("Usuario deixou os campos em branco na tela de login!");
+
 			} finally {
 				if (Utilites.loginOk()) {
 					new GUICodigoDeAcesso();
