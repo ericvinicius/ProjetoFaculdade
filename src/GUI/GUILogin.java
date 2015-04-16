@@ -97,7 +97,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 
 			} catch (Exception e1) {
 				System.out
-						.println("Usuario deixou os campos em branco na tela de login!");
+						.println("Usuario deixou os campos em branco na tela de login!\n");
 
 			} finally {
 				if (Utilites.loginOk()) {
