@@ -118,7 +118,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		}
 		adicionaBotoes();
 		if(contadorDeClicks == 4){
-			if(Utilites.loginOK(codigo)){
+			if(Utilites.loginOk()){
 				JOptionPane.showMessageDialog(this, "Logado com sucesso!");
 			} else {
 				Utilites.tremeTelaNormal(this);

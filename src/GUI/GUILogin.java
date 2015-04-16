@@ -11,13 +11,10 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 
+import objects.UsuarioTentativa;
 import utils.Utilites;
 
 public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
-
-	private String tentativaDeConta;
-	private String tentativaDeAgencia;
-	private String tentativaDeSenha;
 
 	private JLabel btlogin;
 
@@ -89,18 +86,18 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btlogin) {
 			try {
-				tentativaDeAgencia = txtagencia.getValue().toString();
-				tentativaDeConta = txtconta.getValue().toString();
-				tentativaDeSenha = txtsenha.getPassword().toString();
+				UsuarioTentativa.setAgencia(txtagencia.getValue().toString());
+				UsuarioTentativa.setConta(txtconta.getValue().toString());
+				UsuarioTentativa.setSenha(txtsenha.getPassword().toString());
 
-				System.out.printf("agencia: %s conta: %s senha: %s",
-						tentativaDeAgencia, tentativaDeConta, tentativaDeSenha);
+				System.out.printf("[Tentativa] conta: %s agencia: %s senha: %s \n\n",
+						UsuarioTentativa.getConta(), UsuarioTentativa.getAgencia(), UsuarioTentativa.getSenha());
 				
 			} catch(Exception e1){
 				System.out.println("Usuario deixou os campos em branco na tela de login!");
 				
 			} finally {
-				if (Utilites.loginOk(tentativaDeAgencia, tentativaDeConta, tentativaDeSenha)) {
+				if (Utilites.loginOk()) {
 					new GUICodigoDeAcesso();
 				} else {
 					if (jaTremeuATelaDeLogin) {

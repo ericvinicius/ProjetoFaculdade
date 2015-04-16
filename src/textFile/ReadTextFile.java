@@ -4,35 +4,37 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
-import objects.Usuario;
+import objects.UsuarioCadastrado;
+import objects.UsuarioTentativa;
 
 public class ReadTextFile {
-
-	private Scanner leitor;
-
-	public Usuario lerArquivoParaLogin(String arquivo) {
-		Usuario usurio = new Usuario();
+	public static boolean lerArquivoParaLogin(String arquivo) {
+		Scanner leitor = null;
 		try {
-			leitor = new Scanner(new FileReader("src/textFile/" + arquivo))
+			leitor = new Scanner(new FileReader(arquivo))
 					.useDelimiter("\\||\\n");
 
 			while (leitor.hasNext()) {
-				usurio.setConta(leitor.next());
-				System.out.println("conta ---> " + usurio.getConta());
-				usurio.setAgencia(leitor.next());
-				System.out.println("agencia ---> " + usurio.getAgencia());
+				UsuarioCadastrado.setConta(leitor.next());
+				UsuarioCadastrado.setAgencia(leitor.next());
+				
+				System.out.println("[Leitura atual] Conta{" + UsuarioCadastrado.getConta() + "} --- Agencia{" + UsuarioCadastrado.getAgencia() + "}\n");
+				
+				if(UsuarioCadastrado.getConta().equals(UsuarioTentativa.getConta()) && UsuarioCadastrado.getAgencia().equals(UsuarioTentativa.getAgencia())){
+					System.out.println("\n --- conta ---> " + UsuarioCadastrado.getConta());
+					System.out.println("\n --- agencia ---> " + UsuarioCadastrado.getAgencia());
+					leitor.close();
+					return true;
+				}
+				
 			}
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("\nArquivo nao encontrado");
 			e.printStackTrace();
 		} 
-		fecharArquivo();
-		return usurio;
-	}
-
-	public void fecharArquivo() {
-		if (leitor != null)
-			leitor.close();
+		leitor.close();
+		return false;
+		
 	}
 }

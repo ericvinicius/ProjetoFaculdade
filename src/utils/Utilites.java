@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.MaskFormatter;
 
-import objects.Usuario;
+import objects.UsuarioCadastrado;
 import textFile.ReadTextFile;
 
 public class Utilites {
@@ -104,18 +104,7 @@ public class Utilites {
 
 	}
 
-	public static boolean loginOK(int[] v) {
-		return false;
-	}
-
-	public static boolean loginOk(String tentativaDeAgencia,
-			String tentativaDeConta, String tentativaDeSenha) {
-		ReadTextFile leitorDeArquivo = new ReadTextFile();
-		Usuario user = leitorDeArquivo.lerArquivoParaLogin("ACESSO.txt");
-		
-		if(user.getAgencia().equals(tentativaDeAgencia) && user.getConta().equals(tentativaDeConta)){
-			return true;
-		}
-		return false;
+	public static boolean loginOk() {
+		return ReadTextFile.lerArquivoParaLogin("ACESSO.txt");		
 	}
 }
