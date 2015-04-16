@@ -90,11 +90,10 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 				UsuarioTentativa.setConta(txtconta.getValue().toString());
 				UsuarioTentativa.setSenha(txtsenha.getPassword().toString());
 
-				System.out.printf(
-						"[Tentativa] conta: %s agencia: %s senha: %s \n\n",
-						UsuarioTentativa.getConta(),
-						UsuarioTentativa.getAgencia(),
-						UsuarioTentativa.getSenha());
+				System.out.println("[Tentativa] conta{"
+						+ UsuarioTentativa.getConta() + "} --- agencia{"
+						+ UsuarioTentativa.getAgencia() + "} --- senha{"
+						+ UsuarioTentativa.getSenha() + "}");
 
 			} catch (Exception e1) {
 				System.out

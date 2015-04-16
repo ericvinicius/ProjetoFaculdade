@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.MaskFormatter;
 
-import objects.UsuarioCadastrado;
 import textFile.ReadTextFile;
 
 public class Utilites {
@@ -67,31 +66,32 @@ public class Utilites {
 
 		long sleepTime = 30;
 		int aumento = 12;
+		int movimento = 5;
 
 		JLabel lblerro = new JLabel("Dados incorretos, tente novamente!");
 		lblerro.setForeground(Color.RED);
 
 		try {
 			for (int i = 0; i <= 2; i++) {
-				janela.setBounds(originalX + 5, originalY, originalWidth,
+				janela.setBounds(originalX + movimento, originalY, originalWidth,
 						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX + 5, originalY + 5, originalWidth,
+				janela.setBounds(originalX + movimento, originalY + movimento, originalWidth,
 						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX, originalY + 5, originalWidth,
+				janela.setBounds(originalX, originalY + movimento, originalWidth,
 						originalHeight + aumento);
 				Thread.sleep(sleepTime);
 				janela.setBounds(originalX, originalY, originalWidth,
 						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX - 5, originalY, originalWidth,
+				janela.setBounds(originalX - movimento, originalY, originalWidth,
 						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX - 5, originalY - 5, originalWidth,
+				janela.setBounds(originalX - movimento, originalY - movimento, originalWidth,
 						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX, originalY - 5, originalWidth,
+				janela.setBounds(originalX, originalY - movimento, originalWidth,
 						originalHeight + aumento);
 				Thread.sleep(sleepTime);
 			}
