@@ -4,15 +4,18 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import objects.UsuarioCadastrado;
+import objects.UsuarioTentativa;
 import utils.Utilites;
 
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
-	private int[] codigo = new int[4];
+	private int[] codigo = new int[Utilites.TAMANHO_CODIGO_DE_ACESSO];
 	private int contadorDeClicks = -1;
 
 	private JButton bt12, bt34, bt56, bt78, bt90;
@@ -117,11 +120,15 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 			codigo[contadorDeClicks] = 90;
 		}
 		adicionaBotoes();
-		if (contadorDeClicks == 4) {
-			if (Utilites.loginOk()) {
+		if (contadorDeClicks == Utilites.TAMANHO_CODIGO_DE_ACESSO) {
+			UsuarioTentativa.setCodigoDeAcesso(codigo);
+			if (Utilites.codigoDeAcessoOk()) {
+				dispose();
 				JOptionPane.showMessageDialog(this, "Logado com sucesso!");
+				//TODO:Falta criar a tela principal do sistema
 			} else {
 				Utilites.tremeTelaNormal(this);
+				contadorDeClicks = 0;
 			}
 
 		}

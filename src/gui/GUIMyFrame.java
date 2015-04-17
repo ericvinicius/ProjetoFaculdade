@@ -17,7 +17,6 @@ public class GUIMyFrame extends JFrame {
 		barraDeMenu = new JMenuBar();
 		opcoes = new JMenu("Opcoes");
 		opcaoAdmin = new JMenuItem();
-		opcoes.add(opcaoAdmin);
 		
 		barraDeMenu.add(opcoes);
 		

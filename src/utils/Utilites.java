@@ -7,10 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.MaskFormatter;
 
+import objects.UsuarioCadastrado;
 import objects.UsuarioTentativa;
 import textFile.ReadTextFile;
 
 public class Utilites {
+
+	public static final int TAMANHO_CODIGO_DE_ACESSO = 4;
 
 	public static void tremeTelaNormal(JFrame janela) {
 		try {
@@ -111,7 +114,7 @@ public class Utilites {
 	}
 
 	public static boolean verificaAdmin() {
-		String zero = "000";
+		String zero = "0000";
 		if (UsuarioTentativa.getConta().equals("00.000-0")
 				&& UsuarioTentativa.getAgencia().equals("0000-0")
 				&& Arrays.equals(UsuarioTentativa.getSenha(), zero.toCharArray())){
@@ -119,5 +122,9 @@ public class Utilites {
 			
 		}
 		return false;
+	}
+
+	public static boolean codigoDeAcessoOk() {
+		return Arrays.equals(UsuarioTentativa.getCodigoDeAcesso(), UsuarioCadastrado.getCodigoDeAcesso());
 	}
 }
