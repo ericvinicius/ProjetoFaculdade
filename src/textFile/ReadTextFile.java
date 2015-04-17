@@ -23,7 +23,7 @@ public class ReadTextFile {
 				System.out.println("[Leitura atual] Conta{"
 						+ UsuarioCadastrado.getConta() + "} --- Agencia{"
 						+ UsuarioCadastrado.getAgencia() + "} --- Senha{"
-						+ UsuarioCadastrado.getSenha() + "}\n");
+						+ UsuarioCadastrado.getSenha().toString() + "}\n");
 
 				if (UsuarioCadastrado.getConta().equals(
 						UsuarioTentativa.getConta())
@@ -37,7 +37,7 @@ public class ReadTextFile {
 					System.out.println("\n --- agencia ---> "
 							+ UsuarioCadastrado.getAgencia());
 					System.out.println("\n --- senha ---> "
-							+ UsuarioCadastrado.getSenha());
+							+ UsuarioCadastrado.getSenha().toString());
 					
 					leitor.close();
 					return true;

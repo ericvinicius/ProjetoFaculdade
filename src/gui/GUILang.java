@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 public class GUILang extends GUIMyFrame {
 

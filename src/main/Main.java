@@ -1,6 +1,6 @@
-package Main;
+package main;
 
-import GUI.GUILogin;
+import gui.GUILogin;
 
 public class Main {
 	public static void main(String... args) {
