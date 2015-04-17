@@ -10,28 +10,33 @@ import objects.UsuarioTentativa;
 import utils.Utilites;
 
 public class ReadTextFile {
-	
+
 	static Scanner leitor = null;
-	
+
 	public static boolean lerArquivoParaLogin(String arquivo) {
-		
-		int v[] = new int[Utilites.TAMANHO_CODIGO_DE_ACESSO];
+
 		try {
 			leitor = new Scanner(new FileReader(arquivo))
 					.useDelimiter("\\||\\n");
 
 			while (leitor.hasNext()) {
+				UsuarioCadastrado.setId(Integer.parseInt(leitor.next()));
 				UsuarioCadastrado.setConta(leitor.next());
 				UsuarioCadastrado.setAgencia(leitor.next());
 				UsuarioCadastrado.setSenha(leitor.next().toCharArray());
 				UsuarioCadastrado.setCodigoDeAcesso(leituraDoCodigoDeAcesso());
-				
+				UsuarioCadastrado
+						.setAcesso(Boolean.parseBoolean(leitor.next()));
 
-				System.out.println("[Leitura atual] Conta{"
+				System.out.println("[Leitura atual] Id{"
+						+ UsuarioCadastrado.getId() + "} --- Conta{"
 						+ UsuarioCadastrado.getConta() + "} --- Agencia{"
 						+ UsuarioCadastrado.getAgencia() + "} --- Senha{"
-						+ UsuarioCadastrado.getSenha().toString() + "} --- Codigo{"
-						+ UsuarioCadastrado.getCodigoDeAcesso().toString() + "}\n");
+						+ UsuarioCadastrado.getSenha().toString()
+						+ "} --- Codigo{"
+						+ UsuarioCadastrado.getCodigoDeAcesso().toString()
+						+ "} --- Acesso{" + UsuarioCadastrado.getAcesso()
+						+ "\n");
 
 				if (UsuarioCadastrado.getConta().equals(
 						UsuarioTentativa.getConta())
@@ -40,6 +45,8 @@ public class ReadTextFile {
 						&& Arrays.equals(UsuarioCadastrado.getSenha(),
 								UsuarioTentativa.getSenha())) {
 
+					System.out.println("\n --- id ---> "
+							+ UsuarioCadastrado.getId());
 					System.out.println("\n --- conta ---> "
 							+ UsuarioCadastrado.getConta());
 					System.out.println("\n --- agencia ---> "
@@ -48,11 +55,13 @@ public class ReadTextFile {
 							+ UsuarioCadastrado.getSenha().toString());
 					System.out.println("\n --- codigo ---> "
 							+ UsuarioCadastrado.getCodigoDeAcesso().toString());
-					
+					System.out.println("\n --- acesso ---> "
+							+ UsuarioCadastrado.getAcesso() + "\n");
+
 					leitor.close();
 					return true;
 				}
-
+				leitor.nextLine();
 			}
 
 		} catch (FileNotFoundException e) {
@@ -67,9 +76,9 @@ public class ReadTextFile {
 
 	private static int[] leituraDoCodigoDeAcesso() {
 		int[] v = new int[Utilites.TAMANHO_CODIGO_DE_ACESSO];
-		
-		for(int i = 0; i < v.length; i++){
-			v[i] = leitor.nextInt();
+
+		for (int i = 0; i < v.length; i++) {
+			v[i] = Integer.parseInt(leitor.next());
 		}
 		return v;
 	}

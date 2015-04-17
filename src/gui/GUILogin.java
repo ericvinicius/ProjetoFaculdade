@@ -3,8 +3,6 @@ package gui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -16,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
+import objects.UsuarioCadastrado;
 import objects.UsuarioTentativa;
 import utils.Utilites;
 
@@ -111,7 +110,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener, 
 				if (Utilites.verificaAdmin()) {
 					System.out.println("Admin tentando entrar no sistema");
 
-					opcaoAdmin.setText("Quero ir para Bravus!");
+					opcaoAdmin.setText("Quero ir para Braavos!");
 					
 
 					opcoes.add(opcaoAdmin);
@@ -119,10 +118,16 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener, 
 				} else if (Utilites.loginOk()) {
 					dispose();
 					new GUICodigoDeAcesso();
+					
 				} else {
 					if (jaTremeuATelaDeLogin) {
 						Utilites.tremeTelaNormal(this);
+						
 					} else {
+						if(!UsuarioCadastrado.getAcesso()){
+							dispose();
+							JOptionPane.showMessageDialog(null, "Sua Conta foi bloqueada!");
+						}
 						jaTremeuATelaDeLogin = true;
 						Utilites.tremeTelaLogin(this);
 					}
@@ -133,15 +138,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener, 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (e.getSource() == opcaoAdmin) {
-			System.out.println("Admin vai entrar com a senha!");
-			String passe = JOptionPane.showInputDialog(this,
-					"Quem é voce? para ir para Bravus.");
-
-			if (passe.equals("valar morghulis")) {
-				JOptionPane.showMessageDialog(this, "Valar Dohaeris");
-			}
-		}
 	}
 
 	@Override
