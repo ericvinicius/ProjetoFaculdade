@@ -110,7 +110,7 @@ public class Utilites {
 	}
 
 	public static boolean loginOk() {
-		if(ReadTextFile.lerArquivoParaLogin("ACESSO.txt") && UsuarioCadastrado.getAcesso()){
+		if(ReadTextFile.lerArquivoParaLogin("ACESSO.txt")){
 			return true;
 		}
 		
@@ -130,10 +130,5 @@ public class Utilites {
 
 	public static boolean codigoDeAcessoOk() {
 		return Arrays.equals(UsuarioTentativa.getCodigoDeAcesso(), UsuarioCadastrado.getCodigoDeAcesso());
-	}
-
-	public static void travaUsuario() {
-		UsuarioCadastrado.setAcesso(false);
-		//TODO: fazer a varredura pelo usuario que esta logado
 	}
 }

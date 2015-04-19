@@ -25,8 +25,6 @@ public class ReadTextFile {
 				UsuarioCadastrado.setAgencia(leitor.next());
 				UsuarioCadastrado.setSenha(leitor.next().toCharArray());
 				UsuarioCadastrado.setCodigoDeAcesso(leituraDoCodigoDeAcesso());
-				UsuarioCadastrado
-						.setAcesso(Boolean.parseBoolean(leitor.next()));
 
 				System.out.println("[Leitura atual] Id{"
 						+ UsuarioCadastrado.getId() + "} --- Conta{"
@@ -34,9 +32,7 @@ public class ReadTextFile {
 						+ UsuarioCadastrado.getAgencia() + "} --- Senha{"
 						+ UsuarioCadastrado.getSenha().toString()
 						+ "} --- Codigo{"
-						+ UsuarioCadastrado.getCodigoDeAcesso().toString()
-						+ "} --- Acesso{" + UsuarioCadastrado.getAcesso()
-						+ "\n");
+						+ UsuarioCadastrado.getCodigoDeAcesso().toString() + "}\n");
 
 				if (UsuarioCadastrado.getConta().equals(
 						UsuarioTentativa.getConta())

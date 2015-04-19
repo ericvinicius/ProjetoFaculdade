@@ -129,10 +129,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 				dispose();
 				JOptionPane.showMessageDialog(this, "Logado com sucesso!");
 				//TODO:Falta criar a tela principal do sistema
-			
-			} else if(tentativa >= 3){ 
-				dispose();
-				Utilites.travaUsuario();
+
 			} else {
 				Utilites.tremeTelaNormal(this);
 				contadorDeClicks = 0;

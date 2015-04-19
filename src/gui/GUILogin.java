@@ -124,10 +124,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener, 
 						Utilites.tremeTelaNormal(this);
 						
 					} else {
-						if(!UsuarioCadastrado.getAcesso()){
-							dispose();
-							JOptionPane.showMessageDialog(null, "Sua Conta foi bloqueada!");
-						}
 						jaTremeuATelaDeLogin = true;
 						Utilites.tremeTelaLogin(this);
 					}
