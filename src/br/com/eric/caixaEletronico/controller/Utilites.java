@@ -1,19 +1,14 @@
 package br.com.eric.caixaEletronico.controller;
 
-import java.awt.Color;
-import java.util.Arrays;
+import java.awt.Font;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.text.MaskFormatter;
-
-import br.com.eric.caixaEletronico.model.UsuarioCadastrado;
-import br.com.eric.caixaEletronico.model.UsuarioTentativa;
-import br.com.eric.caixaEletronico.textFile.ReadTextFile;
 
 public class Utilites {
 
-	public static final int TAMANHO_CODIGO_DE_ACESSO = 4;
+	public static Font fontNormal = new Font("Arial", Font.PLAIN, 12);
+	public static Font fontHover = new Font("Arial", Font.BOLD, 15);
 
 	public static void tremeTelaNormal(JFrame janela) {
 		try {
@@ -63,12 +58,5 @@ public class Utilites {
 
 	}
 
-	public static boolean codigoDeAcessoOk() {
-		return Arrays.equals(UsuarioTentativa.getCodigoDeAcesso(), UsuarioCadastrado.getCodigoDeAcesso());
-	}
-
-	public static void criaCodigoDeAcesso() {
-		System.out.println("Cria Codigo de acesso!");
-		UsuarioTentativa.setNovoCodigoDeAcesso(true);
-	}
+	
 }

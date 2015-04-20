@@ -1,26 +1,19 @@
 package br.com.eric.caixaEletronico.view;
 
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
+import br.com.eric.caixaEletronico.controller.CodigoDeAcessoController;
 import br.com.eric.caixaEletronico.controller.Utilites;
-import br.com.eric.caixaEletronico.model.UsuarioTentativa;
 
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
-	private int[] codigo = new int[Utilites.TAMANHO_CODIGO_DE_ACESSO];
-	private int contadorDeClicks = -1;
-	private int tentativa = 0;
-
 	private JButton bt12, bt34, bt56, bt78, bt90;
 
-	private Font normal = new Font("Arial", Font.PLAIN, 12);
-	private Font nova = new Font("Arial", Font.BOLD, 15);
+	
 
 	public GUICodigoDeAcesso() {
 
@@ -62,29 +55,29 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		for (int i = 0; i < ordemDosBotoes.length; i++) {
 			switch (ordemDosBotoes[i]) {
 			case 0:
-				bt12.setFont(normal);
+				bt12.setFont(Utilites.fontNormal);
 				add(bt12);
 				break;
 			case 1:
-				bt34.setFont(normal);
+				bt34.setFont(Utilites.fontNormal);
 				add(bt34);
 				break;
 			case 2:
-				bt56.setFont(normal);
+				bt56.setFont(Utilites.fontNormal);
 				add(bt56);
 				break;
 			case 3:
-				bt78.setFont(normal);
+				bt78.setFont(Utilites.fontNormal);
 				add(bt78);
 				break;
 			case 4:
-				bt90.setFont(normal);
+				bt90.setFont(Utilites.fontNormal);
 				add(bt90);
 				break;
 			}
 		}
 		revalidate();
-		contadorDeClicks++;
+		CodigoDeAcessoController.contadorDeClicks++;
 
 	}
 
@@ -101,43 +94,21 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		return ordemDosBotoes;
 	}
 
-	public int[] getCodigo() {
-		return codigo;
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == bt12) {
-			codigo[contadorDeClicks] = 12;
+			CodigoDeAcessoController.codigo[CodigoDeAcessoController.contadorDeClicks] = 12;
 		} else if (e.getSource() == bt34) {
-			codigo[contadorDeClicks] = 34;
+			CodigoDeAcessoController.codigo[CodigoDeAcessoController.contadorDeClicks] = 34;
 		} else if (e.getSource() == bt56) {
-			codigo[contadorDeClicks] = 56;
+			CodigoDeAcessoController.codigo[CodigoDeAcessoController.contadorDeClicks] = 56;
 		} else if (e.getSource() == bt78) {
-			codigo[contadorDeClicks] = 78;
+			CodigoDeAcessoController.codigo[CodigoDeAcessoController.contadorDeClicks] = 78;
 		} else if (e.getSource() == bt90) {
-			codigo[contadorDeClicks] = 90;
+			CodigoDeAcessoController.codigo[CodigoDeAcessoController.contadorDeClicks] = 90;
 		}
 		adicionaBotoes();
-		if (contadorDeClicks == Utilites.TAMANHO_CODIGO_DE_ACESSO) {
-			UsuarioTentativa.setCodigoDeAcesso(codigo);
-			
-			System.out.println("[Tentativa] codigo{"
-					+ UsuarioTentativa.getCodigoDeAcesso().toString() + "}\n");
-			
-			if(UsuarioTentativa.isNovoCodigoDeAcesso()){
-				
-			} else if (Utilites.codigoDeAcessoOk()) {
-				dispose();
-				JOptionPane.showMessageDialog(this, "Logado com sucesso!");
-				//TODO:Falta criar a tela principal do sistema
-
-			} else {
-				Utilites.tremeTelaNormal(this);
-				contadorDeClicks = 0;
-			}
-
-		}
+		CodigoDeAcessoController.verificaCodigo(this);
 	}
 
 	@Override
@@ -150,12 +121,12 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		((JButton) e.getSource()).setFont(nova);
+		((JButton) e.getSource()).setFont(Utilites.fontHover);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		((JButton) e.getSource()).setFont(normal);
+		((JButton) e.getSource()).setFont(Utilites.fontNormal);
 	}
 
 }

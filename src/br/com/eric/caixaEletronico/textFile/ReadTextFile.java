@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import br.com.eric.caixaEletronico.controller.Utilites;
+import br.com.eric.caixaEletronico.controller.CodigoDeAcessoController;
 import br.com.eric.caixaEletronico.model.UsuarioCadastrado;
 import br.com.eric.caixaEletronico.model.UsuarioTentativa;
 
@@ -27,7 +27,7 @@ public class ReadTextFile {
 				try{
 					UsuarioCadastrado.setCodigoDeAcesso(leituraDoCodigoDeAcesso());
 				} catch(Exception e){	
-					Utilites.criaCodigoDeAcesso();
+					CodigoDeAcessoController.criaCodigoDeAcesso();
 				}
 				
 
@@ -76,7 +76,7 @@ public class ReadTextFile {
 	}
 
 	private static int[] leituraDoCodigoDeAcesso() {
-		int[] v = new int[Utilites.TAMANHO_CODIGO_DE_ACESSO];
+		int[] v = new int[CodigoDeAcessoController.TAMANHO_CODIGO_DE_ACESSO];
 
 		for (int i = 0; i < v.length; i++) {
 			v[i] = Integer.parseInt(leitor.next());
