@@ -1,19 +1,18 @@
-package objects;
+package br.com.eric.caixaEletronico.model;
 
-public class UsuarioCadastrado {
-	private static int id;
+public class UsuarioTentativa {
 	private static String conta;
 	private static String agencia;
 	private static char[] senha;
 	private static int[] codigoDeAcesso = new int[4];
-	private static boolean acesso;
+	private static boolean novoCodigoDeAcesso = false;
 
 	public static String getConta() {
 		return conta;
 	}
 
 	public static void setConta(String conta) {
-		UsuarioCadastrado.conta = conta;
+		UsuarioTentativa.conta = conta;
 	}
 
 	public static String getAgencia() {
@@ -21,15 +20,15 @@ public class UsuarioCadastrado {
 	}
 
 	public static void setAgencia(String agencia) {
-		UsuarioCadastrado.agencia = agencia;
+		UsuarioTentativa.agencia = agencia;
 	}
 
 	public static char[] getSenha() {
 		return senha;
 	}
 
-	public static void setSenha(char[] senha) {
-		UsuarioCadastrado.senha = senha;
+	public static void setSenha(char[] cs) {
+		UsuarioTentativa.senha = cs;
 	}
 
 	public static int[] getCodigoDeAcesso() {
@@ -40,21 +39,11 @@ public class UsuarioCadastrado {
 		codigoDeAcesso = v;
 	}
 
-	public static int getId() {
-		return id;
+	public static boolean isNovoCodigoDeAcesso() {
+		return novoCodigoDeAcesso;
 	}
 
-	public static void setId(int id) {
-		UsuarioCadastrado.id = id;
+	public static void setNovoCodigoDeAcesso(boolean novoCodigoDeAcesso) {
+		UsuarioTentativa.novoCodigoDeAcesso = novoCodigoDeAcesso;
 	}
-
-	public static boolean getAcesso() {
-		return acesso;
-	}
-
-	public static void setAcesso(boolean acesso) {
-		UsuarioCadastrado.acesso = acesso;
-	}
-
-		
 }

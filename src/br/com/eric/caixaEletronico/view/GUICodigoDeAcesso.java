@@ -1,4 +1,4 @@
-package gui;
+package br.com.eric.caixaEletronico.view;
 
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import objects.UsuarioTentativa;
-import utils.Utilites;
+import br.com.eric.caixaEletronico.controller.Utilites;
+import br.com.eric.caixaEletronico.model.UsuarioTentativa;
 
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
@@ -125,7 +125,9 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 			System.out.println("[Tentativa] codigo{"
 					+ UsuarioTentativa.getCodigoDeAcesso().toString() + "}\n");
 			
-			if (Utilites.codigoDeAcessoOk()) {
+			if(UsuarioTentativa.isNovoCodigoDeAcesso()){
+				
+			} else if (Utilites.codigoDeAcessoOk()) {
 				dispose();
 				JOptionPane.showMessageDialog(this, "Logado com sucesso!");
 				//TODO:Falta criar a tela principal do sistema

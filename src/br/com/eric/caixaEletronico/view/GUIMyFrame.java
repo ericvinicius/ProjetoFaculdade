@@ -1,4 +1,4 @@
-package gui;
+package br.com.eric.caixaEletronico.view;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;

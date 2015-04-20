@@ -1,4 +1,4 @@
-package gui;
+package br.com.eric.caixaEletronico.view;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -14,12 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-import objects.UsuarioCadastrado;
-import objects.UsuarioTentativa;
-import utils.Utilites;
+import br.com.eric.caixaEletronico.controller.LoginController;
+import br.com.eric.caixaEletronico.controller.Utilites;
+import br.com.eric.caixaEletronico.model.UsuarioTentativa;
 
-public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener, ActionListener
-		 {
+public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
+		ActionListener {
 
 	private JLabel btlogin;
 
@@ -32,8 +32,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener, 
 	private JFormattedTextField txtconta;
 	private JFormattedTextField txtagencia;
 	private JPasswordField txtsenha;
-
-	private boolean jaTremeuATelaDeLogin = false;
 
 	public GUILogin() {
 
@@ -72,9 +70,9 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener, 
 		btlogin = new JLabel(imageLock);
 		btlogin.addMouseListener(this);
 		add(btlogin);
-			
+
 		opcaoAdmin.addActionListener(this);
-		
+
 		configuraPagina();
 	}
 
@@ -92,42 +90,17 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener, 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btlogin) {
-			try {
-				UsuarioTentativa.setAgencia(txtagencia.getValue().toString());
-				UsuarioTentativa.setConta(txtconta.getValue().toString());
-				UsuarioTentativa.setSenha(txtsenha.getPassword());
+			UsuarioTentativa.setAgencia(txtagencia.getValue().toString());
+			UsuarioTentativa.setConta(txtconta.getValue().toString());
+			UsuarioTentativa.setSenha(txtsenha.getPassword());
+			
+			if (LoginController.verificaAdmin()) {
+				System.out.println("Admin tentando entrar no sistema");
+				opcaoAdmin.setText("Quero ir para Braavos!");
+				opcoes.add(opcaoAdmin);
 
-				System.out.println("[Tentativa] conta{"
-						+ UsuarioTentativa.getConta() + "} --- agencia{"
-						+ UsuarioTentativa.getAgencia() + "} --- senha{"
-						+ UsuarioTentativa.getSenha().toString() + "}\n");
-
-			} catch (Exception e1) {
-				System.out
-						.println("Usuario deixou os campos em branco na tela de login!\n");
-
-			} finally {
-				if (Utilites.verificaAdmin()) {
-					System.out.println("Admin tentando entrar no sistema");
-
-					opcaoAdmin.setText("Quero ir para Braavos!");
-					
-
-					opcoes.add(opcaoAdmin);
-
-				} else if (Utilites.loginOk()) {
-					dispose();
-					new GUICodigoDeAcesso();
-					
-				} else {
-					if (jaTremeuATelaDeLogin) {
-						Utilites.tremeTelaNormal(this);
-						
-					} else {
-						jaTremeuATelaDeLogin = true;
-						Utilites.tremeTelaLogin(this);
-					}
-				}
+			} else {
+				LoginController.clickLogin(this);
 			}
 		}
 	}
@@ -179,8 +152,8 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener, 
 
 		if (passe.equals("valar morghulis")) {
 			JOptionPane.showMessageDialog(this, "Valar Dohaeris");
-			//TODO: Criar tela de Administrador
+			// TODO: Criar tela de Administrador
 		}
-		
+
 	}
 }

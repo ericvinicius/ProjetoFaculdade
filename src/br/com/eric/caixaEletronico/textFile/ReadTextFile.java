@@ -1,13 +1,13 @@
-package textFile;
+package br.com.eric.caixaEletronico.textFile;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import objects.UsuarioCadastrado;
-import objects.UsuarioTentativa;
-import utils.Utilites;
+import br.com.eric.caixaEletronico.controller.Utilites;
+import br.com.eric.caixaEletronico.model.UsuarioCadastrado;
+import br.com.eric.caixaEletronico.model.UsuarioTentativa;
 
 public class ReadTextFile {
 
@@ -24,7 +24,12 @@ public class ReadTextFile {
 				UsuarioCadastrado.setConta(leitor.next());
 				UsuarioCadastrado.setAgencia(leitor.next());
 				UsuarioCadastrado.setSenha(leitor.next().toCharArray());
-				UsuarioCadastrado.setCodigoDeAcesso(leituraDoCodigoDeAcesso());
+				try{
+					UsuarioCadastrado.setCodigoDeAcesso(leituraDoCodigoDeAcesso());
+				} catch(Exception e){	
+					Utilites.criaCodigoDeAcesso();
+				}
+				
 
 				System.out.println("[Leitura atual] Id{"
 						+ UsuarioCadastrado.getId() + "} --- Conta{"
