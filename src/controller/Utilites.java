@@ -1,14 +1,20 @@
-package br.com.eric.caixaEletronico.controller;
+package controller;
 
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.text.MaskFormatter;
 
 public class Utilites {
-
+	
+	//Fonts
 	public static Font fontNormal = new Font("Arial", Font.PLAIN, 12);
 	public static Font fontHover = new Font("Arial", Font.BOLD, 15);
+	
+	//Images
+	public static ImageIcon imageLock = new ImageIcon("src/images/locked.png");
+	public static ImageIcon imageUnlock = new ImageIcon("src/images/unlocked.png");
 
 	public static void tremeTelaNormal(JFrame janela) {
 		try {

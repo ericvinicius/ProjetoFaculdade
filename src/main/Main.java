@@ -1,6 +1,6 @@
-package br.com.eric.caixaEletronico.main;
+package main;
 
-import br.com.eric.caixaEletronico.view.GUILogin;
+import view.GUILogin;
 
 public class Main {
 	public static void main(String... args) {

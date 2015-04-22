@@ -1,4 +1,4 @@
-package br.com.eric.caixaEletronico.view;
+package view;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -14,29 +14,24 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-import br.com.eric.caixaEletronico.controller.LoginController;
-import br.com.eric.caixaEletronico.controller.Utilites;
-import br.com.eric.caixaEletronico.model.UsuarioTentativa;
+import model.UsuarioTentativa;
+import controller.LoginController;
+import controller.Utilites;
 
 public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		ActionListener {
 
 	private JLabel btlogin;
-
-	private ImageIcon imageLock;
-	private ImageIcon imageUnlock;
-
+	
 	private JLabel lblconta;
 	private JLabel lblagencia;
 	private JLabel lblsenha;
+	
 	private JFormattedTextField txtconta;
 	private JFormattedTextField txtagencia;
 	private JPasswordField txtsenha;
 
 	public GUILogin() {
-
-		carregaImagens();
-
 		// Conta
 		lblconta = new JLabel("Conta   ");
 		add(lblconta);
@@ -67,7 +62,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		add(txtsenha);
 
 		// botao login
-		btlogin = new JLabel(imageLock);
+		btlogin = new JLabel(Utilites.imageLock);
 		btlogin.addMouseListener(this);
 		add(btlogin);
 
@@ -80,11 +75,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		setLayout(new FlowLayout());
 		setSize(250, 200);
 		setLocationRelativeTo(null);
-	}
-
-	private void carregaImagens() {
-		imageLock = new ImageIcon("src/images/locked.png");
-		imageUnlock = new ImageIcon("src/images/unlocked.png");
 	}
 
 	@Override
@@ -116,14 +106,14 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == btlogin) {
-			btlogin.setIcon(imageUnlock);
+			btlogin.setIcon(Utilites.imageUnlock);
 		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == btlogin) {
-			btlogin.setIcon(imageLock);
+			btlogin.setIcon(Utilites.imageLock);
 		}
 	}
 

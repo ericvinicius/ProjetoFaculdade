@@ -1,4 +1,4 @@
-package br.com.eric.caixaEletronico.view;
+package view;
 
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -6,14 +6,12 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
-import br.com.eric.caixaEletronico.controller.CodigoDeAcessoController;
-import br.com.eric.caixaEletronico.controller.Utilites;
+import controller.CodigoDeAcessoController;
+import controller.Utilites;
 
-public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
+public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 
 	private JButton bt12, bt34, bt56, bt78, bt90;
-
-	
 
 	public GUICodigoDeAcesso() {
 
@@ -36,8 +34,8 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		configuraJanela();
 
 	}
-
-	private void configuraJanela() {
+	
+	public void configuraJanela() {
 		setLayout(new GridLayout());
 		setSize(300, 90);
 		setLocationRelativeTo(null);
@@ -51,7 +49,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		remove(bt90);
 		revalidate();
 
-		int[] ordemDosBotoes = randomizaOrdem();
+		int[] ordemDosBotoes = CodigoDeAcessoController.randomizaOrdemBotoes();
 		for (int i = 0; i < ordemDosBotoes.length; i++) {
 			switch (ordemDosBotoes[i]) {
 			case 0:
@@ -81,19 +79,6 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	}
 
-	private int[] randomizaOrdem() {
-		int[] ordemDosBotoes = { 0, 1, 2, 3, 4 };
-
-		for (int i = 0; i < ordemDosBotoes.length; i++) {
-			int posicaoAleatoria = (int) (Math.random() * 4);
-
-			int aux = ordemDosBotoes[i];
-			ordemDosBotoes[i] = ordemDosBotoes[posicaoAleatoria];
-			ordemDosBotoes[posicaoAleatoria] = aux;
-		}
-		return ordemDosBotoes;
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == bt12) {
@@ -107,8 +92,12 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 		} else if (e.getSource() == bt90) {
 			CodigoDeAcessoController.codigo[CodigoDeAcessoController.contadorDeClicks] = 90;
 		}
+		
 		adicionaBotoes();
-		CodigoDeAcessoController.verificaCodigo(this);
+		
+		if (CodigoDeAcessoController.contadorDeClicks == CodigoDeAcessoController.TAMANHO_CODIGO_DE_ACESSO) {
+			CodigoDeAcessoController.verificaCodigo(this);
+		}
 	}
 
 	@Override

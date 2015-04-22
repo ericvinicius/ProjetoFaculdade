@@ -1,4 +1,4 @@
-package br.com.eric.caixaEletronico.view;
+package view;
 
 public class GUILang extends GUIMyFrame {
 

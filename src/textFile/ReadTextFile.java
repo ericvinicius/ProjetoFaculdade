@@ -1,19 +1,19 @@
-package br.com.eric.caixaEletronico.textFile;
+package textFile;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import br.com.eric.caixaEletronico.controller.CodigoDeAcessoController;
-import br.com.eric.caixaEletronico.model.UsuarioCadastrado;
-import br.com.eric.caixaEletronico.model.UsuarioTentativa;
+import model.UsuarioCadastrado;
+import model.UsuarioTentativa;
+import controller.CodigoDeAcessoController;
 
 public class ReadTextFile {
 
 	static Scanner leitor = null;
 
-	public static boolean lerArquivoParaLogin(String arquivo) {
+	public static boolean fazLeituraDoArquivoParaLogin(String arquivo) {
 
 		try {
 			leitor = new Scanner(new FileReader(arquivo))
@@ -30,7 +30,6 @@ public class ReadTextFile {
 					CodigoDeAcessoController.criaCodigoDeAcesso();
 				}
 				
-
 				System.out.println("[Leitura atual] Id{"
 						+ UsuarioCadastrado.getId() + "} --- Conta{"
 						+ UsuarioCadastrado.getConta() + "} --- Agencia{"

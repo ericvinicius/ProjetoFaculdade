@@ -1,4 +1,4 @@
-package br.com.eric.caixaEletronico.view;
+package view;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -12,7 +12,7 @@ public class GUIMyFrame extends JFrame {
 	protected JMenuItem opcaoAdmin;
 
 	public GUIMyFrame() {
-		configuraTodasAsJanelas();
+		configuraJanela();
 		
 		barraDeMenu = new JMenuBar();
 		opcoes = new JMenu("Opcoes");
@@ -23,11 +23,12 @@ public class GUIMyFrame extends JFrame {
 		setJMenuBar(barraDeMenu);
 	}
 
-	private void configuraTodasAsJanelas() {
+	public void configuraJanela() {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// TODO: Trocar para false no fim do projeto
 		setResizable(true);
 	}
+	
 }

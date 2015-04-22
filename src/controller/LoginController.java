@@ -1,4 +1,4 @@
-package br.com.eric.caixaEletronico.controller;
+package controller;
 
 import java.awt.Color;
 import java.util.Arrays;
@@ -6,9 +6,9 @@ import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import br.com.eric.caixaEletronico.model.UsuarioTentativa;
-import br.com.eric.caixaEletronico.textFile.ReadTextFile;
-import br.com.eric.caixaEletronico.view.GUICodigoDeAcesso;
+import textFile.ReadTextFile;
+import view.GUICodigoDeAcesso;
+import model.UsuarioTentativa;
 
 public class LoginController {
 
@@ -42,7 +42,7 @@ public class LoginController {
 	}
 
 	public static boolean loginOk() {
-		if (ReadTextFile.lerArquivoParaLogin("ACESSO.txt")) {
+		if (ReadTextFile.fazLeituraDoArquivoParaLogin("ACESSO.txt")) {
 			return true;
 		}
 		return false;
