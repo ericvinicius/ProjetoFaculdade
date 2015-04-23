@@ -24,9 +24,7 @@ public class GUIMyFrame extends JFrame {
 	}
 
 	public void configuraJanela() {
-		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		// TODO: Trocar para false no fim do projeto
 		setResizable(true);
 	}

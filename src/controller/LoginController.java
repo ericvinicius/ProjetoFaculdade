@@ -6,15 +6,17 @@ import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import model.UsuarioTentativa;
 import textFile.ReadTextFile;
 import view.GUICodigoDeAcesso;
-import model.UsuarioTentativa;
+import view.GUILogin;
 
 public class LoginController {
-
+	
+	public static JFrame frameLogin;
 	private static boolean jaTremeuATelaDeLogin = false;
 
-	public static void clickLogin(JFrame frameLogin) {
+	public static void clickLogin() {
 		try {
 
 			System.out.println("[Tentativa] conta{"
@@ -31,12 +33,8 @@ public class LoginController {
 				frameLogin.dispose();
 				new GUICodigoDeAcesso();
 
-			} else if (jaTremeuATelaDeLogin) {
-				Utilites.tremeTelaNormal(frameLogin);
-
 			} else {
-				jaTremeuATelaDeLogin = true;
-				tremeTelaLogin(frameLogin);
+				tremeTelaLogin();
 			}
 		}
 	}
@@ -54,16 +52,30 @@ public class LoginController {
 				&& UsuarioTentativa.getAgencia().equals("0000-0")
 				&& Arrays.equals(UsuarioTentativa.getSenha(),
 						zero.toCharArray())) {
+			removeMensagemDeErro();
 			return true;
 		}
 		return false;
+
 	}
 
-	public static void tremeTelaLogin(JFrame janela) {
-		int originalX = janela.getLocation().x;
-		int originalY = janela.getLocation().y;
-		int originalHeight = janela.getHeight();
-		int originalWidth = janela.getWidth();
+	private static void removeMensagemDeErro() {
+		if(jaTremeuATelaDeLogin){
+			frameLogin.setSize(frameLogin.getWidth(), frameLogin.getHeight() - 20);
+		}
+		
+	}
+
+	public static void tremeTelaLogin() {
+		if (jaTremeuATelaDeLogin) {
+			Utilites.tremeTelaNormal(frameLogin);
+			return;
+		}
+		jaTremeuATelaDeLogin = true;
+		int originalX = frameLogin.getLocation().x;
+		int originalY = frameLogin.getLocation().y;
+		int originalHeight = frameLogin.getHeight();
+		int originalWidth = frameLogin.getWidth();
 
 		long sleepTime = 30;
 		int aumento = 12;
@@ -74,35 +86,49 @@ public class LoginController {
 
 		try {
 			for (int i = 0; i <= 2; i++) {
-				janela.setBounds(originalX + movimento, originalY,
+				frameLogin.setBounds(originalX + movimento, originalY,
 						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX + movimento, originalY + movimento,
+				frameLogin.setBounds(originalX + movimento, originalY + movimento,
 						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX, originalY + movimento,
+				frameLogin.setBounds(originalX, originalY + movimento,
 						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX, originalY, originalWidth,
+				frameLogin.setBounds(originalX, originalY, originalWidth,
 						originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX - movimento, originalY,
+				frameLogin.setBounds(originalX - movimento, originalY,
 						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX - movimento, originalY - movimento,
+				frameLogin.setBounds(originalX - movimento, originalY - movimento,
 						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				janela.setBounds(originalX, originalY - movimento,
+				frameLogin.setBounds(originalX, originalY - movimento,
 						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
 			}
-			janela.setLocation(originalX, originalY);
+			frameLogin.setLocation(originalX, originalY);
 		} catch (Exception ex) {
 			System.out.println(ex.toString());
 		}
 
-		janela.add(lblerro);
+		frameLogin.add(lblerro);
 
+	}
+
+	public static boolean armazenaLogin() {
+
+		try {
+			UsuarioTentativa.setAgencia(GUILogin.txtagencia.getValue()
+					.toString());
+			UsuarioTentativa.setConta(GUILogin.txtconta.getValue().toString());
+			UsuarioTentativa.setSenha(GUILogin.txtsenha.getPassword());
+			return false;
+		} catch (Exception e) {
+			tremeTelaLogin();
+			return true;
+		}
 	}
 
 }

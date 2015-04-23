@@ -8,13 +8,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-import model.UsuarioTentativa;
 import controller.LoginController;
 import controller.Utilites;
 
@@ -22,16 +20,17 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		ActionListener {
 
 	private JLabel btlogin;
-	
+
 	private JLabel lblconta;
 	private JLabel lblagencia;
 	private JLabel lblsenha;
-	
-	private JFormattedTextField txtconta;
-	private JFormattedTextField txtagencia;
-	private JPasswordField txtsenha;
+
+	public static JFormattedTextField txtconta;
+	public static JFormattedTextField txtagencia;
+	public static JPasswordField txtsenha;
 
 	public GUILogin() {
+		
 		// Conta
 		lblconta = new JLabel("Conta   ");
 		add(lblconta);
@@ -72,25 +71,27 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	}
 
 	private void configuraPagina() {
+		LoginController.frameLogin = this;
 		setLayout(new FlowLayout());
 		setSize(250, 200);
 		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btlogin) {
-			UsuarioTentativa.setAgencia(txtagencia.getValue().toString());
-			UsuarioTentativa.setConta(txtconta.getValue().toString());
-			UsuarioTentativa.setSenha(txtsenha.getPassword());
-			
-			if (LoginController.verificaAdmin()) {
-				System.out.println("Admin tentando entrar no sistema");
-				opcaoAdmin.setText("Quero ir para Braavos!");
-				opcoes.add(opcaoAdmin);
 
-			} else {
-				LoginController.clickLogin(this);
+			boolean emBranco = LoginController.armazenaLogin();
+			
+			if (!emBranco) {
+				if (LoginController.verificaAdmin()) {
+					System.out.println("Admin tentando entrar no sistema");
+					opcaoAdmin.setText("Quero ir para Braavos!");
+					opcoes.add(opcaoAdmin);
+				} else {
+					LoginController.clickLogin();
+				}
 			}
 		}
 	}
