@@ -20,7 +20,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		ActionListener {
 
 	private JLabel btlogin;
-
 	private JLabel lblconta;
 	private JLabel lblagencia;
 	private JLabel lblsenha;
@@ -71,7 +70,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	}
 
 	private void configuraPagina() {
-		LoginController.frameLogin = this;
+		LoginController.setFrameLogin(this);
 		setLayout(new FlowLayout());
 		setSize(250, 200);
 		setLocationRelativeTo(null);
@@ -141,7 +140,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		String passe = JOptionPane.showInputDialog(this,
 				"Quem é voce? para ir para Braavos.");
 
-		if (passe.equals("valar morghulis")) {
+		if (passe.equals("got")) {
 			JOptionPane.showMessageDialog(this, "Valar Dohaeris");
 			// TODO: Criar tela de Administrador
 		}

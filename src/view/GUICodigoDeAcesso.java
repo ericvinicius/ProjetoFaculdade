@@ -36,6 +36,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 	}
 	
 	public void configuraJanela() {
+		CodigoDeAcessoController.setFrameCodigoDeAcesso(this);
 		setLayout(new GridLayout());
 		setSize(300, 90);
 		setLocationRelativeTo(null);

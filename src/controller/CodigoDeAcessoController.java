@@ -16,6 +16,8 @@ public class CodigoDeAcessoController {
 	public static int contadorDeClicks = -1;
 	public static int tentativa = 0;
 
+	private static JFrame frameCodigoDeAcesso;
+
 	public static boolean codigoOk() {
 		return Arrays.equals(UsuarioTentativa.getCodigoDeAcesso(),
 				UsuarioCadastrado.getCodigoDeAcesso());
@@ -59,5 +61,9 @@ public class CodigoDeAcessoController {
 			ordemDosBotoes[posicaoAleatoria] = aux;
 		}
 		return ordemDosBotoes;
+	}
+
+	public static void setFrameCodigoDeAcesso(JFrame frame) {
+		frameCodigoDeAcesso = frame;
 	}
 }

@@ -5,6 +5,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import controller.Utilites;
+
 public class GUIMyFrame extends JFrame {
 
 	private JMenuBar barraDeMenu;
@@ -12,6 +14,7 @@ public class GUIMyFrame extends JFrame {
 	protected JMenuItem opcaoAdmin;
 
 	public GUIMyFrame() {
+		Utilites.temMensagemDeErro=false;
 		configuraJanela();
 		
 		barraDeMenu = new JMenuBar();
