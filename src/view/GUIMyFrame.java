@@ -5,16 +5,18 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import controller.Utilites;
+import utilities.Utilites;
+import model.Usuario;
 
 public class GUIMyFrame extends JFrame {
 
 	private JMenuBar barraDeMenu;
 	protected JMenu opcoes;
 	protected JMenuItem opcaoAdmin;
+	
+	protected static Usuario user;
 
 	public GUIMyFrame() {
-		Utilites.temMensagemDeErro=false;
 		configuraJanela();
 		
 		barraDeMenu = new JMenuBar();
@@ -30,6 +32,19 @@ public class GUIMyFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// TODO: Trocar para false no fim do projeto
 		setResizable(true);
+	}
+	
+	public void redirect(JFrame janelaAtual, String frame) {
+		janelaAtual.dispose();
+		Utilites.temMensagemDeErro = false;
+		
+		if(frame.equals("codigoDeAcesso")){
+			new GUICodigoDeAcesso();
+		} else if(frame.equals("principal")){
+			new GUIPrincipal();
+		} else if(frame.equals("login")){
+			new GUILogin();
+		}
 	}
 	
 }

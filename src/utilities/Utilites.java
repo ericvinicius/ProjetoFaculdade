@@ -1,4 +1,4 @@
-package controller;
+package utilities;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -8,22 +8,31 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.MaskFormatter;
 
-public class Utilites {
-	
-	//Fonts
-	public static Font fontNormal = new Font("Arial", Font.PLAIN, 12);
-	public static Font fontHover = new Font("Arial", Font.BOLD, 15);
-	
-	//Images
-	public static ImageIcon imageLock = new ImageIcon("src/images/locked.png");
-	public static ImageIcon imageUnlock = new ImageIcon("src/images/unlocked.png");
-	public static boolean temMensagemDeErro = false;
-	
-	public static void removeMensagemDeErro(JFrame frame) {
-		frame.setSize(frame.getWidth(), frame.getHeight() - 20);	
-	}
+public class Utilites extends Thread {
 
-	public static void tremeTelaComMensagemDeErro(JFrame frame) {
+	// Variaveis globais
+	public static final int TAMANHO_CODIGO_DE_ACESSO = 3;
+	public static final int MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO = 3;
+	public static final String DELIMITADOR_DO_ARQUIVO_DE_TEXTO = "\\||\\n";
+	public static final String CAMINHO_PARA_ACESSO_TXT = "ACESSO.txt";
+
+	// Mascaras
+	public final String maskAgencia = "####-#";
+	public final String maskConta = "##.###-#";
+
+	// Fonts
+	public final Font fontNormal = new Font("Arial", Font.PLAIN, 12);
+	public final Font fontHover = new Font("Arial", Font.BOLD, 15);
+
+	// Images
+	public final ImageIcon imageLock = new ImageIcon("src/images/locked.png");
+	public final ImageIcon imageUnlock = new ImageIcon(
+			"src/images/unlocked.png");
+
+	// boolean
+	public static boolean temMensagemDeErro = false;
+
+	public void tremeTelaComMensagemDeErro(JFrame frame) {
 		if (temMensagemDeErro) {
 			Utilites.tremeTelaNormal(frame);
 			return;
@@ -104,21 +113,45 @@ public class Utilites {
 		}
 	}
 
-	public static MaskFormatter criadorDeMascara(String paraOnde) {
+	public static MaskFormatter criadorDeMascara(String mask) {
 		MaskFormatter mascara = new MaskFormatter();
 		mascara.setPlaceholderCharacter('_');
 
 		try {
-			if (paraOnde.equals("conta")) {
-				mascara.setMask("##.###-#");
-
-			} else if (paraOnde.equals("agencia")) {
-				mascara.setMask("####-#");
-			}
+			mascara.setMask(mask);
 		} catch (Exception e) {
-			System.out.println("Erro no Formatador - Classe GUIMyFrame");
+			System.out.println("Erro na criacao de mascara!");
+			e.printStackTrace();
 		}
 		return mascara;
 
 	}
+
+	public static void mostrarHora(JLabel labelHora) {
+		new Relogio(labelHora).start();
+	}
+	
+	public static String converteVetorParaString(int[] vetor){
+		StringBuilder saida = new StringBuilder();  
+		saida.append("[");
+		for (int i = 0; i < vetor.length; i++) {
+			String numerosSeparados = getStringDaPosicaoDoVetor(vetor[i]);
+			saida.append(numerosSeparados);
+			
+			if(i != vetor.length - 1){
+				saida.append(" | ");
+			}
+		}
+		saida.append("]");
+		return saida.toString();
+	}
+
+	private static String getStringDaPosicaoDoVetor(int numero) {
+		String saida;
+		int primeiro = numero / 10;
+		int segundo = numero % 10;
+		saida = primeiro + " ou " + segundo;
+		return saida;
+	}
+
 }

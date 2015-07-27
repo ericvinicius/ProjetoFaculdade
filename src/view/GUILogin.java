@@ -10,11 +10,11 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-import controller.LoginController;
-import controller.Utilites;
+import model.Usuario;
+import textFile.ManipuladorDeArquivos;
+import utilities.Utilites;
 
 public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		ActionListener {
@@ -24,17 +24,22 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	private JLabel lblagencia;
 	private JLabel lblsenha;
 
-	public static JFormattedTextField txtconta;
-	public static JFormattedTextField txtagencia;
-	public static JPasswordField txtsenha;
+	public JFormattedTextField txtconta;
+	public JFormattedTextField txtagencia;
+	public JPasswordField txtsenha;
+	
+	private Usuario usuarioTentativa = new Usuario();
+	private Utilites utilites;
 
 	public GUILogin() {
+		utilites = new Utilites();
 		
 		// Conta
 		lblconta = new JLabel("Conta   ");
 		add(lblconta);
 
-		txtconta = new JFormattedTextField(Utilites.criadorDeMascara("conta"));
+		txtconta = new JFormattedTextField(
+				Utilites.criadorDeMascara(utilites.maskConta));
 		txtconta.setSelectionStart(0);
 		txtconta.setColumns(12);
 		txtconta.addKeyListener(this);
@@ -45,7 +50,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		add(lblagencia);
 
 		txtagencia = new JFormattedTextField(
-				Utilites.criadorDeMascara("agencia"));
+				Utilites.criadorDeMascara(utilites.maskAgencia));
 		txtagencia.setSelectionStart(0);
 		txtagencia.setColumns(12);
 		txtagencia.addKeyListener(this);
@@ -60,17 +65,16 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		add(txtsenha);
 
 		// botao login
-		btlogin = new JLabel(Utilites.imageLock);
+		btlogin = new JLabel(utilites.imageLock);
 		btlogin.addMouseListener(this);
 		add(btlogin);
 
-		opcaoAdmin.addActionListener(this);
+		//opcaoAdmin.addActionListener(this);
 
 		configuraPagina();
 	}
 
 	private void configuraPagina() {
-		LoginController.setFrameLogin(this);
 		setLayout(new FlowLayout());
 		setSize(250, 200);
 		setLocationRelativeTo(null);
@@ -79,19 +83,34 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == btlogin) {
-
-			boolean emBranco = LoginController.armazenaLogin();
+		pegaInformacoesDeLogin();
+		if (usuarioTentativa.isAdmin()) {
+			//TODO: Usuario Admin
+		} else {
+			verificaLogin();
 			
-			if (!emBranco) {
-				if (LoginController.verificaAdmin()) {
-					System.out.println("Admin tentando entrar no sistema");
-					opcaoAdmin.setText("Quero ir para Braavos!");
-					opcoes.add(opcaoAdmin);
-				} else {
-					LoginController.clickLogin();
-				}
-			}
+		}
+	}
+	
+	private void verificaLogin() {
+		ManipuladorDeArquivos leitor = new ManipuladorDeArquivos();
+		user = leitor.fazLeituraDoArquivoParaLogin(usuarioTentativa);
+		if(user != null){
+			super.redirect(this, "codigoDeAcesso");
+		} else {
+			utilites.tremeTelaComMensagemDeErro(this);
+		}
+	}
+
+	public void pegaInformacoesDeLogin(){
+		try{
+			String agencia = txtagencia.getValue().toString();
+			String conta = txtconta.getValue().toString();
+			String senha = new String(txtsenha.getPassword());
+			usuarioTentativa.guardaInformacoes(agencia, conta, senha);
+			
+		} catch (NullPointerException e){
+			utilites.tremeTelaComMensagemDeErro(this);
 		}
 	}
 
@@ -106,14 +125,14 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == btlogin) {
-			btlogin.setIcon(Utilites.imageUnlock);
+			btlogin.setIcon(utilites.imageUnlock);
 		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == btlogin) {
-			btlogin.setIcon(Utilites.imageLock);
+			btlogin.setIcon(utilites.imageLock);
 		}
 	}
 
@@ -136,14 +155,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Admin vai entrar com a senha!");
-		String passe = JOptionPane.showInputDialog(this,
-				"Quem é voce? para ir para Braavos.");
-
-		if (passe.equals("got")) {
-			JOptionPane.showMessageDialog(this, "Valar Dohaeris");
-			// TODO: Criar tela de Administrador
-		}
-
+		//TODO: Criar Tela do Admin
 	}
 }
