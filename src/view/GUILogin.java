@@ -93,8 +93,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	}
 	
 	private void verificaLogin() {
-		ManipuladorDeArquivos leitor = new ManipuladorDeArquivos();
-		user = leitor.fazLeituraDoArquivoParaLogin(usuarioTentativa);
+		user = fileHandler.fazLeituraDoArquivoParaLogin(usuarioTentativa);
 		if(user != null){
 			super.redirect(this, "codigoDeAcesso");
 		} else {
@@ -107,6 +106,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 			String agencia = txtagencia.getValue().toString();
 			String conta = txtconta.getValue().toString();
 			String senha = new String(txtsenha.getPassword());
+			//TODO: usar metodo String.isNullOrEmpty();
 			usuarioTentativa.guardaInformacoes(agencia, conta, senha);
 			
 		} catch (NullPointerException e){

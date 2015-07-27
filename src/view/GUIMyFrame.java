@@ -5,6 +5,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import textFile.ManipuladorDeArquivos;
 import utilities.Utilites;
 import model.Usuario;
 
@@ -15,9 +16,11 @@ public class GUIMyFrame extends JFrame {
 	protected JMenuItem opcaoAdmin;
 	
 	protected static Usuario user;
+	protected ManipuladorDeArquivos fileHandler;
 
 	public GUIMyFrame() {
 		configuraJanela();
+		fileHandler = new ManipuladorDeArquivos();
 		
 		barraDeMenu = new JMenuBar();
 		opcoes = new JMenu("Opcoes");

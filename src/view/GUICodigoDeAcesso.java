@@ -122,7 +122,8 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 		usuarioTentativa.setCodigoDeAcesso(codigo);
 		if (user.isNovoCodigoDeAcesso()) {
 			user.setCodigoDeAcesso(codigo);
-			JOptionPane.showMessageDialog(this, Utilites.converteVetorParaString(codigo));
+			//JOptionPane.showMessageDialog(this, Utilites.converteVetorParaString(codigo));
+			fileHandler.cadastraNovoCodigoDeAcessoParaUsuarioComId(user, 4);
 			redirect(this, "principal");
 
 		} else if (user.fazCompacaoDoCodigoDeAcesso(usuarioTentativa)) {

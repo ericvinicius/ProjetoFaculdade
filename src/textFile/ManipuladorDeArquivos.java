@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
+import java.io.RandomAccessFile;
 import java.util.Scanner;
 
 import model.Usuario;
@@ -21,7 +21,7 @@ public class ManipuladorDeArquivos {
 		try {
 			leitor = new Scanner(new FileReader(Utilites.CAMINHO_PARA_ACESSO_TXT));
 			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
-			cadastraNovoCodigoDeAcesso(4);
+			
 			while (leitor.hasNext()) {
 				usuarioCadastrado = new Usuario();
 				usuarioCadastrado.setId(Integer.parseInt(leitor.next()));
@@ -63,19 +63,15 @@ public class ManipuladorDeArquivos {
 		return v;
 	}
 	
-	public void cadastraNovoCodigoDeAcesso(int id){
+	public void cadastraNovoCodigoDeAcessoParaUsuarioComId(Usuario user, int id){
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(Utilites.CAMINHO_PARA_ACESSO_TXT));
-			
-			leitor = new Scanner(new FileReader(Utilites.CAMINHO_PARA_ACESSO_TXT));
-			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
-			
-			while(leitor.hasNextLine()){
-				if(leitor.nextInt() == id){
-					System.out.println("Achei a linha com id: " + leitor);
-				}
-				leitor.nextLine();
-			}
+			String codigo_0 = user.getCodigoDeAcesso()[0] + "";
+			String codigo_1 = user.getCodigoDeAcesso()[0] + "";
+			String codigo_2 = user.getCodigoDeAcesso()[0] + "";
+			RandomAccessFile handler = new RandomAccessFile(Utilites.CAMINHO_PARA_ACESSO_TXT, "rws");
+			handler.seek(33 * id + 29);
+			handler.write(codigo_0.getBytes());
+			handler.close();
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
