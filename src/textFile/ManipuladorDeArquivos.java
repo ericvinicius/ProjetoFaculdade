@@ -61,14 +61,21 @@ public class ManipuladorDeArquivos {
 		return v;
 	}
 	
-	public void cadastraNovoCodigoDeAcessoParaUsuarioComId(Usuario user, int id){
+	public void cadastraNovoCodigoDeAcessoParaUsuario(Usuario user){
+		Utilites utilites = new Utilites();
+		int posDoCodigo = utilites.criaLogicaDoCodigoDeAcesso(user.getId());
 		try {
-			String codigo_0 = user.getCodigoDeAcesso()[0] + "";
-			String codigo_1 = user.getCodigoDeAcesso()[0] + "";
-			String codigo_2 = user.getCodigoDeAcesso()[0] + "";
+			String codigo_0 = String.valueOf(user.getCodigoDeAcesso()[0]);
+			String codigo_1 = String.valueOf(user.getCodigoDeAcesso()[1]);
+			String codigo_2 = String.valueOf(user.getCodigoDeAcesso()[2]);
+			System.out.println("1: " + codigo_0 + " - 2: " + codigo_1 + " - 3: " + codigo_2);
 			RandomAccessFile handler = new RandomAccessFile(Utilites.CAMINHO_PARA_ACESSO_TXT, "rws");
-			handler.seek(33 * id + 29);
+			handler.seek(posDoCodigo);
 			handler.write(codigo_0.getBytes());
+			handler.skipBytes(1);
+			handler.write(codigo_1.getBytes());
+			handler.skipBytes(1);
+			handler.write(codigo_2.getBytes());
 			handler.close();
 			
 		} catch (FileNotFoundException e) {

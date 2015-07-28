@@ -130,7 +130,7 @@ public class Utilites extends Thread {
 	}
 
 	
-	public static String converteVetorParaString(int[] vetor){
+	public String converteVetorParaString(int[] vetor){
 		StringBuilder saida = new StringBuilder();  
 		saida.append("[");
 		for (int i = 0; i < vetor.length; i++) {
@@ -145,7 +145,7 @@ public class Utilites extends Thread {
 		return saida.toString();
 	}
 
-	private static String getStringDaPosicaoDoVetor(int numero) {
+	private String getStringDaPosicaoDoVetor(int numero) {
 		String saida;
 		int primeiro = numero / 10;
 		int segundo = numero % 10;
@@ -153,7 +153,11 @@ public class Utilites extends Thread {
 		return saida;
 	}
 	
-	public static void mostrarHora(JLabel labelHora) {
+	public void mostrarHora(JLabel labelHora) {
 		new Relogio(labelHora).start();
+	}
+	
+	public int criaLogicaDoCodigoDeAcesso(int linha){
+		return (33 * linha) + 25 + linha;
 	}
 }

@@ -1,6 +1,10 @@
 package model;
 
+import java.util.Arrays;
+
 import javax.swing.JOptionPane;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import utilities.Utilites;
 
@@ -119,7 +123,10 @@ public class Usuario {
 	}
 
 	public boolean fazCompacaoDoCodigoDeAcesso(Usuario usuarioTentativa) {
-		if(getCodigoDeAcesso().equals(usuarioTentativa.getCodigoDeAcesso())){
+		Utilites utilites = new Utilites();
+		System.out.println("[Tentativa] = " + utilites.converteVetorParaString(usuarioTentativa.getCodigoDeAcesso()));
+		System.out.println("[ Correto ] = " + utilites.converteVetorParaString(getCodigoDeAcesso()));
+		if(Arrays.equals(getCodigoDeAcesso(), usuarioTentativa.getCodigoDeAcesso())){
 			return true;
 		}
 		return false;
