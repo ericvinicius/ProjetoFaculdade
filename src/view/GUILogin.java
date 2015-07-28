@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 
 import model.Usuario;
-import utilities.Utilites;
 
 public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		ActionListener {
@@ -26,19 +25,16 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	public JFormattedTextField txtconta;
 	public JFormattedTextField txtagencia;
 	public JPasswordField txtsenha;
-	
+
 	private Usuario usuarioTentativa = new Usuario();
-	private Utilites utilites;
 
 	public GUILogin() {
-		utilites = new Utilites();
-		
 		// Conta
 		lblconta = new JLabel("Conta   ");
 		add(lblconta);
 
 		txtconta = new JFormattedTextField(
-				Utilites.criadorDeMascara(utilites.maskConta));
+				utilites.criadorDeMascara(utilites.maskConta));
 		txtconta.setSelectionStart(0);
 		txtconta.setColumns(12);
 		txtconta.addKeyListener(this);
@@ -49,7 +45,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		add(lblagencia);
 
 		txtagencia = new JFormattedTextField(
-				Utilites.criadorDeMascara(utilites.maskAgencia));
+				utilites.criadorDeMascara(utilites.maskAgencia));
 		txtagencia.setSelectionStart(0);
 		txtagencia.setColumns(12);
 		txtagencia.addKeyListener(this);
@@ -68,7 +64,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		btlogin.addMouseListener(this);
 		add(btlogin);
 
-		//opcaoAdmin.addActionListener(this);
+		// opcaoAdmin.addActionListener(this);
 
 		configuraPagina();
 	}
@@ -82,35 +78,34 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		pegaInformacoesDeLogin();
-		if (usuarioTentativa.isAdmin()) {
-			//TODO: Usuario Admin
-		} else {
-			verificaLogin();
-			
+		try{
+			pegaInformacoesDeLogin();
+			if (usuarioTentativa.isAdmin()) {
+				// TODO: Usuario Admin
+			} else {
+				verificaLogin();
+
+			}
+		} catch (NullPointerException en){
+			utilites.paraLog("Em Branco", "Algum campo esta em branco!");
+			utilites.tremeTelaComMensagemDeErro(this);
 		}
 	}
-	
+
 	private void verificaLogin() {
 		user = fileHandler.fazLeituraDoArquivoParaLogin(usuarioTentativa);
-		if(user != null){
+		if (user != null) {
 			super.redirect(this, "codigoDeAcesso");
 		} else {
 			utilites.tremeTelaComMensagemDeErro(this);
 		}
 	}
 
-	public void pegaInformacoesDeLogin(){
-		try{
-			String agencia = txtagencia.getValue().toString();
-			String conta = txtconta.getValue().toString();
-			String senha = new String(txtsenha.getPassword());
-			//TODO: usar metodo String.isNullOrEmpty();
-			usuarioTentativa.guardaInformacoes(agencia, conta, senha);
-			
-		} catch (NullPointerException e){
-			utilites.tremeTelaComMensagemDeErro(this);
-		}
+	public void pegaInformacoesDeLogin() throws NumberFormatException {
+		String agencia = txtagencia.getValue().toString();
+		String conta = txtconta.getValue().toString();
+		String senha = new String(txtsenha.getPassword());
+		usuarioTentativa.guardaInformacoes(agencia, conta, senha);
 	}
 
 	@Override
@@ -154,6 +149,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//TODO: Criar Tela do Admin
+		// TODO: Criar Tela do Admin
 	}
 }

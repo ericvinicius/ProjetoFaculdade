@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 class Relogio extends Thread {
 
+	private Utilites utilites = new Utilites();
 	private JLabel hr;
 
 	public Relogio(JLabel hora) {
@@ -15,7 +16,6 @@ class Relogio extends Thread {
 
 	@Override
 	public void run() {
-		Utilites utilites = new Utilites();
 		while (true) {
 			Date d = new Date();
 			String data;

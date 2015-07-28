@@ -13,7 +13,6 @@ import utilities.Utilites;
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 
 	private JButton bt12, bt34, bt56, bt78, bt90;
-	private Utilites utilites;
 	
 	private int contadorDeClicks = 0;
 	private int[] codigo = new int[Utilites.TAMANHO_CODIGO_DE_ACESSO];
@@ -23,8 +22,6 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 		if(user.isNovoCodigoDeAcesso()){
 			JOptionPane.showMessageDialog(this, "Voce nao possui codigo de acesso, por favor cadestre um novo com 3 numeros");
 		}
-		
-		utilites = new Utilites();
 		
 		bt12 = new JButton("1 ou 2");
 		bt12.addMouseListener(this);
@@ -52,7 +49,6 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 		setLocationRelativeTo(null);
 		setVisible(true);
 		
-		System.out.println(user.isNovoCodigoDeAcesso());
 		if(user.isNovoCodigoDeAcesso()){
 			setTitle("Crie seu Codigo de acesso");
 		} else {
@@ -136,7 +132,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 		}
 		tentativa++;
 		contadorDeClicks = 0;
-		Utilites.tremeTelaNormal(this);
+		utilites.tremeTela(this);
 	}
 
 	@Override

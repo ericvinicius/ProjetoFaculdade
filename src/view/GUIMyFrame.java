@@ -16,11 +16,11 @@ public class GUIMyFrame extends JFrame {
 	protected JMenuItem opcaoAdmin;
 	
 	protected static Usuario user;
-	protected ManipuladorDeArquivos fileHandler;
+	protected Utilites utilites = new Utilites();
+	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();;
 
 	public GUIMyFrame() {
 		configuraJanela();
-		fileHandler = new ManipuladorDeArquivos();
 		
 		barraDeMenu = new JMenuBar();
 		opcoes = new JMenu("Opcoes");

@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import utilities.Utilites;
 
 public class Usuario {
@@ -17,6 +15,8 @@ public class Usuario {
 	private boolean admin;
 	private int status;
 	private int id;
+	
+	private Utilites utilites = new Utilites();
 	
 	public int getId(){
 		return id;
@@ -82,21 +82,20 @@ public class Usuario {
 	
 	public void toLog(String tag) {
 		StringBuilder log = new StringBuilder();
-		log.append("[" + tag + "] - {" + getId() + "}" );
-		log.append(" - agencia: ( "+ getAgencia() + " )");
-		log.append(" - conta: ( "+ getConta() + " )");
-		log.append(" - senha: ( "+ getSenha().toString() + " )");
-		log.append(" - Admin: ( " + isAdmin() + " )");
-		log.append("\n");
-		System.out.println(log);
+		log.append(" id(" + getId() + ")" );
+		log.append(" agencia( "+ getAgencia() + " )");
+		log.append(" conta( "+ getConta() + " )");
+		log.append(" senha( "+ getSenha().toString() + " )");
+		log.append(" admin( " + isAdmin() + " )");
+		utilites.paraLog(tag, log.toString());
 	}
 	
 	public void guardaInformacoes(String agencia, String conta, String senha2) {
 		setAgencia(agencia);
 		setConta(conta);
 		setSenha(senha2);
-		verificaAdmin();
 		toLog("Tentativa");
+		verificaAdmin();
 	}
 
 	private void verificaAdmin() {
@@ -123,9 +122,8 @@ public class Usuario {
 	}
 
 	public boolean fazCompacaoDoCodigoDeAcesso(Usuario usuarioTentativa) {
-		Utilites utilites = new Utilites();
-		System.out.println("[Tentativa] = " + utilites.converteVetorParaString(usuarioTentativa.getCodigoDeAcesso()));
-		System.out.println("[ Correto ] = " + utilites.converteVetorParaString(getCodigoDeAcesso()));
+		utilites.paraLog("Tentativa", utilites.converteVetorParaString(usuarioTentativa.getCodigoDeAcesso()));
+		utilites.paraLog(" Correto ", utilites.converteVetorParaString(getCodigoDeAcesso()));
 		if(Arrays.equals(getCodigoDeAcesso(), usuarioTentativa.getCodigoDeAcesso())){
 			return true;
 		}

@@ -2,19 +2,22 @@ package utilities;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.text.ParseException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
 public class Utilites extends Thread {
 
 	// Variaveis globais
+	private static final int TAMANHO_MAXIMO_DA_TAG_DE_LOG = 15;
 	public static final int TAMANHO_CODIGO_DE_ACESSO = 3;
 	public static final int MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO = 3;
 	public static final String DELIMITADOR_DO_ARQUIVO_DE_TEXTO = "\\||\\n";
-	public static final String CAMINHO_PARA_ACESSO_TXT = "ACESSO.txt";
+	public static final String CAMINHO_PARA_ACESSO_TXT = "/...ACESSO.txt";
 
 	// Mascaras
 	public final String maskAgencia = "####-#";
@@ -36,7 +39,7 @@ public class Utilites extends Thread {
 
 	public void tremeTelaComMensagemDeErro(JFrame frame) {
 		if (temMensagemDeErro) {
-			Utilites.tremeTelaNormal(frame);
+			tremeTela(frame);
 			return;
 		}
 		temMensagemDeErro = true;
@@ -57,6 +60,7 @@ public class Utilites extends Thread {
 				frame.setBounds(originalX + movimento, originalY,
 						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
+
 				frame.setBounds(originalX + movimento, originalY + movimento,
 						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
@@ -75,17 +79,20 @@ public class Utilites extends Thread {
 				frame.setBounds(originalX, originalY - movimento,
 						originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
+
 			}
-			frame.setLocation(originalX, originalY);
-		} catch (Exception ex) {
-			System.out.println(ex.toString());
+		} catch (InterruptedException ei) {
+			paraLogDeErro(ei, "Utilites.tremeTelaComMessagemDeErro.ei",
+					"Erro da thread que treme tela");
 		}
+
+		frame.setLocation(originalX, originalY);
 
 		frame.add(lblerro);
 
 	}
 
-	public static void tremeTelaNormal(JFrame janela) {
+	public void tremeTela(JFrame janela) {
 		try {
 			int originalX = janela.getLocation().x;
 			int originalY = janela.getLocation().y;
@@ -110,34 +117,34 @@ public class Utilites extends Thread {
 
 			janela.setLocation(originalX, originalY);
 
-		} catch (Exception ex) {
-			System.out.println(ex.toString());
+		} catch (InterruptedException ei) {
+			paraLogDeErro(ei, "Utilites.tremeTela.ei",
+					"Erro da thread que treme tela");
 		}
 	}
 
-	public static MaskFormatter criadorDeMascara(String mask) {
+	public MaskFormatter criadorDeMascara(String mask) {
 		MaskFormatter mascara = new MaskFormatter();
 		mascara.setPlaceholderCharacter('_');
 
 		try {
 			mascara.setMask(mask);
-		} catch (Exception e) {
-			System.out.println("Erro na criacao de mascara!");
-			e.printStackTrace();
+		} catch (ParseException ep) {
+			paraLogDeErro(ep, "Utilites.criadorDeMascara.ep",
+					"Erro ao criar uma mascara");
 		}
 		return mascara;
 
 	}
 
-	
-	public String converteVetorParaString(int[] vetor){
-		StringBuilder saida = new StringBuilder();  
+	public String converteVetorParaString(int[] vetor) {
+		StringBuilder saida = new StringBuilder();
 		saida.append("[");
 		for (int i = 0; i < vetor.length; i++) {
 			String numerosSeparados = getStringDaPosicaoDoVetor(vetor[i]);
 			saida.append(numerosSeparados);
-			
-			if(i != vetor.length - 1){
+
+			if (i != vetor.length - 1) {
 				saida.append(" | ");
 			}
 		}
@@ -152,12 +159,45 @@ public class Utilites extends Thread {
 		saida = primeiro + " ou " + segundo;
 		return saida;
 	}
-	
+
 	public void mostrarHora(JLabel labelHora) {
 		new Relogio(labelHora).start();
 	}
-	
-	public int criaLogicaDoCodigoDeAcesso(int linha){
+
+	public int criaLogicaDoCodigoDeAcesso(int linha) {
 		return (33 * linha) + 25 + linha;
+	}
+
+	public void paraLog(String tag, String texto) {
+		int i = 0;
+		String espaco = " ";
+		while (tag.length() < Utilites.TAMANHO_MAXIMO_DA_TAG_DE_LOG) {
+			if (i % 2 == 0) {
+				tag = espaco + tag;
+			} else {
+				tag = tag + espaco;
+			}
+			i++;
+		}
+		if (tag.length() > Utilites.TAMANHO_MAXIMO_DA_TAG_DE_LOG) {
+			tag.trim();
+			while (tag.length() > Utilites.TAMANHO_MAXIMO_DA_TAG_DE_LOG) {
+				tag = tag.substring(0, tag.length() - 1);
+			}
+		}
+		System.out.println("[" + tag + "] " + texto);
+	}
+
+	public void paraLogDeErro(Exception e, String locate, String myMessage) {
+		System.out
+				.println("=========================================================ERRO============================================================================");
+		System.out.println("Local=======>(" + locate + ") \nMessage=====>("
+				+ e.getMessage() + ")\nMy Message==>(" + myMessage
+				+ ")\nStack Trace: ");
+		e.printStackTrace();
+		JOptionPane.showMessageDialog(null, "Erro na Aplicação", "Erro",
+				JOptionPane.ERROR_MESSAGE);
+		System.out
+				.println("=========================================================================================================================================");
 	}
 }
