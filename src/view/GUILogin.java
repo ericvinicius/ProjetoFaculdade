@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 
 import model.Usuario;
-import textFile.ManipuladorDeArquivos;
 import utilities.Utilites;
 
 public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,

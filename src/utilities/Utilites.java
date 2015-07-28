@@ -19,6 +19,8 @@ public class Utilites extends Thread {
 	// Mascaras
 	public final String maskAgencia = "####-#";
 	public final String maskConta = "##.###-#";
+	public final String maskDia = "dd/MM/yyyy";
+	public final String maskHora = "HH:mm:ss";
 
 	// Fonts
 	public final Font fontNormal = new Font("Arial", Font.PLAIN, 12);
@@ -127,9 +129,6 @@ public class Utilites extends Thread {
 
 	}
 
-	public static void mostrarHora(JLabel labelHora) {
-		new Relogio(labelHora).start();
-	}
 	
 	public static String converteVetorParaString(int[] vetor){
 		StringBuilder saida = new StringBuilder();  
@@ -153,5 +152,8 @@ public class Utilites extends Thread {
 		saida = primeiro + " ou " + segundo;
 		return saida;
 	}
-
+	
+	public static void mostrarHora(JLabel labelHora) {
+		new Relogio(labelHora).start();
+	}
 }

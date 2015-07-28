@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.swing.JLabel;
 
-public class Relogio extends Thread {
+class Relogio extends Thread {
 
 	private JLabel hr;
 
@@ -15,13 +15,14 @@ public class Relogio extends Thread {
 
 	@Override
 	public void run() {
+		Utilites utilites = new Utilites();
 		while (true) {
 			Date d = new Date();
 			String data;
-			SimpleDateFormat sdfData = new SimpleDateFormat("dd.MM.yyyy");
+			SimpleDateFormat sdfData = new SimpleDateFormat(utilites.maskDia);
 			data = sdfData.format(d);
 			data += " - ";
-			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat(utilites.maskHora);
 			this.hr.setText(data + sdf.format(d));
 			 try {
 				Thread.sleep(100);
