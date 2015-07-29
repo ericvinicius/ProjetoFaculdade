@@ -64,7 +64,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 		remove(bt90);
 		revalidate();
 
-		int[] ordemDosBotoes = randomizaOrdemBotoes();
+		int[] ordemDosBotoes = utilites.criaVetorComOrdemAleatoriaComQuatroPosicoes();
 		for (int i = 0; i < ordemDosBotoes.length; i++) {
 			switch (ordemDosBotoes[i]) {
 			case 0:
@@ -153,17 +153,4 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 		((JButton) e.getSource()).setFont(utilites.fontNormal);
 	}
 	
-	public int[] randomizaOrdemBotoes() {
-		int[] ordemDosBotoes = { 0, 1, 2, 3, 4 };
-
-		for (int i = 0; i < ordemDosBotoes.length; i++) {
-			int posicaoAleatoria = (int) (Math.random() * 4);
-
-			int aux = ordemDosBotoes[i];
-			ordemDosBotoes[i] = ordemDosBotoes[posicaoAleatoria];
-			ordemDosBotoes[posicaoAleatoria] = aux;
-		}
-		return ordemDosBotoes;
-	}
-
 }

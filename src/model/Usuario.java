@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import javax.swing.JOptionPane;
@@ -7,16 +8,25 @@ import javax.swing.JOptionPane;
 import utilities.Utilites;
 
 public class Usuario {
+	
 	private String conta;
 	private String agencia;
 	private String senha;
 	private int[] codigoDeAcesso = new int[Utilites.TAMANHO_CODIGO_DE_ACESSO];
 	private boolean novoCodigoDeAcesso = false;
+	
 	private boolean admin;
 	private int status;
+	
 	private int id;
+	private String nome;
+	private BigDecimal saldo = BigDecimal.ZERO;
 	
 	private Utilites utilites = new Utilites();
+	
+	public Usuario(){
+		
+	}
 	
 	public int getId(){
 		return id;
@@ -82,7 +92,7 @@ public class Usuario {
 	
 	public void toLog(String tag) {
 		StringBuilder log = new StringBuilder();
-		log.append(" id(" + getId() + ")" );
+		log.append("id(" + getId() + ")" );
 		log.append(" agencia( "+ getAgencia() + " )");
 		log.append(" conta( "+ getConta() + " )");
 		log.append(" senha( "+ getSenha().toString() + " )");
@@ -94,14 +104,27 @@ public class Usuario {
 		setAgencia(agencia);
 		setConta(conta);
 		setSenha(senha2);
-		toLog("Tentativa");
 		verificaAdmin();
+		toLog("Tentativa");
 	}
 
 	private void verificaAdmin() {
-		//TODO: verificacao com 00.000-0
+		if (getDados().equals(getDadosDoAdmin())){
+			setAdmin(true);
+		}
 	}
 	
+	private String getDadosDoAdmin() {
+		StringBuilder dados = new StringBuilder();
+		dados.append("0000-0");
+		dados.append("|");
+		dados.append("00.000-0");
+		dados.append("|");
+		dados.append("0000");
+		return dados.toString();
+		
+	}
+
 	public int getStatus() {
 		return status;
 	}
@@ -135,6 +158,23 @@ public class Usuario {
 			this.id = id;
 		}
 	}
-	
-	
+
+	public String getNome() {
+		if(nome == null){
+			return "Maluco Beleza";
+		}
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public BigDecimal getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
+	}
 }

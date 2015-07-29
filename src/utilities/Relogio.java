@@ -9,9 +9,13 @@ class Relogio extends Thread {
 
 	private Utilites utilites = new Utilites();
 	private JLabel hr;
+	private String conteudo = "";
 
 	public Relogio(JLabel hora) {
 		this.hr = hora;
+		if(hora.getText() != null){
+			conteudo = hora.getText();
+		}
 	}
 
 	@Override
@@ -22,12 +26,15 @@ class Relogio extends Thread {
 			SimpleDateFormat sdfData = new SimpleDateFormat(utilites.maskDia);
 			data = sdfData.format(d);
 			data += " - ";
+			if(conteudo != ""){
+				data = conteudo + " - " + data;
+			}
 			SimpleDateFormat sdf = new SimpleDateFormat(utilites.maskHora);
 			this.hr.setText(data + sdf.format(d));
 			 try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Thread.sleep(450);
+			} catch (InterruptedException ei) {
+				utilites.paraLogDeErro(ei, "Erro na espera da thread do relogio");
 			}
 			this.hr.revalidate();
 		}

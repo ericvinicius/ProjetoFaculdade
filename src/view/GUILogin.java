@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
 import model.Usuario;
@@ -64,7 +65,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		btlogin.addMouseListener(this);
 		add(btlogin);
 
-		// opcaoAdmin.addActionListener(this);
+		opcaoAdmin.addActionListener(this);
 
 		configuraPagina();
 	}
@@ -81,7 +82,8 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		try{
 			pegaInformacoesDeLogin();
 			if (usuarioTentativa.isAdmin()) {
-				// TODO: Usuario Admin
+				opcaoAdmin.setText("Quero ir para Braavos!");
+				opcoes.add(opcaoAdmin);
 			} else {
 				verificaLogin();
 
@@ -149,6 +151,12 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO: Criar Tela do Admin
+		String passe = JOptionPane.showInputDialog(this,
+				"Quem é voce? para ir para Braavos.");
+
+		if (passe.equals("got")) {
+			JOptionPane.showMessageDialog(this, "Valar Dohaeris");
+			// TODO: Criar tela de Administrador
+		}
 	}
 }

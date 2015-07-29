@@ -40,7 +40,7 @@ public class ManipuladorDeArquivos {
 			}
 			
 		} catch (FileNotFoundException ef) {
-			utilites.paraLogDeErro(ef, "ManipuladorDeArquivos.fazLeituraDoArquivoParaLgoin.ef", "Arquivo ACESSO.txt nao encontrado");
+			utilites.paraLogDeErro(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (NumberFormatException en) {
 			utilites.paraLog("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
 		} finally {
@@ -78,9 +78,9 @@ public class ManipuladorDeArquivos {
 			handler.close();
 			
 		} catch (FileNotFoundException ef) {
-			utilites.paraLogDeErro(ef, "ManipuladorDeArquivos.cadastraNovoCodigoDeAcessoParaUsuario.ef", "Arquivo ACESSO.txt nao encontrado");
+			utilites.paraLogDeErro(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (IOException eio) {
-			utilites.paraLogDeErro(eio, "ManipuladorDeArquivos.cadastraNovoCodigoDeAcessoParaUsuario.eio", "Nao conseguiu gravar no arquivo, erro de permissao");
+			utilites.paraLogDeErro(eio, "Nao conseguiu gravar no arquivo, erro de permissao");
 		}
 	}
 }
