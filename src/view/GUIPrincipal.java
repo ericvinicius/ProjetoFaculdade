@@ -20,33 +20,19 @@ public class GUIPrincipal extends GUIMyFrame {
 	private JLabel[] lsaldos;
 	private JLabel[] lvalSaldos;
 	private final JTable table;
-	
-	
-	Object[][] data = {
-		    {"Kathy", "Smith",
-		     "Snowboarding", new Integer(5), new Boolean(false)},
-		    {"John", "Doe",
-		     "Rowing", new Integer(3), new Boolean(true)},
-		    {"Sue", "Black",
-		     "Knitting", new Integer(2), new Boolean(false)},
-		    {"Jane", "White",
-		     "Speed reading", new Integer(20), new Boolean(true)},
-		    {"Joe", "Brown",
-		     "Pool", new Integer(10), new Boolean(false)}
-		};
-	
-	String[] columnNames = {"First Name",
-            "Last Name",
-            "Sport",
-            "# of Years",
-            "Vegetarian"};
+
+	Object[][] data = { { "Kathy", "Smith", "Snowboarding", new Integer(5), new Boolean(false) }, { "John", "Doe", "Rowing", new Integer(3), new Boolean(true) },
+			{ "Sue", "Black", "Knitting", new Integer(2), new Boolean(false) }, { "Jane", "White", "Speed reading", new Integer(20), new Boolean(true) },
+			{ "Joe", "Brown", "Pool", new Integer(10), new Boolean(false) } };
+
+	String[] columnNames = { "First Name", "Last Name", "Sport", "# of Years", "Vegetarian" };
 
 	public GUIPrincipal() {
 		configuraJanela();
 		criaPaineis();
 		table = new JTable(data, columnNames);
 		// Nome - data - hora
-		JLabel lnome = new JLabel(user.getNome());
+		JLabel lnome = new JLabel(user.getCliente().getNome());
 		lnome.setHorizontalAlignment(JLabel.CENTER);
 		utilites.mostrarHoraNoLabel(lnome);
 		getContentPane().add(lnome, BorderLayout.NORTH);
@@ -70,21 +56,21 @@ public class GUIPrincipal extends GUIMyFrame {
 	private void adicionaComponetesPadroesParaTodasOsPaineis() {
 		lsaldos = new JLabel[4];
 		lvalSaldos = new JLabel[4];
-		
-		for(int i = 0; i <= 3; i++){	
+
+		for (int i = 0; i <= 3; i++) {
 			lsaldos[i] = new JLabel("Saldo: ");
 			lvalSaldos[i] = atualizaSaldo();
 		}
-		
+
 		painelExtrato.add(lsaldos[0]);
 		painelExtrato.add(lvalSaldos[0]);
-		
+
 		painelTransferencia.add(lsaldos[1]);
 		painelTransferencia.add(lvalSaldos[1]);
-		
+
 		painelDebitoAutomatico.add(lsaldos[2]);
 		painelDebitoAutomatico.add(lvalSaldos[2]);
-		
+
 		painelSaque.add(lsaldos[3]);
 		painelSaque.add(lvalSaldos[3]);
 	}
@@ -93,12 +79,12 @@ public class GUIPrincipal extends GUIMyFrame {
 		BigDecimal saldo = user.getSaldo();
 		int compareTo = saldo.compareTo(BigDecimal.ZERO);
 		JLabel lsaldo = new JLabel(utilites.getValorComMoeda(user.getSaldo()));
-		
-		if(compareTo == -1){
-			//Saldo Negativo
+
+		if (compareTo == -1) {
+			// Saldo Negativo
 			lsaldo.setForeground(Color.red);
 		} else {
-			//Saldo 0 ou positivo
+			// Saldo 0 ou positivo
 			lsaldo.setForeground(Color.blue);
 		}
 		return lsaldo;

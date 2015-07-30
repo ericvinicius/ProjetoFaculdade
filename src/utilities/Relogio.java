@@ -1,6 +1,6 @@
 package utilities;
 
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JLabel;
@@ -21,20 +21,16 @@ class Relogio extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-			Date d = new Date();
-			String data;
-			SimpleDateFormat sdfData = new SimpleDateFormat(utilites.maskDia);
-			data = sdfData.format(d);
-			data += " - ";
+			Date date = Calendar.getInstance().getTime();
+			String texto = Utilites.formatDiaHora.format(date);
 			if(conteudo != ""){
-				data = conteudo + " - " + data;
+				texto = conteudo + " - " + texto;
 			}
-			SimpleDateFormat sdf = new SimpleDateFormat(utilites.maskHora);
-			this.hr.setText(data + sdf.format(d));
+			this.hr.setText(texto);
 			 try {
 				Thread.sleep(450);
 			} catch (InterruptedException ei) {
-				utilites.paraLogDeErro(ei, "Erro na espera da thread do relogio");
+				utilites.logger.logError(ei, "Erro na espera da thread do relogio");
 			}
 			this.hr.revalidate();
 		}

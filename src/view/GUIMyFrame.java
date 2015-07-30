@@ -7,7 +7,7 @@ import javax.swing.JMenuItem;
 
 import textFile.ManipuladorDeArquivos;
 import utilities.Utilites;
-import model.Usuario;
+import model.Conta;
 
 public class GUIMyFrame extends JFrame {
 
@@ -15,7 +15,7 @@ public class GUIMyFrame extends JFrame {
 	protected JMenu opcoes;
 	protected JMenuItem opcaoAdmin;
 	
-	protected static Usuario user;
+	protected static Conta user;
 	protected Utilites utilites = new Utilites();
 	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();;
 

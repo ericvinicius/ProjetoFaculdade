@@ -3,21 +3,24 @@ package utilities;
 import java.awt.Color;
 import java.awt.Font;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
+import anotations.Log;
+
+@Log
 public class Utilites {
 
 	// Variaveis globais
-	private static final int TAMANHO_MAXIMO_DA_TAG_DE_LOG = 15;
 	public static final int TAMANHO_CODIGO_DE_ACESSO = 3;
 	public static final int MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO = 3;
 	public static final String DELIMITADOR_DO_ARQUIVO_DE_TEXTO = "\\||\\n";
@@ -28,6 +31,7 @@ public class Utilites {
 	public final String maskConta = "##.###-#";
 	public final String maskDia = "dd/MM/yyyy";
 	public final String maskHora = "HH:mm:ss";
+	public static final SimpleDateFormat formatDiaHora = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 
 	// Fonts
 	public final Font fontNormal = new Font("Arial", Font.PLAIN, 12);
@@ -42,10 +46,13 @@ public class Utilites {
 
 	// boolean
 	public static boolean temMensagemDeErro = false;
-	
+
 	// Idioma
 	public static ResourceBundle bn;
 	public static Locale local;
+	
+	//Log
+	public Logger logger = new Logger();
 
 	public void tremeTelaComMensagemDeErro(JFrame frame) {
 		if (temMensagemDeErro) {
@@ -67,32 +74,24 @@ public class Utilites {
 
 		try {
 			for (int i = 0; i <= 2; i++) {
-				frame.setBounds(originalX + movimento, originalY,
-						originalWidth, originalHeight + aumento);
+				frame.setBounds(originalX + movimento, originalY, originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-
-				frame.setBounds(originalX + movimento, originalY + movimento,
-						originalWidth, originalHeight + aumento);
+				frame.setBounds(originalX + movimento, originalY + movimento, originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				frame.setBounds(originalX, originalY + movimento,
-						originalWidth, originalHeight + aumento);
+				frame.setBounds(originalX, originalY + movimento, originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				frame.setBounds(originalX, originalY, originalWidth,
-						originalHeight + aumento);
+				frame.setBounds(originalX, originalY, originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				frame.setBounds(originalX - movimento, originalY,
-						originalWidth, originalHeight + aumento);
+				frame.setBounds(originalX - movimento, originalY, originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				frame.setBounds(originalX - movimento, originalY - movimento,
-						originalWidth, originalHeight + aumento);
+				frame.setBounds(originalX - movimento, originalY - movimento, originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
-				frame.setBounds(originalX, originalY - movimento,
-						originalWidth, originalHeight + aumento);
+				frame.setBounds(originalX, originalY - movimento, originalWidth, originalHeight + aumento);
 				Thread.sleep(sleepTime);
 
 			}
 		} catch (InterruptedException ei) {
-			paraLogDeErro(ei, "Erro da thread que treme tela");
+			logger.logError(ei, "Erro da thread que treme tela");
 		}
 
 		frame.setLocation(originalX, originalY);
@@ -127,7 +126,7 @@ public class Utilites {
 			janela.setLocation(originalX, originalY);
 
 		} catch (InterruptedException ei) {
-			paraLogDeErro(ei, "Erro da thread que treme tela");
+			logger.logError(ei, "Erro da thread que treme tela");
 		}
 	}
 
@@ -138,7 +137,7 @@ public class Utilites {
 		try {
 			mascara.setMask(mask);
 		} catch (ParseException ep) {
-			paraLogDeErro(ep, "Erro ao criar uma mascara");
+			logger.logError(ep, "Erro ao criar uma mascara");
 		}
 		return mascara;
 
@@ -172,7 +171,7 @@ public class Utilites {
 	public int criaLogicaDoCodigoDeAcesso(int linha) {
 		return (33 * linha) + 25 + linha;
 	}
-	
+
 	public int[] criaVetorComOrdemAleatoriaComQuatroPosicoes() {
 		int[] ordemDosBotoes = { 0, 1, 2, 3, 4 };
 
@@ -186,56 +185,7 @@ public class Utilites {
 		return ordemDosBotoes;
 	}
 
-	public void paraLog(String tag, String texto) {
-		int i = 0;
-		String espaco = " ";
-		while (tag.length() < Utilites.TAMANHO_MAXIMO_DA_TAG_DE_LOG) {
-			if (i % 2 == 0) {
-				tag = espaco + tag;
-			} else {
-				tag = tag + espaco;
-			}
-			i++;
-		}
-		if (tag.length() > Utilites.TAMANHO_MAXIMO_DA_TAG_DE_LOG) {
-			tag.trim();
-			while (tag.length() > Utilites.TAMANHO_MAXIMO_DA_TAG_DE_LOG) {
-				tag = tag.substring(0, tag.length() - 1);
-			}
-		}
-		System.out.println("[" + tag + "] " + texto);
-	}
-
-	public void paraLogDeErro(Exception e, String myMessage) {
-		Throwable t = new Throwable();
-		StackTraceElement[] trace = t.getStackTrace();
-		String className = trace[1].getClassName();
-		String methodName = trace[1].getMethodName();
-		int lineNumber = trace[1].getLineNumber();
-
-		String antClassName = trace[2].getClassName();
-		String antMethodName = trace[2].getMethodName();
-		int antLineNumber = trace[2].getLineNumber();
-
-		System.out
-				.println("=========================================================ERRO============================================================================");
-		StringBuilder builder = new StringBuilder();
-		builder.append("[   Local        ] " + className + "." + methodName
-				+ "." + lineNumber + "\n");
-		builder.append("[   Local Ant.   ] " + antClassName + "."
-				+ antMethodName + "." + antLineNumber + "\n");
-		builder.append("[   Message      ] " + e.getMessage() + "\n");
-		builder.append("[   My Message   ] " + myMessage + "\n");
-		builder.append("[   Stack Trace  ] ");
-		System.out.println(builder.toString());
-		e.printStackTrace();
-		JOptionPane.showMessageDialog(null, "Erro na Aplicação", "Erro",
-				JOptionPane.ERROR_MESSAGE);
-		System.out
-				.println("=========================================================================================================================================");
-	}
-	
-	public String getValorComMoeda(BigDecimal valor){
+	public String getValorComMoeda(BigDecimal valor) {
 		NumberFormat moedaFormat = NumberFormat.getCurrencyInstance(local);
 		return moedaFormat.format(valor);
 	}

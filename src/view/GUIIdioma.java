@@ -45,14 +45,17 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 		if(click == br){
 			Utilites.local = new Locale("pt", "BR");
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
+			utilites.logger.logInfo("Idioma", "Portugues");
 			
 		} else if(click == us){
 			Utilites.local = Locale.US;
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
+			utilites.logger.logInfo("Idioma", "Ingles");
 			
 		} else if(click == es){
 			Utilites.local = new Locale("es", "ES");
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
+			utilites.logger.logInfo("Idioma", "Espanhol");
 		}
 		this.dispose();
 		new GUILogin();

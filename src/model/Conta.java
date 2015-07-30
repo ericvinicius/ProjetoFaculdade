@@ -2,37 +2,43 @@ package model;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import utilities.Utilites;
 
-public class Usuario {
-	
+//TODO: Esta classe possui codigo comentado para a implementacao de observers
+
+public class Conta implements Acesso /* anotations.Observable */{
+	// Acesso
 	private String conta;
 	private String agencia;
 	private String senha;
 	private int[] codigoDeAcesso = new int[Utilites.TAMANHO_CODIGO_DE_ACESSO];
+
+	private BigDecimal saldo = BigDecimal.ZERO;
+
 	private boolean novoCodigoDeAcesso = false;
-	
 	private boolean admin;
 	private int status;
-	
+
 	private int id;
-	private String nome;
-	private BigDecimal saldo = BigDecimal.ZERO;
-	
+	private Cliente cliente;
+
+	private List<Movimentacao> movimentacoes;
+
 	private Utilites utilites = new Utilites();
-	
-	public Usuario(){
-		
+
+	public Conta() {
+		cliente = new Cliente();
 	}
-	
-	public int getId(){
+
+	public int getId() {
 		return id;
 	}
 
-	public String getConta(){
+	public String getConta() {
 		return conta;
 	}
 
@@ -71,16 +77,16 @@ public class Usuario {
 	public void setNovoCodigoDeAcesso(boolean novoCodigoDeAcesso) {
 		this.novoCodigoDeAcesso = novoCodigoDeAcesso;
 	}
-	
+
 	public boolean isAdmin() {
 		return admin;
 	}
-	
+
 	public void setAdmin(boolean isAdmin) {
 		this.admin = isAdmin;
 	}
-	
-	protected String getDados(){
+
+	protected String getDados() {
 		StringBuilder dados = new StringBuilder();
 		dados.append(getAgencia());
 		dados.append("|");
@@ -89,17 +95,18 @@ public class Usuario {
 		dados.append(getSenha());
 		return dados.toString();
 	}
-	
+
 	public void toLog(String tag) {
 		StringBuilder log = new StringBuilder();
-		log.append("id(" + getId() + ")" );
-		log.append(" agencia( "+ getAgencia() + " )");
-		log.append(" conta( "+ getConta() + " )");
-		log.append(" senha( "+ getSenha().toString() + " )");
+		log.append("id(" + getId() + ")");
+		log.append(" agencia( " + getAgencia() + " )");
+		log.append(" conta( " + getConta() + " )");
+		log.append(" senha( " + getSenha().toString() + " )");
 		log.append(" admin( " + isAdmin() + " )");
-		utilites.paraLog(tag, log.toString());
+		utilites.logger.logInfo(tag, log.toString());
+
 	}
-	
+
 	public void guardaInformacoes(String agencia, String conta, String senha2) {
 		setAgencia(agencia);
 		setConta(conta);
@@ -109,11 +116,11 @@ public class Usuario {
 	}
 
 	private void verificaAdmin() {
-		if (getDados().equals(getDadosDoAdmin())){
+		if (getDados().equals(getDadosDoAdmin())) {
 			setAdmin(true);
 		}
 	}
-	
+
 	private String getDadosDoAdmin() {
 		StringBuilder dados = new StringBuilder();
 		dados.append("0000-0");
@@ -122,7 +129,7 @@ public class Usuario {
 		dados.append("|");
 		dados.append("0000");
 		return dados.toString();
-		
+
 	}
 
 	public int getStatus() {
@@ -132,10 +139,11 @@ public class Usuario {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
-	public boolean fazComparacaoParaLogin(Usuario usuarioTentativa) {
-		if(getDados().equals(usuarioTentativa.getDados())){
-			if(getStatus() == 1){
+
+	@Override
+	public boolean validaLogin(Conta usuarioTentativa) {
+		if (getDados().equals(usuarioTentativa.getDados())) {
+			if (getStatus() == 1) {
 				JOptionPane.showMessageDialog(null, "Usuario Bloqueado", "Block", JOptionPane.ERROR_MESSAGE);
 				System.exit(1);
 			}
@@ -144,37 +152,66 @@ public class Usuario {
 		return false;
 	}
 
-	public boolean fazCompacaoDoCodigoDeAcesso(Usuario usuarioTentativa) {
-		utilites.paraLog("Tentativa", utilites.converteVetorParaString(usuarioTentativa.getCodigoDeAcesso()));
-		utilites.paraLog(" Correto ", utilites.converteVetorParaString(getCodigoDeAcesso()));
-		if(Arrays.equals(getCodigoDeAcesso(), usuarioTentativa.getCodigoDeAcesso())){
+	@Override
+	public boolean validaCodigoDeAcesso(Conta usuarioTentativa) {
+		utilites.logger.logInfo("Tentativa", utilites.converteVetorParaString(usuarioTentativa.getCodigoDeAcesso()));
+		utilites.logger.logInfo("Correto", utilites.converteVetorParaString(getCodigoDeAcesso()));
+		if (Arrays.equals(getCodigoDeAcesso(), usuarioTentativa.getCodigoDeAcesso())) {
 			return true;
 		}
 		return false;
 	}
 
 	public void setId(int id) {
-		if(id >= 0){
+		if (id >= 0) {
 			this.id = id;
 		}
-	}
-
-	public String getNome() {
-		if(nome == null){
-			return "Maluco Beleza";
-		}
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public BigDecimal getSaldo() {
-		return saldo;
 	}
 
 	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
+
+	public BigDecimal getSaldo() {
+		// anotations.Observer observer = new anotations.Observer();
+		// this.registerObserver(observer);
+		// this.notifyObservers();
+		return saldo;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public List<Movimentacao> getMovimentacoes() {
+		return movimentacoes;
+	}
+
+	public void setMovimentacoes(List<Movimentacao> movimentacoes) {
+		this.movimentacoes = movimentacoes;
+	}
+
+	// private List<Observer> observers = new ArrayList();
+	//
+	// @Override
+	// public void registerObserver(Observer observer) {
+	// observers.add(observer);
+	// }
+	//
+	// @Override
+	// public void removeObserver(Observer observer) {
+	// observers.remove(observer);
+	// }
+	//
+	// @Override
+	// public void notifyObservers() {
+	// for (Observer ob : observers) {
+	// System.out.println("Notificando observers!");
+	// ob.update(null, this);
+	// }
+	// }
 }
