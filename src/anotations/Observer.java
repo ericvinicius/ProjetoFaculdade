@@ -11,7 +11,7 @@ public class Observer implements java.util.Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		Throwable t = new Throwable();
-		StackTraceElement[] trace = t.getStackTrace();
+		//StackTraceElement[] trace = t.getStackTrace();
 		t.printStackTrace();
 	}
 }

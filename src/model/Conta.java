@@ -10,7 +10,7 @@ import utilities.Utilites;
 
 //TODO: Esta classe possui codigo comentado para a implementacao de observers
 
-public class Conta implements Acesso /* anotations.Observable */{
+public class Conta extends Cliente implements Acesso /* anotations.Observable */{
 	// Acesso
 	private String conta;
 	private String agencia;
@@ -27,6 +27,7 @@ public class Conta implements Acesso /* anotations.Observable */{
 	private Cliente cliente;
 
 	private List<Movimentacao> movimentacoes;
+	private List<DebitoAutomatico> debitosAutomaticos;
 
 	private Utilites utilites = new Utilites();
 
@@ -193,6 +194,14 @@ public class Conta implements Acesso /* anotations.Observable */{
 
 	public void setMovimentacoes(List<Movimentacao> movimentacoes) {
 		this.movimentacoes = movimentacoes;
+	}
+
+	public List<DebitoAutomatico> getDebitosAutomaticos() {
+		return debitosAutomaticos;
+	}
+
+	public void setDebitosAutomaticos(List<DebitoAutomatico> debitosAutomaticos) {
+		this.debitosAutomaticos = debitosAutomaticos;
 	}
 
 	// private List<Observer> observers = new ArrayList();
