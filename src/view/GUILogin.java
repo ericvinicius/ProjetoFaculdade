@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-import model.Conta;
+import model.Cliente;
 
 public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		ActionListener {
@@ -27,7 +27,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	public JFormattedTextField txtagencia;
 	public JPasswordField txtsenha;
 
-	private Conta usuarioTentativa = new Conta();
+	private Cliente usuarioTentativa = new Cliente();
 
 	public GUILogin() {
 		// Conta

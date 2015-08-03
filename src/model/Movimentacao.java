@@ -7,6 +7,8 @@ public class Movimentacao {
 
 	private BigDecimal valor;
 	private Calendar data;
+	private BigDecimal novoSaldo;
+	private Long id;
 
 	private String tipo;
 
@@ -36,6 +38,22 @@ public class Movimentacao {
 
 	public void efetuarMovimentacao(String tipo) {
 		// TODO: efetuar movimentacao
+	}
+
+	public BigDecimal getNovoSaldo() {
+		return novoSaldo;
+	}
+
+	public void setNovoSaldo(BigDecimal novoSaldo) {
+		this.novoSaldo = novoSaldo;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

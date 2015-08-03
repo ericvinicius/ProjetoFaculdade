@@ -5,18 +5,20 @@ import java.awt.Color;
 import java.math.BigDecimal;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import view.painel.PainelDebitoAutomatico;
 import view.painel.PainelExtrato;
+import view.painel.PainelSaque;
+import view.painel.PainelTransferencia;
 
 public class GUIPrincipal extends GUIMyFrame {
 
 	private JTabbedPane abas = new JTabbedPane();
-	private JPanel painelExtrato = new PainelExtrato();
-	private JPanel painelTransferencia ;
-	private JPanel painelDebitoAutomatico;
-	private JPanel painelSaque;
+	private PainelExtrato painelExtrato = new PainelExtrato();
+	private PainelTransferencia painelTransferencia = new PainelTransferencia();
+	private PainelDebitoAutomatico painelDebitoAutomatico = new PainelDebitoAutomatico();
+	private PainelSaque painelSaque = new PainelSaque();
 	
 
 	public GUIPrincipal() {
@@ -24,7 +26,7 @@ public class GUIPrincipal extends GUIMyFrame {
 		criaPaineis();
 		
 		// Nome - data - hora
-		JLabel lnome = new JLabel(user.getCliente().getNome());
+		JLabel lnome = new JLabel(user.getNome());
 		lnome.setHorizontalAlignment(JLabel.CENTER);
 		utilites.mostrarHoraNoLabel(lnome);
 		getContentPane().add(lnome, BorderLayout.NORTH);
@@ -40,7 +42,10 @@ public class GUIPrincipal extends GUIMyFrame {
 
 	private void criaPaineis() {
 		adicionaComponetesPadroesParaTodasOsPaineis();
-		
+		painelExtrato.constroiTela(user.getExtrato());
+		painelTransferencia.controiTela();
+		painelDebitoAutomatico.constroiTela();
+		painelSaque.constroiTela();
 	}
 
 	private void adicionaComponetesPadroesParaTodasOsPaineis() {
@@ -86,4 +91,5 @@ public class GUIPrincipal extends GUIMyFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+
 }

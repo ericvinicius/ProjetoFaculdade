@@ -6,23 +6,23 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Scanner;
 
-import model.Conta;
+import model.Cliente;
 import utilities.Utilites;
 
 public class ManipuladorDeArquivos {
 
 	private Utilites utilites = new Utilites();
-	private Conta usuarioCadastrado;
+	private Cliente usuarioCadastrado;
 	private Scanner leitor = null;
 
-	public Conta fazLeituraDoArquivoParaLogin(Conta usuarioTentativa) {
+	public Cliente fazLeituraDoArquivoParaLogin(Cliente usuarioTentativa) {
 
 		try {
 			leitor = new Scanner(new FileReader(Utilites.CAMINHO_PARA_ACESSO_TXT));
 			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
 
 			while (leitor.hasNext()) {
-				usuarioCadastrado = new Conta();
+				usuarioCadastrado = new Cliente();
 				usuarioCadastrado.setId(Integer.parseInt(leitor.next()));
 				usuarioCadastrado.setStatus(Integer.parseInt(leitor.next()));
 				usuarioCadastrado.setConta(leitor.next());
@@ -62,7 +62,7 @@ public class ManipuladorDeArquivos {
 		return v;
 	}
 
-	public void cadastraNovoCodigoDeAcessoParaUsuario(Conta user) {
+	public void cadastraNovoCodigoDeAcessoParaUsuario(Cliente user) {
 		int posDoCodigo = utilites.criaLogicaDoCodigoDeAcesso(user.getId());
 		try {
 			String codigo_0 = String.valueOf(user.getCodigoDeAcesso()[0]);

@@ -5,9 +5,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import dao.ClienteDao;
 import textFile.ManipuladorDeArquivos;
 import utilities.Utilites;
-import model.Conta;
+import model.Cliente;
 
 public class GUIMyFrame extends JFrame {
 
@@ -15,9 +16,11 @@ public class GUIMyFrame extends JFrame {
 	protected JMenu opcoes;
 	protected JMenuItem opcaoAdmin;
 	
-	protected static Conta user;
+	private ClienteDao clienteDao = new ClienteDao();
+	
+	protected static Cliente user;
 	protected Utilites utilites = new Utilites();
-	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();;
+	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();
 
 	public GUIMyFrame() {
 		configuraJanela();
@@ -44,6 +47,7 @@ public class GUIMyFrame extends JFrame {
 		if(frame.equals("codigoDeAcesso")){
 			new GUICodigoDeAcesso();
 		} else if(frame.equals("principal")){
+			user = clienteDao.carregaClienteComMovimentacoes(user);
 			new GUIPrincipal();
 		} else if(frame.equals("login")){
 			new GUILogin();

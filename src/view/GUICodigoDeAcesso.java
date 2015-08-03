@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import model.Conta;
+import model.Cliente;
 import utilities.Utilites;
 
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
@@ -114,7 +114,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 	}
 	
 	public void verificaCodigo() {
-		Conta usuarioTentativa = new Conta();
+		Cliente usuarioTentativa = new Cliente();
 		usuarioTentativa.setCodigoDeAcesso(codigo);
 		if (user.isNovoCodigoDeAcesso()) {
 			user.setCodigoDeAcesso(codigo);
