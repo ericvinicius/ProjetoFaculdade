@@ -1,4 +1,4 @@
-package view;
+package views;
 
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import model.Cliente;
+import modelos.Cliente;
 import utilities.Utilites;
 
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{

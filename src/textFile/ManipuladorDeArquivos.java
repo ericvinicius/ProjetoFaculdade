@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Scanner;
 
-import model.Cliente;
+import modelos.Cliente;
 import utilities.Utilites;
 
 public class ManipuladorDeArquivos {

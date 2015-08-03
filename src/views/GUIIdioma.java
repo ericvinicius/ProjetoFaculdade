@@ -1,4 +1,4 @@
-package view;
+package views;
 
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;

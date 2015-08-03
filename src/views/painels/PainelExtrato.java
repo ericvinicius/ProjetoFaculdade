@@ -1,4 +1,4 @@
-package view.painel;
+package views.painels;
 
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;

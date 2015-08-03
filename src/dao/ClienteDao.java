@@ -2,7 +2,7 @@ package dao;
 
 import java.sql.SQLException;
 
-import model.Cliente;
+import modelos.Cliente;
 
 public class ClienteDao extends MyDao {
 	

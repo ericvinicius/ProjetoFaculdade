@@ -4,10 +4,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import model.Cliente;
-import model.Movimentacao;
-import model.Saque;
-import model.Transferencia;
+import modelos.Cliente;
+import modelos.Movimentacao;
+import modelos.Saque;
+import modelos.Transferencia;
 
 public class MovimentacaoDao extends MyDao {
 

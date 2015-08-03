@@ -1,4 +1,4 @@
-package view;
+package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
-import view.painel.PainelDebitoAutomatico;
-import view.painel.PainelExtrato;
-import view.painel.PainelSaque;
-import view.painel.PainelTransferencia;
+import views.painels.PainelDebitoAutomatico;
+import views.painels.PainelExtrato;
+import views.painels.PainelSaque;
+import views.painels.PainelTransferencia;
 
 public class GUIPrincipal extends GUIMyFrame {
 

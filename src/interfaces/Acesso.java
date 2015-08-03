@@ -1,6 +1,6 @@
 package interfaces;
 
-import model.Cliente;
+import modelos.Cliente;
 
 public interface Acesso {
 	public boolean validaLogin(Cliente u);

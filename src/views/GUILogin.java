@@ -1,4 +1,4 @@
-package view;
+package views;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-import model.Cliente;
+import modelos.Cliente;
 
 public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		ActionListener {

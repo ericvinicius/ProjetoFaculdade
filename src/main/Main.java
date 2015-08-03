@@ -5,7 +5,7 @@ import java.util.Date;
 
 import utilities.Logger;
 import utilities.Utilites;
-import view.GUIIdioma;
+import views.GUIIdioma;
 
 
 public class Main {

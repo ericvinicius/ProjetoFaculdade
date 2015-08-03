@@ -1,4 +1,4 @@
-package model;
+package modelos;
 
 public class Transferencia extends Movimentacao {
 	private String contaDestino;

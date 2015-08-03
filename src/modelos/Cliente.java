@@ -1,4 +1,4 @@
-package model;
+package modelos;
 
 import interfaces.Acesso;
 

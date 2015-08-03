@@ -1,4 +1,4 @@
-package view;
+package views;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 import dao.ClienteDao;
 import textFile.ManipuladorDeArquivos;
 import utilities.Utilites;
-import model.Cliente;
+import modelos.Cliente;
 
 public class GUIMyFrame extends JFrame {
 
