@@ -1,12 +1,13 @@
 package modelos;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
+
+import org.joda.time.DateTime;
 
 public class Movimentacao {
 
 	private BigDecimal valor;
-	private Calendar data;
+	private DateTime data;
 	private BigDecimal novoSaldo;
 	private Long id;
 
@@ -20,11 +21,11 @@ public class Movimentacao {
 		this.valor = valor;
 	}
 
-	public Calendar getData() {
+	public DateTime getData() {
 		return data;
 	}
 
-	public void setData(Calendar data) {
+	public void setData(DateTime data) {
 		this.data = data;
 	}
 

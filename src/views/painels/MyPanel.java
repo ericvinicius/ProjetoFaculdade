@@ -24,7 +24,7 @@ public class MyPanel extends JPanel {
 		add(lvalSaldos);
 	}
 	
-	private JLabel atualizaSaldo() {
+	protected JLabel atualizaSaldo() {
 		BigDecimal saldo = user.getSaldo();
 		int compareTo = saldo.compareTo(BigDecimal.ZERO);
 		JLabel lsaldo = new JLabel(utilites.getValorComMoeda(user.getSaldo()));

@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import org.joda.time.DateTime;
+
 import modelos.Cliente;
 import modelos.Movimentacao;
 import modelos.Saque;
@@ -43,7 +45,7 @@ public class MovimentacaoDao extends MyDao {
 			}
 			cliente.setMovimentacoes(movimentacoes);
 		} catch (SQLException se) {
-			utilites.logger.logError(se, "Erro na busca de cliente por id");
+			utilites.logger.logError(se, "Erro na busca de movimentacao por id");
 		}
 		
 		fechaConexao();
@@ -55,8 +57,9 @@ public class MovimentacaoDao extends MyDao {
 			mov.setTipo(mov.getClass().getSimpleName());
 			
 			Calendar cal = Calendar.getInstance();
-			cal.setTime(rs.getDate("data", cal));
-			mov.setData(cal);
+			cal.setTime(rs.getTimestamp("data", cal));
+			DateTime data = new DateTime(cal.getTime());
+			mov.setData(data);
 			
 			mov.setValor(rs.getBigDecimal("valor"));
 			

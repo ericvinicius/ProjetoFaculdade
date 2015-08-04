@@ -5,7 +5,6 @@ import interfaces.Acesso;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -195,18 +194,16 @@ public class Cliente implements Acesso /* anotations.Observable */{
 		this.debitosAutomaticos = debitosAutomaticos;
 	}
 	
-	public String[][] getExtrato(){
-		//TODO: Descomentar esta classe e trocar o retorno
-	
+	public Object[][] getExtrato(){
 		int size = movimentacoes.size();
 		
-		String[][] extrato = new String[size][5];
+		Object[][] extrato = new Object[size][5];
 		int i = 0;
 		for (Movimentacao mov : movimentacoes) {
-			extrato[i][0] = mov.getValor().toString();
-			extrato[i][1] = mov.getData().getTime().toString();
+			extrato[i][0] = mov.getValor();
+			extrato[i][1] = mov.getData();
 			extrato[i][2] = mov.getTipo();
-			extrato[i][3] = mov.getNovoSaldo().toString();
+			extrato[i][3] = mov.getNovoSaldo();
 			i++;
 		}
 		return extrato;
