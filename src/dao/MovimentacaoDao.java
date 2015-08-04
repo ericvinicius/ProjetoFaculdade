@@ -64,8 +64,6 @@ public class MovimentacaoDao extends MyDao {
 			mov.setValor(rs.getBigDecimal("valor"));
 			
 			mov.setNovoSaldo(rs.getBigDecimal("novoSaldo"));
-			System.out.println(mov.getNovoSaldo());
-			
 			movimentacoes.add(mov);
 		} catch (SQLException e) {
 			utilites.logger.logError(e, "Erro de generics");

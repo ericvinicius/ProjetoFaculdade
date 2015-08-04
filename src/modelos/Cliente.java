@@ -8,6 +8,10 @@ import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import utilities.Utilites;
 
 //TODO: Esta classe possui codigo comentado para a implementacao de observers
@@ -201,7 +205,9 @@ public class Cliente implements Acesso /* anotations.Observable */{
 		int i = 0;
 		for (Movimentacao mov : movimentacoes) {
 			extrato[i][0] = mov.getValor();
-			extrato[i][1] = mov.getData();
+			DateTime data = mov.getData();
+			DateTimeFormatter fmt = DateTimeFormat.forPattern(utilites.maskDiaHora);
+			extrato[i][1] = fmt.print(data);
 			extrato[i][2] = mov.getTipo();
 			extrato[i][3] = mov.getNovoSaldo();
 			i++;

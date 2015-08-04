@@ -1,21 +1,25 @@
 package views.painels;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.math.BigDecimal;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import utilities.Utilites;
 import modelos.Cliente;
+import utilities.Utilites;
 
 public class MyPanel extends JPanel {
 	protected static Cliente user;
 	protected Utilites utilites;
 	
+	
 	public MyPanel(Cliente u, Utilites ut){
 		user = u;
 		utilites = ut;
+		
+		configuraPainel();
 		
 		JLabel lsaldos = new JLabel("Saldo: ");
 		JLabel lvalSaldos = atualizaSaldo();
@@ -24,8 +28,13 @@ public class MyPanel extends JPanel {
 		add(lvalSaldos);
 	}
 	
+	private void configuraPainel(){
+		setLayout(new FlowLayout());
+	}
+	
 	protected JLabel atualizaSaldo() {
-		BigDecimal saldo = user.getSaldo();
+		BigDecimal saldo = BigDecimal.TEN;
+		saldo = user.getSaldo();
 		int compareTo = saldo.compareTo(BigDecimal.ZERO);
 		JLabel lsaldo = new JLabel(utilites.getValorComMoeda(user.getSaldo()));
 

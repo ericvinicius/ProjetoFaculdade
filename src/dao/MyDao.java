@@ -14,6 +14,7 @@ public class MyDao {
 	protected ResultSet rs = null;
 
 	protected Utilites utilites = new Utilites();
+	//TODO: adicionar tudo aos log
 	
 	protected void criaConexao(){
 		this.connection = new ConnectionFactory().getConnection();

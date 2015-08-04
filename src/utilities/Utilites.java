@@ -30,6 +30,7 @@ public class Utilites {
 	public final String maskConta = "##.###-#";
 	public final String maskDia = "dd/MM/yyyy";
 	public final String maskHora = "HH:mm:ss";
+	public final String maskDiaHora = "dd/MM/yyyy - HH:mm:ss";
 	public static final SimpleDateFormat formatDiaHora = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 
 	// Fonts

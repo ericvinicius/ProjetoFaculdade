@@ -1,8 +1,6 @@
 package views.painels;
 
 import java.awt.Dimension;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -20,15 +18,18 @@ import javax.swing.border.SoftBevelBorder;
 import modelos.Cliente;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import utilities.Utilites;
 
-public class PainelExtrato extends MyPanel implements MouseListener, FocusListener, KeyListener {
+public class PainelExtrato extends MyPanel implements MouseListener, KeyListener {
 	
 	private JScrollPane scroll = new JScrollPane();
 	
 	private JTable table;
 	private Object[][] linhasDaTabela;
+
 	private String[] tituloDaTabela = {"Valor", "Data", "Tipo", "Novo Saldo"};
 	
 	private JButton imprimiExtrato = new JButton("Imprimir Extrato");
@@ -45,7 +46,6 @@ public class PainelExtrato extends MyPanel implements MouseListener, FocusListen
 		add(lfiltros);
 		
 		tfiltro.setColumns(5);
-		tfiltro.addFocusListener(this);
 		tfiltro.addKeyListener(this);
 		add(tfiltro);
 		
@@ -68,12 +68,12 @@ public class PainelExtrato extends MyPanel implements MouseListener, FocusListen
 	
 	private void atualizaTabela(String periodo) {
 		try{
-			periodo = periodo.trim();
 			int dias = Integer.parseInt(periodo);
 			filtraTabela(dias);
 			
 		} catch(NumberFormatException e){
 			//Este exception é prevista para quando o periodo nao for int, por exemplo para carregar toda a tabela
+			//TODO: criar log que nao mostra erro na tela do usuario
 		}
 		
 		table = new JTable(linhasDaTabela, tituloDaTabela);
@@ -94,7 +94,10 @@ public class PainelExtrato extends MyPanel implements MouseListener, FocusListen
 	}
 	
 	private void filtraTabela(int periodo) {
+		DateTimeFormatter fmt = DateTimeFormat.forPattern(utilites.maskDiaHora);
 		DateTime data = DateTime.now().minusDays(periodo);
+		String dataFormatada = fmt.print(data);
+		data = fmt.parseDateTime(dataFormatada);
 		
 		int linhas = linhasDaTabela.length;
 		int colunas = linhasDaTabela[0].length;
@@ -102,7 +105,9 @@ public class PainelExtrato extends MyPanel implements MouseListener, FocusListen
 		
 		int j = 0;
 		for(int i = 0; i < linhas; i++){
-			DateTime dataMovimentacao = (DateTime)linhasDaTabela[i][1];
+			DateTime dataMovimentacao = fmt.parseDateTime(linhasDaTabela[i][1] + "");
+			System.out.println(dataMovimentacao + "- -- - -" + data);
+			System.out.println(linhasDaTabela[i][1]);
 			if(dataMovimentacao.isAfter(data)){
 				extrato[j][0] = linhasDaTabela[i][0];
 				extrato[j][1] = linhasDaTabela[i][1];
@@ -111,6 +116,8 @@ public class PainelExtrato extends MyPanel implements MouseListener, FocusListen
 				j++;
 			}
 		}
+		System.out.println("==========");
+		linhasDaTabela = extrato;
 	}
 
 	@Override
@@ -120,7 +127,7 @@ public class PainelExtrato extends MyPanel implements MouseListener, FocusListen
 		} else if(e.getSource() == imprimiSaldo){
 			//TODO: Imprimi Saldo
 		} else if(e.getSource() == bfiltrar){
-			atualizaTabela(lfiltros.getText());
+			atualizaTabela(tfiltro.getText());
 		}
 	}
 
@@ -145,17 +152,6 @@ public class PainelExtrato extends MyPanel implements MouseListener, FocusListen
 	}
 
 	@Override
-	public void focusGained(FocusEvent e) {
-		
-	}
-
-	@Override
-	public void focusLost(FocusEvent e) {
-		atualizaTabela(tfiltro.getText());
-	}
-
-
-	@Override
 	public void keyTyped(KeyEvent e) {
 		// Se for uma letra
 		if (e.getKeyChar() > 'a' && e.getKeyChar() < 'Z') {
@@ -166,13 +162,9 @@ public class PainelExtrato extends MyPanel implements MouseListener, FocusListen
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }

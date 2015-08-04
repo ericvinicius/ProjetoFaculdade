@@ -17,7 +17,6 @@ public class GUIPrincipal extends GUIMyFrame {
 	private PainelTransferencia painelTransferencia = new PainelTransferencia(user, utilites);
 	private PainelDebitoAutomatico painelDebitoAutomatico = new PainelDebitoAutomatico(user, utilites);
 	private PainelSaque painelSaque = new PainelSaque(user, utilites);
-	
 
 	public GUIPrincipal() {
 		configuraJanela();
