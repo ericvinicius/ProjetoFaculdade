@@ -5,47 +5,57 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
-public class PainelExtrato extends JPanel implements MouseListener {
+import utilities.Utilites;
+import modelos.Cliente;
+
+public class PainelExtrato extends MyPanel implements MouseListener {
 	
 	private JScrollPane scroll = new JScrollPane();
 	
 	private JTable table;
-	private String[][] rowData;
-	private String[] columnNames = {"Valor", "Data", "Tipo", "Novo Saldo"};
+	private String[][] linhasDaTabela;
+	private String[] tituloDaTabela = {"Valor", "Data", "Tipo", "Novo Saldo"};
 	
 	private JButton imprimiExtrato = new JButton("Imprimir Extrato");
 	private JButton imprimiSaldo = new JButton("Imprimir Saldo");
 	
-	public PainelExtrato(){
+	private JLabel lfiltros = new JLabel("Dias:");
+	
+	public PainelExtrato(Cliente u, Utilites ut){
+		super(u, ut);
+		
+		linhasDaTabela = user.getExtrato();
+		
+		criaTabela();
+		
+		add(imprimiExtrato);
+		add(imprimiSaldo);
+		
 		imprimiExtrato.addMouseListener(this);
 		imprimiSaldo.addMouseListener(this);
 	}
 
-	public void constroiTela(String[][] ex) {
-		//TODO: Descomentar para mostrar o extrato
-		rowData = ex;
-		
-		table = new JTable(rowData, columnNames);
+	private void criaTabela() {
+		table = new JTable(linhasDaTabela, tituloDaTabela);
 		table.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		table.setEnabled(false);
+		table.getColumnModel().getColumn(0).setPreferredWidth(63);
+		table.getColumnModel().getColumn(1).setPreferredWidth(204);
+		table.getColumnModel().getColumn(2).setPreferredWidth(104);
+		table.getColumnModel().getColumn(3).setPreferredWidth(77);
 		
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 		scroll.setPreferredSize(new Dimension(450, 350));
 		scroll.setViewportView(table);
-		
 		add(scroll);
-		add(imprimiExtrato);
-		add(imprimiSaldo);
-		
-		
 	}
 
 	@Override

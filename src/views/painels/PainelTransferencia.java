@@ -1,12 +1,13 @@
 package views.painels;
 
-import javax.swing.JPanel;
+import utilities.Utilites;
+import modelos.Cliente;
 
-public class PainelTransferencia extends JPanel {
 
-	public void controiTela() {
-		// TODO Auto-generated method stub
-		
+public class PainelTransferencia extends MyPanel {
+
+	public PainelTransferencia(Cliente u, Utilites ut) {
+		super(u, ut);
 	}
 
 }

@@ -1,12 +1,14 @@
 package views.painels;
 
-import javax.swing.JPanel;
+import utilities.Utilites;
+import modelos.Cliente;
 
-public class PainelSaque extends JPanel {
 
-	public void constroiTela() {
-		// TODO Auto-generated method stub
-		
+public class PainelSaque extends MyPanel {
+
+	public PainelSaque(Cliente u, Utilites ut) {
+		super(u, ut);
 	}
+
 
 }

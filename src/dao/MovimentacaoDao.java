@@ -52,7 +52,7 @@ public class MovimentacaoDao extends MyDao {
 
 	private <T extends Movimentacao> void getValorPadrao(T mov) {
 		try {
-			mov.setTipo(mov.getClass().getTypeName().substring(6));
+			mov.setTipo(mov.getClass().getSimpleName());
 			
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(rs.getDate("data", cal));

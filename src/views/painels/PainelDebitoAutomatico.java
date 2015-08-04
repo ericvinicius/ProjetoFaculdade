@@ -1,12 +1,13 @@
 package views.painels;
 
-import javax.swing.JPanel;
+import utilities.Utilites;
+import modelos.Cliente;
 
-public class PainelDebitoAutomatico extends JPanel {
 
-	public void constroiTela() {
-		// TODO Auto-generated method stub
-		
+public class PainelDebitoAutomatico extends MyPanel {
+
+	public PainelDebitoAutomatico(Cliente u, Utilites ut) {
+		super(u, ut);
 	}
 
 }
