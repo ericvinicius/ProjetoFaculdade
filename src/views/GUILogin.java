@@ -23,9 +23,9 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	private JLabel lblagencia;
 	private JLabel lblsenha;
 
-	public JFormattedTextField txtconta;
-	public JFormattedTextField txtagencia;
-	public JPasswordField txtsenha;
+	private JFormattedTextField txtconta;
+	private JFormattedTextField txtagencia;
+	private JPasswordField txtsenha;
 
 	private Cliente usuarioTentativa = new Cliente();
 

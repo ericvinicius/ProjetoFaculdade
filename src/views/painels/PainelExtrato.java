@@ -1,5 +1,6 @@
 package views.painels;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -35,27 +36,27 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 	private JButton imprimiExtrato = new JButton("Imprimir Extrato");
 	private JButton imprimiSaldo = new JButton("Imprimir Saldo");
 	
-	private JLabel lfiltros = new JLabel("Dias:");
+	private JLabel lfiltros = new JLabel("Filtrar dias atras:");
 	private JTextField tfiltro = new JTextField("");
-	private JButton bfiltrar = new JButton("Filtrar");
+	private JButton bfiltrar = new JButton("Aplicar filtro");
 	
 	public PainelExtrato(Cliente u, Utilites ut){
 		super(u, ut);
 		linhasDaTabela = user.getExtrato();
 		
-		add(lfiltros);
+		painelN.add(lfiltros, BorderLayout.WEST);
 		
 		tfiltro.setColumns(5);
 		tfiltro.addKeyListener(this);
-		add(tfiltro);
+		painelN.add(tfiltro, BorderLayout.CENTER);
 		
 		bfiltrar.addMouseListener(this);
-		add(bfiltrar);
+		painelN.add(bfiltrar, BorderLayout.EAST);
 		
 		criaEAdicionaTabela();
 		
-		add(imprimiExtrato);
-		add(imprimiSaldo);
+		painelS.add(imprimiExtrato, BorderLayout.WEST);
+		painelS.add(imprimiSaldo, BorderLayout.EAST);
 		
 		imprimiExtrato.addMouseListener(this);
 		imprimiSaldo.addMouseListener(this);
@@ -63,7 +64,7 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 
 	private void criaEAdicionaTabela() {
 		atualizaTabela("tudo");
-		add(scroll);
+		painelC.add(scroll, BorderLayout.CENTER);
 	}
 	
 	private void atualizaTabela(String periodo) {
@@ -72,7 +73,7 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 			filtraTabela(dias);
 			
 		} catch(NumberFormatException e){
-			//Este exception é prevista para quando o periodo nao for int, por exemplo para carregar toda a tabela
+			//Este exception é prevista para quando o periodo nao for int, por exemplo para carregar toda a tabela, passo "tudo"
 			//TODO: criar log que nao mostra erro na tela do usuario
 		}
 		
@@ -86,7 +87,7 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 		
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-		scroll.setPreferredSize(new Dimension(450, 350));
+		scroll.setPreferredSize(new Dimension(450, 150));
 		scroll.setViewportView(table);
 		
 		scroll.repaint();

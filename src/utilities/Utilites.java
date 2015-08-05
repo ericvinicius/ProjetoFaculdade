@@ -32,6 +32,9 @@ public class Utilites {
 	public final String maskHora = "HH:mm:ss";
 	public final String maskDiaHora = "dd/MM/yyyy - HH:mm:ss";
 	public static final SimpleDateFormat formatDiaHora = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+	
+	//Cores
+	public static final Color corCinzaEscuro = new Color(212, 212, 212);
 
 	// Fonts
 	public final Font fontNormal = new Font("Arial", Font.PLAIN, 12);
