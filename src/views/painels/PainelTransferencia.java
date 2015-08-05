@@ -10,10 +10,12 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import modelos.Cliente;
+
+import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.JXTextField;
+
 import utilities.Utilites;
 
 public class PainelTransferencia extends MyPanel implements KeyListener, MouseListener {
@@ -25,13 +27,13 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 
 	private JFormattedTextField txtconta;
 	private JFormattedTextField txtagencia;
-	private JTextField txtvalor;
+	private JXTextField txtvalor;
 	
 	public PainelTransferencia(Cliente u, Utilites ut) {
 		super(u, ut);
 		
 		// Conta
-		JPanel painelConta = new JPanel();
+		JXPanel painelConta = new JXPanel();
 		lblconta = new JLabel("Conta   ");
 		painelConta.add(lblconta);
 
@@ -44,7 +46,7 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 		painelC.add(painelConta, BorderLayout.NORTH);
 
 		// Agencia
-		JPanel painelAgencia = new JPanel();
+		JXPanel painelAgencia = new JXPanel();
 		lblagencia = new JLabel("Agencia");
 		painelAgencia.add(lblagencia);
 
@@ -57,11 +59,11 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 		painelC.add(painelAgencia, BorderLayout.CENTER);
 
 		// Valor
-		JPanel painelValor = new JPanel();
+		JXPanel painelValor = new JXPanel();
 		lblvalor = new JLabel("Valor    ");
 		painelValor.add(lblvalor);
 
-		txtvalor = new JTextField();
+		txtvalor = new JXTextField();
 		txtvalor.setColumns(12);
 		painelValor.add(txtvalor);
 		
@@ -73,7 +75,7 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 		painelS.add(btefetuaTranferencia, BorderLayout.CENTER);
 		
 		//Cria painel que vai possuir a borda
-		JPanel painelDeTransferencia = new JPanel();
+		JXPanel painelDeTransferencia = new JXPanel();
 		painelDeTransferencia.setLayout(new BoxLayout(painelDeTransferencia, BoxLayout.PAGE_AXIS));
 		painelDeTransferencia.setBorder(BorderFactory.createLoweredBevelBorder());
 		painelDeTransferencia.setBackground(Utilites.corCinzaEscuro);

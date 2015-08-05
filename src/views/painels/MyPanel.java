@@ -10,17 +10,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import modelos.Cliente;
+
+import org.jdesktop.swingx.JXPanel;
+
 import utilities.Utilites;
 
 public class MyPanel extends JPanel {
 	protected static Cliente user;
 	protected Utilites utilites;
 	
-	protected JPanel painelN = new JPanel(new BorderLayout());
-	protected JPanel painelS = new JPanel(new BorderLayout());
-	protected JPanel painelE = new JPanel(new BorderLayout());
-	protected JPanel painelW = new JPanel(new BorderLayout());
-	protected JPanel painelC = new JPanel(new BorderLayout());
+	protected JXPanel painelN = new JXPanel(new BorderLayout());
+	protected JXPanel painelS = new JXPanel(new BorderLayout());
+	protected JXPanel painelE = new JXPanel(new BorderLayout());
+	protected JXPanel painelW = new JXPanel(new BorderLayout());
+	protected JXPanel painelC = new JXPanel(new BorderLayout());
 	
 	public MyPanel(Cliente u, Utilites ut){
 		user = u;
@@ -30,7 +33,7 @@ public class MyPanel extends JPanel {
 		JLabel lsaldos = new JLabel("Saldo: ");
 		JLabel lvalSaldos = atualizaSaldo();
 
-		JPanel containerSaldo = new JPanel();
+		JXPanel containerSaldo = new JXPanel();
 		containerSaldo.add(lsaldos);
 		containerSaldo.add(lvalSaldos);
 		painelN.add(containerSaldo, BorderLayout.NORTH);
@@ -41,7 +44,7 @@ public class MyPanel extends JPanel {
 	protected void colocaPainelNoCentro(JPanel painel) {
 		painel.add(Box.createVerticalGlue());
 		painel.add(Box.createHorizontalGlue());
-		JPanel centerPanel = new JPanel(new GridBagLayout());
+		JXPanel centerPanel = new JXPanel(new GridBagLayout());
 		centerPanel.add(painel);
 		add(centerPanel);
 	}

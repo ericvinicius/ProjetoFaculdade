@@ -5,10 +5,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import dao.ClienteDao;
+import modelos.Cliente;
 import textFile.ManipuladorDeArquivos;
 import utilities.Utilites;
-import modelos.Cliente;
+import dao.ClienteDao;
 
 public class GUIMyFrame extends JFrame {
 

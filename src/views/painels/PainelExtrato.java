@@ -7,17 +7,19 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.table.TableColumnModel;
 
 import modelos.Cliente;
 
+import org.jdesktop.swingx.JXButton;
+import org.jdesktop.swingx.JXTable;
+import org.jdesktop.swingx.JXTextField;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -33,12 +35,12 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 
 	private String[] tituloDaTabela = {"Valor", "Data", "Tipo", "Novo Saldo"};
 	
-	private JButton imprimiExtrato = new JButton("Imprimir Extrato");
-	private JButton imprimiSaldo = new JButton("Imprimir Saldo");
+	private JXButton imprimiExtrato = new JXButton("Imprimir Extrato");
+	private JXButton imprimiSaldo = new JXButton("Imprimir Saldo");
 	
 	private JLabel lfiltros = new JLabel("Filtrar dias atras:");
-	private JTextField tfiltro = new JTextField("");
-	private JButton bfiltrar = new JButton("Aplicar filtro");
+	private JXTextField tfiltro = new JXTextField("");
+	private JXButton bfiltrar = new JXButton("Aplicar filtro");
 	
 	public PainelExtrato(Cliente u, Utilites ut){
 		super(u, ut);
@@ -77,13 +79,16 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 			//TODO: criar log que nao mostra erro na tela do usuario
 		}
 		
-		table = new JTable(linhasDaTabela, tituloDaTabela);
+		table = new JXTable(linhasDaTabela, tituloDaTabela);
 		table.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		table.setEnabled(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(63);
-		table.getColumnModel().getColumn(1).setPreferredWidth(204);
-		table.getColumnModel().getColumn(2).setPreferredWidth(104);
-		table.getColumnModel().getColumn(3).setPreferredWidth(77);
+		TableColumnModel modeloDeColunas = table.getColumnModel();
+		modeloDeColunas.getColumn(0).setPreferredWidth(63);
+		modeloDeColunas.getColumn(1).setPreferredWidth(204);
+		modeloDeColunas.getColumn(2).setPreferredWidth(104);
+		modeloDeColunas.getColumn(3).setPreferredWidth(77);
+		table.setColumnModel(modeloDeColunas);
+		
 		
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
