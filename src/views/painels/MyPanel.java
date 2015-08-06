@@ -15,7 +15,7 @@ import org.jdesktop.swingx.JXPanel;
 
 import utilities.Utilites;
 
-public class MyPanel extends JPanel {
+public class MyPanel extends JXPanel {
 	protected static Cliente user;
 	protected Utilites utilites;
 	

@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 
 import modelos.Cliente;
 
+import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTextField;
 
@@ -20,7 +21,7 @@ import utilities.Utilites;
 
 public class PainelTransferencia extends MyPanel implements KeyListener, MouseListener {
 
-	private JLabel btefetuaTranferencia;
+	private JXButton btefetuaTranferencia;
 	private JLabel lblconta;
 	private JLabel lblagencia;
 	private JLabel lblvalor;
@@ -70,7 +71,7 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 		painelC.add(painelValor, BorderLayout.SOUTH);
 
 		// botao login
-		btefetuaTranferencia = new JLabel("Realizar Transferencia");
+		btefetuaTranferencia = new JXButton("Realizar Transferencia");
 		btefetuaTranferencia.addMouseListener(this);
 		painelS.add(btefetuaTranferencia, BorderLayout.CENTER);
 		
@@ -92,7 +93,9 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+		if(e.getSource().equals(btefetuaTranferencia)){
+			
+		}
 	}
 
 	@Override

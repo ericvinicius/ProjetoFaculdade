@@ -66,7 +66,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		add(btlogin);
 
 		opcaoAdmin.addActionListener(this);
-
+		
 		configuraPagina();
 	}
 
