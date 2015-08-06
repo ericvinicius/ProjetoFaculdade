@@ -14,7 +14,7 @@ public class ClienteDao extends MyDao {
 			stmt.setLong(1, cliente.getId());
 			rs = stmt.executeQuery();
 			
-			while(rs.next()){
+			if(rs.next()){
 				cliente.setNome(rs.getString("nome"));
 				cliente.setSaldo(rs.getBigDecimal("saldo"));
 			}

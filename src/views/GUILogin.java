@@ -3,6 +3,7 @@ package views;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -35,7 +36,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		add(lblconta);
 
 		txtconta = new JFormattedTextField(
-				utilites.criadorDeMascara(utilites.maskConta));
+				utilites.criadorDeMascara(utilites.maskConta, true));
 		txtconta.setSelectionStart(0);
 		txtconta.setColumns(12);
 		txtconta.addKeyListener(this);
@@ -46,7 +47,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		add(lblagencia);
 
 		txtagencia = new JFormattedTextField(
-				utilites.criadorDeMascara(utilites.maskAgencia));
+				utilites.criadorDeMascara(utilites.maskAgencia, true));
 		txtagencia.setSelectionStart(0);
 		txtagencia.setColumns(12);
 		txtagencia.addKeyListener(this);
@@ -58,6 +59,14 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 
 		txtsenha = new JPasswordField();
 		txtsenha.setColumns(12);
+		txtsenha.addKeyListener(new KeyAdapter() {
+		      public void keyPressed(KeyEvent evt) {
+		          int key = evt.getKeyCode();
+		          if (key == KeyEvent.VK_ENTER){
+		        	  pegaInformacoesEVerificaLogin();
+		          }
+		      }
+		});
 		add(txtsenha);
 
 		// botao login
@@ -79,6 +88,10 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		pegaInformacoesEVerificaLogin();
+	}
+
+	private void pegaInformacoesEVerificaLogin() {
 		try{
 			pegaInformacoesDeLogin();
 			if (usuarioTentativa.isAdmin()) {
@@ -92,6 +105,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 			utilites.logger.logWarn("Em Branco", "Algum campo esta em branco!");
 			utilites.tremeTelaComMensagemDeErro(this);
 		}
+		
 	}
 
 	private void verificaLogin() {
@@ -134,10 +148,12 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// Se for uma letra
-		if (e.getKeyChar() > 'a' && e.getKeyChar() < 'Z') {
-			// delete
-			e.consume();
+		Object campo = e.getSource();
+		char letra = e.getKeyChar();
+		if(campo.equals(txtconta) || campo.equals(txtagencia)){
+			if (letra > 'a' && letra < 'Z') {
+				e.consume();
+			}
 		}
 	}
 

@@ -38,7 +38,7 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 		lblconta = new JLabel("Conta   ");
 		painelConta.add(lblconta);
 
-		txtconta = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskConta));
+		txtconta = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskConta, true));
 		txtconta.setSelectionStart(0);
 		txtconta.setColumns(12);
 		txtconta.addKeyListener(this);
@@ -51,7 +51,7 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 		lblagencia = new JLabel("Agencia");
 		painelAgencia.add(lblagencia);
 
-		txtagencia = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskAgencia));
+		txtagencia = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskAgencia, true));
 		txtagencia.setSelectionStart(0);
 		txtagencia.setColumns(12);
 		txtagencia.addKeyListener(this);

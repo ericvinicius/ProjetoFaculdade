@@ -3,6 +3,7 @@ package utilities;
 import java.awt.Color;
 import java.awt.Font;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,15 +24,17 @@ public class Utilites {
 	public static final int TAMANHO_CODIGO_DE_ACESSO = 3;
 	public static final int MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO = 3;
 	public static final String DELIMITADOR_DO_ARQUIVO_DE_TEXTO = "\\||\\n";
-	public static final String CAMINHO_PARA_ACESSO_TXT = "ACESSO.txt";
+	public static final String CAMINHO_PARA_ACESSO_TXT = "acesso/ACESSO.txt";
 
+	
 	// Mascaras
+	public static final SimpleDateFormat formatDiaHora = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+	public final String maskFiltraTabela = "###";
 	public final String maskAgencia = "####-#";
 	public final String maskConta = "##.###-#";
 	public final String maskDia = "dd/MM/yyyy";
 	public final String maskHora = "HH:mm:ss";
 	public final String maskDiaHora = "dd/MM/yyyy - HH:mm:ss";
-	public static final SimpleDateFormat formatDiaHora = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 	
 	//Cores
 	public static final Color corCinzaEscuro = new Color(212, 212, 212);
@@ -41,11 +44,11 @@ public class Utilites {
 	public final Font fontHover = new Font("Arial", Font.BOLD, 15);
 
 	// Images
-	public final ImageIcon imageLock = new ImageIcon("src/images/locked.png");
-	public final ImageIcon imageUnlock = new ImageIcon("src/images/unlocked.png");
-	public final ImageIcon br = new ImageIcon("src/images/Brazil-icon.png");
-	public final ImageIcon es = new ImageIcon("src/images/Spain-icon.png");
-	public final ImageIcon us = new ImageIcon("src/images/USA-icon.png");
+	public final ImageIcon imageLock = new ImageIcon("images/locked.png");
+	public final ImageIcon imageUnlock = new ImageIcon("images/unlocked.png");
+	public final ImageIcon br = new ImageIcon("images/Brazil-icon.png");
+	public final ImageIcon es = new ImageIcon("images/Spain-icon.png");
+	public final ImageIcon us = new ImageIcon("images/USA-icon.png");
 
 	// boolean
 	public static boolean temMensagemDeErro = false;
@@ -56,6 +59,13 @@ public class Utilites {
 	
 	//Log
 	public Logger logger = new Logger();
+	
+	public DecimalFormat getFormatacaoParaNumeros(){
+		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+		DecimalFormat decimalFormat = (DecimalFormat) numberFormat;
+		decimalFormat.setGroupingUsed(false);
+		return decimalFormat;
+	}
 
 	public void tremeTelaComMensagemDeErro(JFrame frame) {
 		if (temMensagemDeErro) {
@@ -133,9 +143,11 @@ public class Utilites {
 		}
 	}
 
-	public MaskFormatter criadorDeMascara(String mask) {
+	public MaskFormatter criadorDeMascara(String mask, boolean placeHolder) {
 		MaskFormatter mascara = new MaskFormatter();
-		mascara.setPlaceholderCharacter('_');
+		if(placeHolder){
+			mascara.setPlaceholderCharacter('_');
+		}
 
 		try {
 			mascara.setMask(mask);
@@ -191,5 +203,10 @@ public class Utilites {
 	public String getValorComMoeda(BigDecimal valor) {
 		NumberFormat moedaFormat = NumberFormat.getCurrencyInstance(local);
 		return moedaFormat.format(valor);
+	}
+
+	public String getValorComMoeda(double parseDouble) {
+		BigDecimal bigDecimal = new BigDecimal(parseDouble);
+		return getValorComMoeda(bigDecimal);
 	}
 }

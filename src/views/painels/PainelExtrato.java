@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -18,7 +19,6 @@ import modelos.Cliente;
 
 import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXTable;
-import org.jdesktop.swingx.JXTextField;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -38,8 +38,10 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 	private JXButton imprimiSaldo = new JXButton("Imprimir Saldo");
 
 	private JLabel lfiltros = new JLabel("Filtrar dias atras:");
-	private JXTextField tfiltro = new JXTextField("");
+	private JFormattedTextField tfiltro = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskFiltraTabela, false));
 	private JXButton bfiltrar = new JXButton("Aplicar filtro");
+
+	private boolean renderizado = false;
 
 	public PainelExtrato(Cliente u, Utilites ut) {
 		super(u, ut);
@@ -47,7 +49,7 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 
 		painelN.add(lfiltros, BorderLayout.WEST);
 
-		tfiltro.setColumns(5);
+		tfiltro.setSelectionStart(0);
 		tfiltro.addKeyListener(this);
 		painelN.add(tfiltro, BorderLayout.CENTER);
 
@@ -78,14 +80,18 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 			// exemplo para carregar toda a tabela, passo "tudo"
 			// TODO: criar log que nao mostra erro na tela do usuario
 		}
+		if(!renderizado){
+			adicionaNumberFormatParaTabela();
+			renderizado = true;
+		}
 
 		table = new JXTable(linhasDaTabela, tituloDaTabela);
 		table.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		TableColumnModel modeloDeColunas = table.getColumnModel();
-		modeloDeColunas.getColumn(0).setPreferredWidth(63);
-		modeloDeColunas.getColumn(1).setPreferredWidth(204);
-		modeloDeColunas.getColumn(2).setPreferredWidth(104);
-		modeloDeColunas.getColumn(3).setPreferredWidth(77);
+		modeloDeColunas.getColumn(0).setPreferredWidth(104);
+		modeloDeColunas.getColumn(1).setPreferredWidth(159);
+		modeloDeColunas.getColumn(2).setPreferredWidth(96);
+		modeloDeColunas.getColumn(3).setPreferredWidth(118);
 		table.setColumnModel(modeloDeColunas);
 		table.setEditable(false);
 
@@ -96,6 +102,13 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 
 		scroll.repaint();
 		scroll.revalidate();
+	}
+
+	private void adicionaNumberFormatParaTabela() {
+		for (Object[] linha : linhasDaTabela) {
+			linha[0] = utilites.getValorComMoeda(Double.parseDouble(linha[0] + ""));
+			linha[3] = utilites.getValorComMoeda(Double.parseDouble(linha[3] + ""));
+		}
 	}
 
 	private void filtraTabela(int periodo) {
@@ -111,8 +124,6 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 		int j = 0;
 		for (int i = 0; i < linhas; i++) {
 			DateTime dataMovimentacao = fmt.parseDateTime(linhasDaTabela[i][1] + "");
-			System.out.println(dataMovimentacao + "- -- - -" + data);
-			System.out.println(linhasDaTabela[i][1]);
 			if (dataMovimentacao.isAfter(data)) {
 				extrato[j][0] = linhasDaTabela[i][0];
 				extrato[j][1] = linhasDaTabela[i][1];
@@ -158,18 +169,25 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// Se for uma letra
-		if (e.getKeyChar() > 'a' && e.getKeyChar() < 'Z') {
-			// delete
-			e.consume();
+		Object campo = e.getSource();
+		char letra = e.getKeyChar();
+		if(campo.equals(tfiltro)){
+			if (letra > 'a' && letra < 'Z') {
+				e.consume();
+			}
 		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
+
 }

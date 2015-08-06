@@ -29,7 +29,6 @@ public class MyPanel extends JXPanel {
 		user = u;
 		utilites = ut;
 		
-		
 		JLabel lsaldos = new JLabel("Saldo: ");
 		JLabel lvalSaldos = atualizaSaldo();
 
