@@ -10,11 +10,7 @@ public class Logger {
 	private static String tagDebug = "[ Debug ]";
 	private static String tagInfo = "[ Info  ]";
 
-	private static StringBuilder builder;
-
-	public Logger() {
-		resetaBuilder();
-	}
+	private static StringBuilder builder = new StringBuilder();
 
 	public static void logError(Exception e, String myMessage) {
 		Throwable t = new Throwable();
@@ -36,26 +32,26 @@ public class Logger {
 		builder.append(arrumaEspacamentoDaTag("Message") + e.getMessage() + "\n");
 		builder.append(arrumaEspacamentoDaTag("My Message") + myMessage + "\n");
 		builder.append(arrumaEspacamentoDaTag("Stack Trace"));
-		log();
+		print();
 		e.printStackTrace();
 		builder.append("========================================");
-		log();
+		print();
 		JOptionPane.showMessageDialog(null, "Erro na Aplicação", tagError, JOptionPane.ERROR_MESSAGE);
 	}
 
 	public static void logWarn(String tag, String myMessage) {
 		builder.append(tagWarn);
-		log(tag, myMessage);
+		print(tag, myMessage);
 	}
 
 	public static void logDebug(String tag, String myMessage) {
 		builder.append(tagDebug);
-		log(tag, myMessage);
+		print(tag, myMessage);
 	}
 
 	public static void logInfo(String tag, String myMessage) {
 		builder.append(tagInfo);
-		log(tag, myMessage);
+		print(tag, myMessage);
 
 	}
 
@@ -63,13 +59,13 @@ public class Logger {
 		builder = new StringBuilder();
 	}
 
-	private static void log(String tag, String message) {
+	private static void print(String tag, String message) {
 		builder.append(arrumaEspacamentoDaTag(tag));
 		builder.append(message);
-		log();
+		print();
 	}
 
-	private static void log() {
+	private static void print() {
 		System.out.println(builder.toString());
 		resetaBuilder();
 	}

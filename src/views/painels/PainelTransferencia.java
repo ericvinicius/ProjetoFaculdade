@@ -19,6 +19,7 @@ import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTextField;
 
+import builders.TransferenciaBuilder;
 import utilities.Utilites;
 
 public class PainelTransferencia extends MyPanel implements KeyListener, MouseListener {
@@ -107,8 +108,12 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	}
 
 	private void efetuaTransferencia() {
-		Transferencia transferencia = Transferencia.criaTransferencia(valor, user.getSaldo(), userDestino, user.getId());
+		TransferenciaBuilder builder = new TransferenciaBuilder();
+		builder.comValor(valor).comAgenciaDestino(userDestino.getAgencia()).comContaDestino(userDestino.getConta()).comIdDoCliente(user.getId());
+		Transferencia transferencia = builder.constroi();
+		
 		transferencia.efetuaTransferencia();
+		
 		user.addMovimentacao(transferencia);
 	}
 

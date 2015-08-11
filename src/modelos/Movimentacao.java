@@ -27,6 +27,7 @@ public class Movimentacao {
 		setNovoSaldo(novoSaldo);
 		setTipo(tipo);
 		setIdCliente(idCliente);
+		//TODO: aqui deve ir para o log
 	}
 
 	public Movimentacao(BigDecimal valor, Date data, BigDecimal novoSaldo, String tipo, Long idCliente) {
@@ -35,6 +36,7 @@ public class Movimentacao {
 		setNovoSaldo(novoSaldo);
 		setTipo(tipo);
 		setIdCliente(idCliente);
+		//TODO: aqui deve ir para o log
 	}
 
 	public BigDecimal getValor() {
