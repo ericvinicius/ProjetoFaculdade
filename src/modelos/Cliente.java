@@ -87,10 +87,12 @@ public class Cliente  /* anotations.Observable */{
 
 	public void toLog(String tag) {
 		StringBuilder log = new StringBuilder();
+		
 		String id = getId() + "";
 		if(id.length() == 1){
 			id = "  " + id + " ";
 		}
+		
 		log.append("id(" + id + ")");
 		log.append(" agencia( " + getAgencia() + " )");
 		log.append(" conta( " + getConta() + " )");
@@ -186,6 +188,24 @@ public class Cliente  /* anotations.Observable */{
 		this.movimentacoes.add(mov);
 	}
 
+	String getDadosDeLogin() {
+		StringBuilder dados = new StringBuilder();
+		dados.append(getAgencia());
+		dados.append("|");
+		dados.append(getConta());
+		dados.append("|");
+		dados.append(getSenha());
+		return dados.toString();
+	}
+	
+	String getDadosAgenciaConta() {
+		StringBuilder dados = new StringBuilder();
+		dados.append(getAgencia());
+		dados.append("|");
+		dados.append(getConta());
+		return dados.toString();
+	}
+	
 	// private List<Observer> observers = new ArrayList();
 	//
 	// @Override

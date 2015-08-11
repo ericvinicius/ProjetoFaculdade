@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import utilities.Logger;
-import utilities.Utilites;
 
 public class ConnectionFactory {
 	

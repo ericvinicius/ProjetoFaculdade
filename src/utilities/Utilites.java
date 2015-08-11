@@ -156,7 +156,7 @@ public class Utilites {
 
 	}
 
-	public String converteVetorParaString(int[] vetor) {
+	public String converteCodigoDeAcessoParaString(int[] vetor) {
 		StringBuilder saida = new StringBuilder();
 		for (int i = 0; i < vetor.length; i++) {
 			String numerosSeparados = getStringDaPosicaoDoVetor(vetor[i]);
