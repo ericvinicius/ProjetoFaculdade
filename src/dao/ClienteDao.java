@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import utilities.Logger;
 import modelos.Cliente;
 import modelos.Movimentacao;
 import modelos.Saque;
@@ -49,7 +50,7 @@ public class ClienteDao extends MyDao {
 			cliente.setMovimentacoes(movimentacoes);
 
 		} catch (SQLException se) {
-			utilites.logger.logError(se, "Erro na busca de cliente por id");
+			Logger.logError(se, "Erro na busca de cliente por id");
 		}
 
 		fechaConexao();
@@ -65,7 +66,7 @@ public class ClienteDao extends MyDao {
 			stmt.executeQuery();
 
 		} catch (SQLException se) {
-			utilites.logger.logError(se, "Erro na busca de cliente por id");
+			Logger.logError(se, "Erro na busca de cliente por id");
 		}
 		fechaConexao();
 

@@ -1,22 +1,18 @@
 package modelos;
 
-import interfaces.Acesso;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.swing.JOptionPane;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import utilities.Logger;
 import utilities.Utilites;
 
 //TODO: Esta classe possui codigo comentado para a implementacao de observers
 
-public class Cliente implements Acesso /* anotations.Observable */{
+public class Cliente  /* anotations.Observable */{
 	// Acesso
 	private String conta;
 	private String agencia;
@@ -89,50 +85,31 @@ public class Cliente implements Acesso /* anotations.Observable */{
 		this.admin = isAdmin;
 	}
 
-	protected String getDados() {
-		StringBuilder dados = new StringBuilder();
-		dados.append(getAgencia());
-		dados.append("|");
-		dados.append(getConta());
-		dados.append("|");
-		dados.append(getSenha());
-		return dados.toString();
-	}
-
 	public void toLog(String tag) {
 		StringBuilder log = new StringBuilder();
-		log.append("id(" + getId() + ")");
+		String id = getId() + "";
+		if(id.length() == 1){
+			id = "  " + id + " ";
+		}
+		log.append("id(" + id + ")");
 		log.append(" agencia( " + getAgencia() + " )");
 		log.append(" conta( " + getConta() + " )");
 		log.append(" senha( " + getSenha().toString() + " )");
 		log.append(" admin( " + isAdmin() + " )");
-		utilites.logger.logInfo(tag, log.toString());
+		Logger.logInfo(tag, log.toString());
 
 	}
-
-	public void guardaInformacoes(String agencia, String conta, String senha2) {
+	
+	public void guardaInformacoes(String agencia2, String conta2) {
 		setAgencia(agencia);
 		setConta(conta);
-		setSenha(senha2);
-		verificaAdmin();
+	}
+
+	public void guardaInformacoes(String agencia, String conta, String senha) {
+		setAgencia(agencia);
+		setConta(conta);
+		setSenha(senha);
 		toLog("Tentativa");
-	}
-
-	private void verificaAdmin() {
-		if (getDados().equals(getDadosDoAdmin())) {
-			setAdmin(true);
-		}
-	}
-
-	private String getDadosDoAdmin() {
-		StringBuilder dados = new StringBuilder();
-		dados.append("0000-0");
-		dados.append("|");
-		dados.append("00.000-0");
-		dados.append("|");
-		dados.append("0000");
-		return dados.toString();
-
 	}
 
 	public int getStatus() {
@@ -141,26 +118,6 @@ public class Cliente implements Acesso /* anotations.Observable */{
 
 	public void setStatus(int status) {
 		this.status = status;
-	}
-
-	public boolean validaLogin(Cliente usuarioTentativa) {
-		if (getDados().equals(usuarioTentativa.getDados())) {
-			if (getStatus() == 1) {
-				JOptionPane.showMessageDialog(null, "Usuario Bloqueado", "Block", JOptionPane.ERROR_MESSAGE);
-				System.exit(1);
-			}
-			return true;
-		}
-		return false;
-	}
-
-	public boolean validaCodigoDeAcesso(Cliente usuarioTentativa) {
-		utilites.logger.logInfo("Tentativa", utilites.converteVetorParaString(usuarioTentativa.getCodigoDeAcesso()));
-		utilites.logger.logInfo("Correto", utilites.converteVetorParaString(getCodigoDeAcesso()));
-		if (Arrays.equals(getCodigoDeAcesso(), usuarioTentativa.getCodigoDeAcesso())) {
-			return true;
-		}
-		return false;
 	}
 
 	public void setId(Long id) {
@@ -223,16 +180,6 @@ public class Cliente implements Acesso /* anotations.Observable */{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public void guardaInformacoes(String agencia2, String conta2) {
-		setAgencia(agencia);
-		setConta(conta);
-	}
-
-	public boolean validaAgenciaConta(Cliente usuarioTentativa) {
-		//TODO: criar este metodo
-		return false;
 	}
 
 	public void addMovimentacao(Movimentacao mov) {

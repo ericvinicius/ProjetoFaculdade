@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 
 class Relogio extends Thread {
 
-	private Utilites utilites = new Utilites();
 	private JLabel hr;
 	private String conteudo = "";
 
@@ -30,7 +29,7 @@ class Relogio extends Thread {
 			 try {
 				Thread.sleep(450);
 			} catch (InterruptedException ei) {
-				utilites.logger.logError(ei, "Erro na espera da thread do relogio");
+				Logger.logError(ei, "Erro na espera da thread do relogio");
 			}
 			this.hr.revalidate();
 		}

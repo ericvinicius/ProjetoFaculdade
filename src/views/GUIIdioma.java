@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import utilities.Logger;
 import utilities.Utilites;
 
 public class GUIIdioma extends GUIMyFrame implements MouseListener {
@@ -45,17 +46,17 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 		if(click == br){
 			Utilites.local = new Locale("pt", "BR");
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
-			utilites.logger.logInfo("Idioma", "Portugues");
+			Logger.logInfo("Idioma", "Portugues");
 			
 		} else if(click == us){
 			Utilites.local = Locale.US;
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
-			utilites.logger.logInfo("Idioma", "Ingles");
+			Logger.logInfo("Idioma", "Ingles");
 			
 		} else if(click == es){
 			Utilites.local = new Locale("es", "ES");
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
-			utilites.logger.logInfo("Idioma", "Espanhol");
+			Logger.logInfo("Idioma", "Espanhol");
 		}
 		this.dispose();
 		new GUILogin();

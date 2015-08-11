@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import modelos.Cliente;
+import modelos.ValidadorDeClientes;
 
 import org.jdesktop.swingx.JXButton;
 
@@ -116,17 +117,16 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 		}
 	}
 	
-	public void verificaCodigo() {
+	private void verificaCodigo() {
 		Cliente usuarioTentativa = new Cliente();
+		ValidadorDeClientes validador = new ValidadorDeClientes();
 		usuarioTentativa.setCodigoDeAcesso(codigo);
+		
 		if (user.isNovoCodigoDeAcesso()) {
-			user.setCodigoDeAcesso(codigo);
-			JOptionPane.showMessageDialog(this, utilites.converteVetorParaString(codigo));
-			fileHandler.cadastraNovoCodigoDeAcessoParaUsuario(user);
-			user.setNovoCodigoDeAcesso(false);
+			criaCodiggoDeAcesso();
 			redirect(this, "principal");
 
-		} else if (user.validaCodigoDeAcesso(usuarioTentativa)) {
+		} else if (validador.validaCodigoDeAcesso(user, usuarioTentativa)) {
 			redirect(this, "principal");
 			
 		} else if(tentativa >= Utilites.MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO){
@@ -136,6 +136,13 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 		tentativa++;
 		contadorDeClicks = 0;
 		utilites.tremeTela(this);
+	}
+
+	private void criaCodiggoDeAcesso() {
+		user.setCodigoDeAcesso(codigo);
+		JOptionPane.showMessageDialog(this, utilites.converteVetorParaString(codigo));
+		fileHandler.cadastraNovoCodigoDeAcessoParaUsuario(user);
+		user.setNovoCodigoDeAcesso(false);
 	}
 
 	@Override

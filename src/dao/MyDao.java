@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modelos.Movimentacao;
+import utilities.Logger;
 import utilities.Utilites;
 
 public class MyDao {
@@ -36,7 +37,7 @@ public class MyDao {
 				connection.close();
 			}
 		} catch (SQLException se) {
-			utilites.logger.logError(se, "Erro ao fechar a conexao");
+			Logger.logError(se, "Erro ao fechar a conexao");
 		}
 	}
 	

@@ -58,9 +58,6 @@ public class Utilites {
 	public static ResourceBundle bn;
 	public static Locale local;
 	
-	//Log
-	public Logger logger = new Logger();
-	
 	public DecimalFormat getFormatacaoParaNumeros(){
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
 		DecimalFormat decimalFormat = (DecimalFormat) numberFormat;
@@ -105,7 +102,7 @@ public class Utilites {
 
 			}
 		} catch (InterruptedException ei) {
-			logger.logError(ei, "Erro da thread que treme tela");
+			Logger.logError(ei, "Erro da thread que treme tela");
 		}
 
 		frame.setLocation(originalX, originalY);
@@ -140,7 +137,7 @@ public class Utilites {
 			janela.setLocation(originalX, originalY);
 
 		} catch (InterruptedException ei) {
-			logger.logError(ei, "Erro da thread que treme tela");
+			Logger.logError(ei, "Erro da thread que treme tela");
 		}
 	}
 
@@ -153,7 +150,7 @@ public class Utilites {
 		try {
 			mascara.setMask(mask);
 		} catch (ParseException ep) {
-			logger.logError(ep, "Erro ao criar uma mascara");
+			Logger.logError(ep, "Erro ao criar uma mascara");
 		}
 		return mascara;
 

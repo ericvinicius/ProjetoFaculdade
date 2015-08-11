@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import modelos.Transferencia;
+import utilities.Logger;
 
 public class MovimentacaoDao extends MyDao {
 	
@@ -25,7 +26,7 @@ public class MovimentacaoDao extends MyDao {
 			
 			
 		} catch(SQLException se){
-			utilites.logger.logError(se, "Erro ao salvar a movimentacao");
+			Logger.logError(se, "Erro ao salvar a movimentacao");
 		}
 		fechaConexao();
 	}

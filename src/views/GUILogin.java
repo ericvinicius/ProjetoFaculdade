@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
+import utilities.Logger;
 import modelos.Cliente;
 
 public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
@@ -102,7 +103,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 
 			}
 		} catch (NullPointerException en){
-			utilites.logger.logWarn("Em Branco", "Algum campo esta em branco!");
+			Logger.logWarn("Em Branco", "Algum campo esta em branco!");
 			utilites.tremeTelaComMensagemDeErro(this);
 		}
 		

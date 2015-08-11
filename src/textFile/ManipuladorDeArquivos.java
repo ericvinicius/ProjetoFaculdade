@@ -7,10 +7,13 @@ import java.io.RandomAccessFile;
 import java.util.Scanner;
 
 import modelos.Cliente;
+import modelos.ValidadorDeClientes;
+import utilities.Logger;
 import utilities.Utilites;
 
 public class ManipuladorDeArquivos {
 
+	private ValidadorDeClientes validador = new ValidadorDeClientes();
 	private Utilites utilites = new Utilites();
 	private Cliente usuarioCadastrado;
 	private Scanner leitor = null;
@@ -32,7 +35,7 @@ public class ManipuladorDeArquivos {
 
 				usuarioCadastrado.toLog("Leitura Atual");
 
-				if (usuarioCadastrado.validaLogin(usuarioTentativa)) {
+				if (validador.validaLogin(usuarioCadastrado, usuarioTentativa)) {
 					usuarioCadastrado.toLog("Usuario");
 					leitor.close();
 					return usuarioCadastrado;
@@ -40,10 +43,10 @@ public class ManipuladorDeArquivos {
 			}
 
 		} catch (FileNotFoundException ef) {
-			utilites.logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
+			Logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (NumberFormatException en) {
 			//Se cair nesta exception quer dizer que o leitor chegou na linha do meu texto no arquivo de ACESSO
-			utilites.logger.logWarn("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
+			Logger.logWarn("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
 		} finally {
 			if (leitor != null) {
 				leitor.close();
@@ -79,9 +82,9 @@ public class ManipuladorDeArquivos {
 			handler.close();
 
 		} catch (FileNotFoundException ef) {
-			utilites.logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
+			Logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (IOException eio) {
-			utilites.logger.logError(eio, "Nao conseguiu gravar no arquivo, erro de permissao");
+			Logger.logError(eio, "Nao conseguiu gravar no arquivo, erro de permissao");
 		}
 	}
 
@@ -101,7 +104,7 @@ public class ManipuladorDeArquivos {
 
 				usuarioCadastrado.toLog("Leitura Transf");
 
-				if (usuarioCadastrado.validaAgenciaConta(usuarioTentativa)) {
+				if (validador.validaClienteExistente(usuarioCadastrado, usuarioTentativa)) {
 					usuarioCadastrado.toLog("Usuario");
 					leitor.close();
 					return true;
@@ -109,10 +112,10 @@ public class ManipuladorDeArquivos {
 			}
 
 		} catch (FileNotFoundException ef) {
-			utilites.logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
+			Logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (NumberFormatException en) {
 			//Se cair nesta exception quer dizer que o leitor chegou na linha do meu texto no arquivo de ACESSO
-			utilites.logger.logWarn("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
+			Logger.logWarn("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
 		} finally {
 			if (leitor != null) {
 				leitor.close();
