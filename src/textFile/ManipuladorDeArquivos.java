@@ -23,7 +23,7 @@ public class ManipuladorDeArquivos {
 
 			while (leitor.hasNext()) {
 				usuarioCadastrado = new Cliente();
-				usuarioCadastrado.setId(Integer.parseInt(leitor.next()));
+				usuarioCadastrado.setId(Long.parseLong(leitor.next()));
 				usuarioCadastrado.setStatus(Integer.parseInt(leitor.next()));
 				usuarioCadastrado.setConta(leitor.next());
 				usuarioCadastrado.setAgencia(leitor.next());
@@ -42,6 +42,7 @@ public class ManipuladorDeArquivos {
 		} catch (FileNotFoundException ef) {
 			utilites.logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (NumberFormatException en) {
+			//Se cair nesta exception quer dizer que o leitor chegou na linha do meu texto no arquivo de ACESSO
 			utilites.logger.logWarn("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
 		} finally {
 			if (leitor != null) {
@@ -82,5 +83,41 @@ public class ManipuladorDeArquivos {
 		} catch (IOException eio) {
 			utilites.logger.logError(eio, "Nao conseguiu gravar no arquivo, erro de permissao");
 		}
+	}
+
+	public boolean usuarioExiste(Cliente usuarioTentativa) {
+		try {
+			leitor = new Scanner(new FileReader(Utilites.CAMINHO_PARA_ACESSO_TXT));
+			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
+
+			while (leitor.hasNext()) {
+				usuarioCadastrado = new Cliente();
+				usuarioCadastrado.setId(Long.parseLong(leitor.next()));
+				usuarioCadastrado.setStatus(Integer.parseInt(leitor.next()));
+				usuarioCadastrado.setConta(leitor.next());
+				usuarioCadastrado.setAgencia(leitor.next());
+				usuarioCadastrado.setSenha(leitor.next());
+				usuarioCadastrado.setCodigoDeAcesso(leituraDoCodigoDeAcesso());
+
+				usuarioCadastrado.toLog("Leitura Transf");
+
+				if (usuarioCadastrado.validaAgenciaConta(usuarioTentativa)) {
+					usuarioCadastrado.toLog("Usuario");
+					leitor.close();
+					return true;
+				}
+			}
+
+		} catch (FileNotFoundException ef) {
+			utilites.logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
+		} catch (NumberFormatException en) {
+			//Se cair nesta exception quer dizer que o leitor chegou na linha do meu texto no arquivo de ACESSO
+			utilites.logger.logWarn("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
+		} finally {
+			if (leitor != null) {
+				leitor.close();
+			}
+		}
+		return false;
 	}
 }

@@ -1,17 +1,41 @@
 package modelos;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import org.joda.time.DateTime;
 
 public class Movimentacao {
 
-	private BigDecimal valor;
-	private DateTime data;
-	private BigDecimal novoSaldo;
 	private Long id;
-
+	
+	private BigDecimal valor;
+	
+	private DateTime data;
+	
+	private BigDecimal novoSaldo;
+	
 	private String tipo;
+	
+	private Long idCliente;
+
+	public Movimentacao(Long id, BigDecimal valor, Timestamp data, BigDecimal novoSaldo, String tipo, Long idCliente){
+		setId(id);
+		setValor(valor);
+		setData(new DateTime(data));
+		setNovoSaldo(novoSaldo);
+		setTipo(tipo);
+		setIdCliente(idCliente);
+	}
+
+	public Movimentacao(BigDecimal valor, Date data, BigDecimal novoSaldo, String tipo, Long idCliente) {
+		setValor(valor);
+		setData(new DateTime(data));
+		setNovoSaldo(novoSaldo);
+		setTipo(tipo);
+		setIdCliente(idCliente);
+	}
 
 	public BigDecimal getValor() {
 		return valor;
@@ -37,10 +61,6 @@ public class Movimentacao {
 		this.tipo = tipo;
 	}
 
-	public void efetuarMovimentacao(String tipo) {
-		// TODO: efetuar movimentacao
-	}
-
 	public BigDecimal getNovoSaldo() {
 		return novoSaldo;
 	}
@@ -55,6 +75,14 @@ public class Movimentacao {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
 	}
 
 }

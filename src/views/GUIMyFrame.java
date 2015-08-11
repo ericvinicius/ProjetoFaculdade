@@ -50,7 +50,7 @@ public class GUIMyFrame extends JXFrame {
 		if(frame.equals("codigoDeAcesso")){
 			new GUICodigoDeAcesso();
 		} else if(frame.equals("principal")){
-			user = clienteDao.carregaClienteComMovimentacoes(user);
+			user = clienteDao.carregaCliente(user);
 			new GUIPrincipal();
 		} else if(frame.equals("login")){
 			new GUILogin();

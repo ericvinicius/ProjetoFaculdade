@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.math.BigDecimal;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -12,6 +13,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 
 import modelos.Cliente;
+import modelos.Transferencia;
 
 import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXPanel;
@@ -29,6 +31,9 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	private JFormattedTextField txtconta;
 	private JFormattedTextField txtagencia;
 	private JXTextField txtvalor;
+	
+	private Cliente userDestino = new Cliente();
+	private BigDecimal valor;
 	
 	public PainelTransferencia(Cliente u, Utilites ut) {
 		super(u, ut);
@@ -94,8 +99,32 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource().equals(btefetuaTranferencia)){
-			
+			verificaCampos();
+			if(fileHandler.usuarioExiste(userDestino)){
+				efetuaTransferencia();
+			}
 		}
+	}
+
+	private void efetuaTransferencia() {
+		Transferencia transferencia = Transferencia.criaTransferencia(valor, user.getSaldo(), userDestino, user.getId());
+		transferencia.efetuaTransferencia();
+		user.addMovimentacao(transferencia);
+	}
+
+	private void verificaCampos() {
+		try{
+			pegaInformacoesDeLogin();
+			valor = new BigDecimal(Double.parseDouble(txtvalor.getText()));
+		} catch (NumberFormatException ne){
+			//TODO: Esta exception é esperada quando o usuario digita uma letra no campo do valor
+		}
+	}
+	
+	public void pegaInformacoesDeLogin() {
+		String agenciaDestino = txtagencia.getValue().toString();
+		String contaDestino = txtconta.getValue().toString();
+		userDestino.guardaInformacoes(agenciaDestino, contaDestino);
 	}
 
 	@Override

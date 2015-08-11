@@ -28,13 +28,13 @@ public class Utilites {
 
 	
 	// Mascaras
-	public static final SimpleDateFormat formatDiaHora = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 	public final String maskFiltraTabela = "###";
 	public final String maskAgencia = "####-#";
 	public final String maskConta = "##.###-#";
 	public final String maskDia = "dd/MM/yyyy";
 	public final String maskHora = "HH:mm:ss";
 	public final String maskDiaHora = "dd/MM/yyyy - HH:mm:ss";
+	public final static SimpleDateFormat formatDiaHora = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 	
 	//Cores
 	public static final Color corCinzaEscuro = new Color(212, 212, 212);
@@ -49,6 +49,7 @@ public class Utilites {
 	public final ImageIcon br = new ImageIcon("images/Brazil-icon.png");
 	public final ImageIcon es = new ImageIcon("images/Spain-icon.png");
 	public final ImageIcon us = new ImageIcon("images/USA-icon.png");
+	public final ImageIcon brgif = new ImageIcon("images/brazil_gifs");
 
 	// boolean
 	public static boolean temMensagemDeErro = false;
@@ -183,7 +184,8 @@ public class Utilites {
 		new Relogio(labelHora).start();
 	}
 
-	public int criaLogicaDoCodigoDeAcesso(int linha) {
+	public int criaLogicaDoCodigoDeAcesso(Long l) {
+		int linha = Integer.parseInt(l + "");
 		return (33 * linha) + 25 + linha;
 	}
 

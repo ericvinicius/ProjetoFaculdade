@@ -59,6 +59,7 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 		}
 		this.dispose();
 		new GUILogin();
+		
 	}
 
 	@Override

@@ -15,13 +15,19 @@ CREATE TABLE `Movimentacao` (
   `idMovimentacao` int(11) NOT NULL AUTO_INCREMENT,
   `valor` decimal(20,0) NOT NULL,
   `data` datetime NOT NULL,
-  `contaDestino` varchar(45) DEFAULT NULL,
-  `agenciaDestino` varchar(45) DEFAULT NULL,
+  `novoSaldo` decimal(20,0) NOT NULL,
   `tipo` varchar(45) NOT NULL,
-  `idCliente` int(11) NOT NULL,
+  `agenciaDestino` varchar(45) NOT NULL,
+  `contaDestino` varchar(45) NOT NULL,
+  `idClienteRemetente` int(11) NOT NULL,
   PRIMARY KEY (`idMovimentacao`),
-  KEY `idCliente_idx` (`idCliente`),
-  CONSTRAINT `idCliente` FOREIGN KEY (`idCliente`) REFERENCES `Cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+  KEY `idCliente_idx` (`idClienteRemetente`),
+  CONSTRAINT `idCliente` FOREIGN KEY (`idClienteRemetente`) REFERENCES `Cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+
+
+
+
 
 

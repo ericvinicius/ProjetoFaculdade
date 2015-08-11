@@ -117,7 +117,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		}
 	}
 
-	public void pegaInformacoesDeLogin() throws NumberFormatException {
+	public void pegaInformacoesDeLogin() {
 		String agencia = txtagencia.getValue().toString();
 		String conta = txtconta.getValue().toString();
 		String senha = new String(txtsenha.getPassword());

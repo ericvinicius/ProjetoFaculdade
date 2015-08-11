@@ -29,7 +29,7 @@ public class Cliente implements Acesso /* anotations.Observable */{
 	private boolean admin;
 	private int status;
 
-	private int id;
+	private Long id;
 	private String nome;
 	
 	private ArrayList<Movimentacao> movimentacoes;
@@ -37,7 +37,7 @@ public class Cliente implements Acesso /* anotations.Observable */{
 
 	private Utilites utilites = new Utilites();
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -143,7 +143,6 @@ public class Cliente implements Acesso /* anotations.Observable */{
 		this.status = status;
 	}
 
-	@Override
 	public boolean validaLogin(Cliente usuarioTentativa) {
 		if (getDados().equals(usuarioTentativa.getDados())) {
 			if (getStatus() == 1) {
@@ -155,7 +154,6 @@ public class Cliente implements Acesso /* anotations.Observable */{
 		return false;
 	}
 
-	@Override
 	public boolean validaCodigoDeAcesso(Cliente usuarioTentativa) {
 		utilites.logger.logInfo("Tentativa", utilites.converteVetorParaString(usuarioTentativa.getCodigoDeAcesso()));
 		utilites.logger.logInfo("Correto", utilites.converteVetorParaString(getCodigoDeAcesso()));
@@ -165,7 +163,7 @@ public class Cliente implements Acesso /* anotations.Observable */{
 		return false;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		if (id >= 0) {
 			this.id = id;
 		}
@@ -225,6 +223,20 @@ public class Cliente implements Acesso /* anotations.Observable */{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public void guardaInformacoes(String agencia2, String conta2) {
+		setAgencia(agencia);
+		setConta(conta);
+	}
+
+	public boolean validaAgenciaConta(Cliente usuarioTentativa) {
+		//TODO: criar este metodo
+		return false;
+	}
+
+	public void addMovimentacao(Movimentacao mov) {
+		this.movimentacoes.add(mov);
 	}
 
 	// private List<Observer> observers = new ArrayList();

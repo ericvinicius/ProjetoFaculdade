@@ -13,11 +13,13 @@ import modelos.Cliente;
 
 import org.jdesktop.swingx.JXPanel;
 
+import textFile.ManipuladorDeArquivos;
 import utilities.Utilites;
 
 public class MyPanel extends JXPanel {
 	protected static Cliente user;
 	protected Utilites utilites;
+	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();
 	
 	protected JXPanel painelN = new JXPanel(new BorderLayout());
 	protected JXPanel painelS = new JXPanel(new BorderLayout());
@@ -28,11 +30,11 @@ public class MyPanel extends JXPanel {
 	public MyPanel(Cliente u, Utilites ut){
 		user = u;
 		utilites = ut;
+		JXPanel containerSaldo = new JXPanel();
 		
 		JLabel lsaldos = new JLabel("Saldo: ");
 		JLabel lvalSaldos = atualizaSaldo();
 
-		JXPanel containerSaldo = new JXPanel();
 		containerSaldo.add(lsaldos);
 		containerSaldo.add(lvalSaldos);
 		painelN.add(containerSaldo, BorderLayout.NORTH);
