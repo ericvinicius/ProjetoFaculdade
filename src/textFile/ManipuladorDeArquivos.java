@@ -114,8 +114,7 @@ public class ManipuladorDeArquivos {
 		} catch (FileNotFoundException ef) {
 			Logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (NumberFormatException en) {
-			//Se cair nesta exception quer dizer que o leitor chegou na linha do meu texto no arquivo de ACESSO
-			Logger.logWarn("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
+			Logger.logWarn("Sem Cadastro", "Usuario da transferencia não foi encontrado no arquivo ACESSO.txt");
 		} finally {
 			if (leitor != null) {
 				leitor.close();

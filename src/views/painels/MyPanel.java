@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import modelos.Cliente;
 
@@ -15,11 +16,13 @@ import org.jdesktop.swingx.JXPanel;
 
 import textFile.ManipuladorDeArquivos;
 import utilities.Utilites;
+import views.GUIPrincipal;
 
 public class MyPanel extends JXPanel {
-	protected static Cliente user;
+	protected Cliente user;
 	protected Utilites utilites;
 	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();
+	protected GUIPrincipal tela = (GUIPrincipal) SwingUtilities.getWindowAncestor(this);
 	
 	protected JXPanel painelN = new JXPanel(new BorderLayout());
 	protected JXPanel painelS = new JXPanel(new BorderLayout());

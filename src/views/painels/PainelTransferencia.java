@@ -19,8 +19,8 @@ import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTextField;
 
-import builders.TransferenciaBuilder;
 import utilities.Utilites;
+import builders.TransferenciaBuilder;
 
 public class PainelTransferencia extends MyPanel implements KeyListener, MouseListener {
 
@@ -103,6 +103,8 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 			verificaCampos();
 			if(fileHandler.usuarioExiste(userDestino)){
 				efetuaTransferencia();
+			} else {
+				utilites.tremeTela(tela);
 			}
 		}
 	}
