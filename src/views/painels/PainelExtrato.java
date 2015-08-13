@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -19,9 +21,6 @@ import modelos.Cliente;
 
 import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXTable;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import utilities.Utilites;
 
@@ -112,10 +111,11 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 	}
 
 	private void filtraTabela(int periodo) {
-		DateTimeFormatter fmt = DateTimeFormat.forPattern(utilites.maskDiaHora);
-		DateTime data = DateTime.now().minusDays(periodo);
-		String dataFormatada = fmt.print(data);
-		data = fmt.parseDateTime(dataFormatada);
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern(utilites.maskDiaHora);
+		LocalDateTime dataAtual = LocalDateTime.now();
+		String stringDataLimite = dataAtual.minusDays(periodo).toString();
+		System.out.println(stringDataLimite);
+		LocalDateTime dataLimiteFormatada = LocalDateTime.parse(stringDataLimite, fmt);
 
 		int linhas = linhasDaTabela.length;
 		int colunas = linhasDaTabela[0].length;
@@ -123,8 +123,9 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 
 		int j = 0;
 		for (int i = 0; i < linhas; i++) {
-			DateTime dataMovimentacao = fmt.parseDateTime(linhasDaTabela[i][1] + "");
-			if (dataMovimentacao.isAfter(data)) {
+			LocalDateTime dataMovimentacao = LocalDateTime.parse(linhasDaTabela[i][1] + "", fmt);
+			System.out.println(dataMovimentacao);
+			if (dataMovimentacao.isAfter(dataLimiteFormatada)) {
 				extrato[j][0] = linhasDaTabela[i][0];
 				extrato[j][1] = linhasDaTabela[i][1];
 				extrato[j][2] = linhasDaTabela[i][2];
@@ -132,7 +133,6 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 				j++;
 			}
 		}
-		System.out.println("==========");
 		linhasDaTabela = extrato;
 	}
 

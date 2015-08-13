@@ -1,11 +1,9 @@
 package modelos;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import utilities.Logger;
 import utilities.Utilites;
@@ -162,9 +160,8 @@ public class Cliente  /* anotations.Observable */{
 		int i = 0;
 		for (Movimentacao mov : movimentacoes) {
 			extrato[i][0] = mov.getValor();
-			DateTime data = mov.getData();
-			DateTimeFormatter fmt = DateTimeFormat.forPattern(utilites.maskDiaHora);
-			extrato[i][1] = fmt.print(data);
+			LocalDateTime data = mov.getData();
+			extrato[i][1] = data.format(DateTimeFormatter.ofPattern(utilites.maskDiaHora));
 			extrato[i][2] = mov.getTipo();
 			extrato[i][3] = mov.getNovoSaldo();
 			i++;

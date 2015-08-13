@@ -1,10 +1,7 @@
 package modelos;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Date;
-
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 
 public class Movimentacao {
 
@@ -12,7 +9,7 @@ public class Movimentacao {
 	
 	private BigDecimal valor;
 	
-	private DateTime data;
+	private LocalDateTime data;
 	
 	private BigDecimal novoSaldo;
 	
@@ -20,19 +17,19 @@ public class Movimentacao {
 	
 	private Long idCliente;
 
-	public Movimentacao(Long id, BigDecimal valor, Timestamp data, BigDecimal novoSaldo, String tipo, Long idCliente){
+	public Movimentacao(Long id, BigDecimal valor, LocalDateTime data, BigDecimal novoSaldo, String tipo, Long idCliente){
 		setId(id);
 		setValor(valor);
-		setData(new DateTime(data));
+		setData(data);
 		setNovoSaldo(novoSaldo);
 		setTipo(tipo);
 		setIdCliente(idCliente);
 		//TODO: aqui deve ir para o log
 	}
 
-	public Movimentacao(BigDecimal valor, Date data, BigDecimal novoSaldo, String tipo, Long idCliente) {
+	public Movimentacao(BigDecimal valor, LocalDateTime data, BigDecimal novoSaldo, String tipo, Long idCliente) {
 		setValor(valor);
-		setData(new DateTime(data));
+		setData(data);
 		setNovoSaldo(novoSaldo);
 		setTipo(tipo);
 		setIdCliente(idCliente);
@@ -47,11 +44,11 @@ public class Movimentacao {
 		this.valor = valor;
 	}
 
-	public DateTime getData() {
+	public LocalDateTime getData() {
 		return data;
 	}
 
-	public void setData(DateTime data) {
+	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
 

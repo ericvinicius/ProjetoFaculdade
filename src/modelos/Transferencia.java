@@ -1,8 +1,7 @@
 package modelos;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import dao.MovimentacaoDao;
 
@@ -12,13 +11,13 @@ public class Transferencia extends Movimentacao {
 	private String contaDestino;
 	private String agenciaDestino;
 	
-	public Transferencia(BigDecimal valor, Timestamp data, BigDecimal novoSaldo, String contaDestino, String agenciaDestino, Long idCliente){
+	public Transferencia(BigDecimal valor, LocalDateTime data, BigDecimal novoSaldo, String contaDestino, String agenciaDestino, Long idCliente){
 		super(valor, data, novoSaldo, Transferencia.class.getSimpleName(), idCliente);
 		setContaDestino(contaDestino);
 		setAgenciaDestino(agenciaDestino);
 	}
 	
-	public Transferencia(Long id, BigDecimal valor, Timestamp data, BigDecimal novoSaldo, String contaDestino, String agenciaDestino, Long idCliente){
+	public Transferencia(Long id, BigDecimal valor, LocalDateTime data, BigDecimal novoSaldo, String contaDestino, String agenciaDestino, Long idCliente){
 		super(id, valor, data, novoSaldo, Transferencia.class.getSimpleName(), idCliente);
 		setContaDestino(contaDestino);
 		setAgenciaDestino(agenciaDestino);
@@ -44,7 +43,7 @@ public class Transferencia extends Movimentacao {
 		BigDecimal novoSaldo = saldoAtual.subtract(valor);
 		String contaDestino = userDestino.getConta();
 		String agenciaDestino = userDestino.getAgencia();
-		Timestamp data = new Timestamp(new Date().getTime());
+		LocalDateTime data = LocalDateTime.now();
 		
 		return new Transferencia(valor, data, novoSaldo, contaDestino, agenciaDestino, idCliente);
 	}

@@ -1,13 +1,13 @@
 package builders;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import modelos.Transferencia;
 
 public class TransferenciaBuilder {
 	private BigDecimal valor;
-	private Timestamp data;
+	private LocalDateTime data;
 	private BigDecimal novoSaldo;
 	private String contaDestino;
 	private String agenciaDestino;
@@ -32,7 +32,7 @@ public class TransferenciaBuilder {
 		return this;
 	}
 	
-	public TransferenciaBuilder naData(Timestamp d){
+	public TransferenciaBuilder naData(LocalDateTime d){
 		this.data = d;
 		return this;
 	}

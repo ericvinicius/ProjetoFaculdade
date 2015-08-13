@@ -14,9 +14,8 @@ public class MovimentacaoDao extends MyDao {
 			stmt = connection.prepareStatement("INSERT INTO Movimentacao (`valor`, `data`, `novoSaldo`, `tipo`, `agenciaDestino`, `contaDestino`, `idCliente`) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?");
 			
-			Timestamp data = new Timestamp(transferencia.getData().getMillis());
 			stmt.setBigDecimal(1, transferencia.getNovoSaldo());
-			stmt.setTimestamp(2, data);
+			stmt.setTimestamp(2, Timestamp.valueOf(transferencia.getData()));
 			stmt.setBigDecimal(3, transferencia.getNovoSaldo());
 			stmt.setString(4, transferencia.getTipo());
 			stmt.setString(5, transferencia.getAgenciaDestino());

@@ -1,11 +1,11 @@
 package modelos;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Saque extends Movimentacao {
 	
-	public Saque(Long id, BigDecimal valor, Timestamp data, BigDecimal novoSaldo, long idCliente){
+	public Saque(Long id, BigDecimal valor, LocalDateTime data, BigDecimal novoSaldo, long idCliente){
 		super(id, valor, data, novoSaldo, Saque.class.getSimpleName(), idCliente);
 	}
 	

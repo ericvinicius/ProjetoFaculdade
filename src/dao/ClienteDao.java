@@ -2,14 +2,14 @@ package dao;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import utilities.Logger;
 import modelos.Cliente;
 import modelos.Movimentacao;
 import modelos.Saque;
 import modelos.Transferencia;
+import utilities.Logger;
 
 public class ClienteDao extends MyDao {
 
@@ -30,7 +30,7 @@ public class ClienteDao extends MyDao {
 			while (rs.next()) {
 				long id = rs.getLong("idMovimentacao");
 				BigDecimal valor = rs.getBigDecimal("valor");
-				Timestamp data = rs.getTimestamp("data");
+				LocalDateTime data = rs.getTimestamp("data").toLocalDateTime();
 				BigDecimal novoSaldo = rs.getBigDecimal("novoSaldo");
 				String tipo = rs.getString("tipo");
 				long idCliente = cliente.getId();
