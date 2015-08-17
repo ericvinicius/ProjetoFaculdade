@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
+import builders.ClienteBuilder;
 import utilities.Logger;
 import modelos.Cliente;
 
@@ -29,7 +30,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	private JFormattedTextField txtagencia;
 	private JPasswordField txtsenha;
 
-	private Cliente usuarioTentativa = new Cliente();
+	private Cliente usuarioTentativa;
 
 	public GUILogin() {
 		// Conta
@@ -95,16 +96,14 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	private void pegaInformacoesEVerificaLogin() {
 		try{
 			pegaInformacoesDeLogin();
-			if (usuarioTentativa.isAdmin()) {
-				opcaoAdmin.setText("Quero ir para Braavos!");
-				opcoes.add(opcaoAdmin);
-			} else {
-				verificaLogin();
+			
+			//TODO: Falta verificar se é admin
+			verificaLogin();
 
-			}
 		} catch (NullPointerException en){
 			Logger.logWarn("Em Branco", "Algum campo esta em branco!");
 			utilites.tremeTelaComMensagemDeErro(this);
+			en.printStackTrace();
 		}
 		
 	}
@@ -122,7 +121,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		String agencia = txtagencia.getValue().toString();
 		String conta = txtconta.getValue().toString();
 		String senha = new String(txtsenha.getPassword());
-		usuarioTentativa.guardaInformacoes(agencia, conta, senha);
+		usuarioTentativa = new ClienteBuilder().comAgencia(agencia).comConta(conta).comSenha(senha).constroi();
 	}
 
 	@Override

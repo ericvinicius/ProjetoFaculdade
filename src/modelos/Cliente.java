@@ -29,6 +29,22 @@ public class Cliente  /* anotations.Observable */{
 	private ArrayList<DebitoAutomatico> debitosAutomaticos;
 
 	private Utilites utilites = new Utilites();
+	
+	public Cliente(String conta, String agencia, String senha, int[] codigoDeAcesso, BigDecimal saldo, boolean novoCodigoDeAcesso, boolean admin, int status, Long id,
+			String nome, ArrayList<Movimentacao> movimentacoes, ArrayList<DebitoAutomatico> debitosAutomaticos) {
+		this.conta = conta;
+		this.agencia = agencia;
+		this.senha = senha;
+		this.codigoDeAcesso = codigoDeAcesso;
+		this.saldo = saldo;
+		this.novoCodigoDeAcesso = novoCodigoDeAcesso;
+		this.admin = admin;
+		this.status = status;
+		this.id = id;
+		this.nome = nome;
+		this.movimentacoes = movimentacoes;
+		this.debitosAutomaticos = debitosAutomaticos;
+	}
 
 	public Long getId() {
 		return id;
@@ -97,18 +113,6 @@ public class Cliente  /* anotations.Observable */{
 		log.append(" admin( " + isAdmin() + " )");
 		Logger.logInfo(tag, log.toString());
 
-	}
-	
-	public void guardaInformacoes(String agencia2, String conta2) {
-		setAgencia(agencia);
-		setConta(conta);
-	}
-
-	public void guardaInformacoes(String agencia, String conta, String senha) {
-		setAgencia(agencia);
-		setConta(conta);
-		setSenha(senha);
-		toLog("Tentativa");
 	}
 
 	public int getStatus() {

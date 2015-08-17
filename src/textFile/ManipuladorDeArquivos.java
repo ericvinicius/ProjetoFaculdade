@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Scanner;
 
+import builders.ClienteBuilder;
 import modelos.Cliente;
 import modelos.ValidadorDeClientes;
 import utilities.Logger;
@@ -17,6 +18,7 @@ public class ManipuladorDeArquivos {
 	private Utilites utilites = new Utilites();
 	private Cliente usuarioCadastrado;
 	private Scanner leitor = null;
+	private ClienteBuilder clienteBuilder = new ClienteBuilder();
 
 	public Cliente fazLeituraDoArquivoParaLogin(Cliente usuarioTentativa) {
 
@@ -25,13 +27,8 @@ public class ManipuladorDeArquivos {
 			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
 
 			while (leitor.hasNext()) {
-				usuarioCadastrado = new Cliente();
-				usuarioCadastrado.setId(Long.parseLong(leitor.next()));
-				usuarioCadastrado.setStatus(Integer.parseInt(leitor.next()));
-				usuarioCadastrado.setConta(leitor.next());
-				usuarioCadastrado.setAgencia(leitor.next());
-				usuarioCadastrado.setSenha(leitor.next());
-				usuarioCadastrado.setCodigoDeAcesso(leituraDoCodigoDeAcesso());
+				usuarioCadastrado = clienteBuilder.comId(Long.parseLong(leitor.next())).comStatus(Integer.parseInt(leitor.next())).comConta(leitor.next())
+						.comAgencia(leitor.next()).comSenha(leitor.next()).comCodigoDeAcesso(leituraDoCodigoDeAcesso()).constroi();
 
 				usuarioCadastrado.toLog("Leitura Atual");
 
@@ -45,7 +42,8 @@ public class ManipuladorDeArquivos {
 		} catch (FileNotFoundException ef) {
 			Logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (NumberFormatException en) {
-			//Se cair nesta exception quer dizer que o leitor chegou na linha do meu texto no arquivo de ACESSO
+			// Se cair nesta exception quer dizer que o leitor chegou na linha
+			// do meu texto no arquivo de ACESSO
 			Logger.logWarn("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
 		} finally {
 			if (leitor != null) {
@@ -62,7 +60,7 @@ public class ManipuladorDeArquivos {
 			v[i] = Integer.parseInt(leitor.next());
 
 		}
-		usuarioCadastrado.setNovoCodigoDeAcesso(v[--i] != 0 ? false : true);
+		clienteBuilder.comNovoCodigo(v[--i] != 0 ? false : true);
 		return v;
 	}
 
@@ -94,13 +92,8 @@ public class ManipuladorDeArquivos {
 			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
 
 			while (leitor.hasNext()) {
-				usuarioCadastrado = new Cliente();
-				usuarioCadastrado.setId(Long.parseLong(leitor.next()));
-				usuarioCadastrado.setStatus(Integer.parseInt(leitor.next()));
-				usuarioCadastrado.setConta(leitor.next());
-				usuarioCadastrado.setAgencia(leitor.next());
-				usuarioCadastrado.setSenha(leitor.next());
-				usuarioCadastrado.setCodigoDeAcesso(leituraDoCodigoDeAcesso());
+				usuarioCadastrado = clienteBuilder.comId(Long.parseLong(leitor.next())).comStatus(Integer.parseInt(leitor.next())).comConta(leitor.next())
+						.comAgencia(leitor.next()).comSenha(leitor.next()).comCodigoDeAcesso(leituraDoCodigoDeAcesso()).constroi();
 
 				usuarioCadastrado.toLog("Leitura Transf");
 

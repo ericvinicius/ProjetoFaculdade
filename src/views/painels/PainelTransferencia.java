@@ -20,6 +20,7 @@ import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTextField;
 
 import utilities.Utilites;
+import builders.ClienteBuilder;
 import builders.TransferenciaBuilder;
 
 public class PainelTransferencia extends MyPanel implements KeyListener, MouseListener {
@@ -33,7 +34,7 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	private JFormattedTextField txtagencia;
 	private JXTextField txtvalor;
 	
-	private Cliente userDestino = new Cliente();
+	private Cliente userDestino;
 	private BigDecimal valor;
 	
 	public PainelTransferencia(Cliente u, Utilites ut) {
@@ -131,7 +132,8 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	public void pegaInformacoesDeLogin() {
 		String agenciaDestino = txtagencia.getValue().toString();
 		String contaDestino = txtconta.getValue().toString();
-		userDestino.guardaInformacoes(agenciaDestino, contaDestino);
+		ClienteBuilder builder = new ClienteBuilder();
+		userDestino = builder.comAgencia(agenciaDestino).comConta(contaDestino).constroi();
 	}
 
 	@Override

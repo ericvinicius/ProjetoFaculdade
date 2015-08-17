@@ -13,6 +13,7 @@ import modelos.ValidadorDeClientes;
 import org.jdesktop.swingx.JXButton;
 
 import utilities.Utilites;
+import builders.ClienteBuilder;
 
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 
@@ -118,9 +119,8 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 	}
 	
 	private void verificaCodigo() {
-		Cliente usuarioTentativa = new Cliente();
 		ValidadorDeClientes validador = new ValidadorDeClientes();
-		usuarioTentativa.setCodigoDeAcesso(codigo);
+		Cliente usuarioTentativa = new ClienteBuilder().comCodigoDeAcesso(codigo).constroi();
 		
 		if (user.isNovoCodigoDeAcesso()) {
 			criaCodiggoDeAcesso();
