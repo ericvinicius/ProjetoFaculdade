@@ -25,7 +25,7 @@ public class ClienteDao extends MyDao {
 				cliente.setNome(rs.getString("nome"));
 				cliente.setSaldo(rs.getBigDecimal("saldo"));
 			}
-
+			rs.previous();
 			movimentacoes = new ArrayList<Movimentacao>();
 			while (rs.next()) {
 				long id = rs.getLong("idMovimentacao");
@@ -34,7 +34,6 @@ public class ClienteDao extends MyDao {
 				BigDecimal novoSaldo = rs.getBigDecimal("novoSaldo");
 				String tipo = rs.getString("tipo");
 				long idCliente = cliente.getId();
-				
 				if(tipo.equals("transferencia")){
 					String agenciaDestino = rs.getString("agenciaDestino");
 					String contaDestino = rs.getString("contaDestino");
@@ -44,7 +43,6 @@ public class ClienteDao extends MyDao {
 				} else {
 					Saque saque = new Saque(id, valor, data, novoSaldo, idCliente);
 					movimentacoes.add(saque);
-					
 				}	
 			}
 			cliente.setMovimentacoes(movimentacoes);

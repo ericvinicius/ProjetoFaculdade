@@ -6,8 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -39,8 +37,6 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 	private JLabel lfiltros = new JLabel("Filtrar dias atras:");
 	private JFormattedTextField tfiltro = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskFiltraTabela, false));
 	private JXButton bfiltrar = new JXButton("Aplicar filtro");
-
-	private boolean renderizado = false;
 
 	public PainelExtrato(Cliente u, Utilites ut) {
 		super(u, ut);
@@ -79,10 +75,6 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 			// exemplo para carregar toda a tabela, passo "tudo"
 			// TODO: criar log que nao mostra erro na tela do usuario
 		}
-		if(!renderizado){
-			adicionaNumberFormatParaTabela();
-			renderizado = true;
-		}
 
 		table = new JXTable(linhasDaTabela, tituloDaTabela);
 		table.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -103,37 +95,8 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 		scroll.revalidate();
 	}
 
-	private void adicionaNumberFormatParaTabela() {
-		for (Object[] linha : linhasDaTabela) {
-			linha[0] = utilites.getValorComMoeda(Double.parseDouble(linha[0] + ""));
-			linha[3] = utilites.getValorComMoeda(Double.parseDouble(linha[3] + ""));
-		}
-	}
-
 	private void filtraTabela(int periodo) {
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern(utilites.maskDiaHora);
-		LocalDateTime dataAtual = LocalDateTime.now();
-		String stringDataLimite = dataAtual.minusDays(periodo).toString();
-		System.out.println(stringDataLimite);
-		LocalDateTime dataLimiteFormatada = LocalDateTime.parse(stringDataLimite, fmt);
-
-		int linhas = linhasDaTabela.length;
-		int colunas = linhasDaTabela[0].length;
-		Object[][] extrato = new Object[linhas][colunas];
-
-		int j = 0;
-		for (int i = 0; i < linhas; i++) {
-			LocalDateTime dataMovimentacao = LocalDateTime.parse(linhasDaTabela[i][1] + "", fmt);
-			System.out.println(dataMovimentacao);
-			if (dataMovimentacao.isAfter(dataLimiteFormatada)) {
-				extrato[j][0] = linhasDaTabela[i][0];
-				extrato[j][1] = linhasDaTabela[i][1];
-				extrato[j][2] = linhasDaTabela[i][2];
-				extrato[j][3] = linhasDaTabela[i][3];
-				j++;
-			}
-		}
-		linhasDaTabela = extrato;
+		//TODO: Este metodo nao esta funfando
 	}
 
 	@Override
