@@ -16,13 +16,13 @@ import org.jdesktop.swingx.JXPanel;
 
 import textFile.ManipuladorDeArquivos;
 import utilities.Utilites;
+import views.GUIMyFrame;
 import views.GUIPrincipal;
 
 public class MyPanel extends JXPanel {
 	protected Cliente user;
 	protected Utilites utilites;
 	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();
-	protected GUIPrincipal tela = (GUIPrincipal) SwingUtilities.getWindowAncestor(this);
 	
 	protected JXPanel painelN = new JXPanel(new BorderLayout());
 	protected JXPanel painelS = new JXPanel(new BorderLayout());
@@ -76,6 +76,12 @@ public class MyPanel extends JXPanel {
 			lsaldo.setForeground(Color.blue);
 		}
 		return lsaldo;
+	}
+	
+	protected void recreate() {
+		GUIMyFrame tela = (GUIMyFrame) SwingUtilities.getAncestorOfClass(GUIMyFrame.class, this);
+		tela.dispose();
+		new GUIPrincipal();
 	}
 	
 }
