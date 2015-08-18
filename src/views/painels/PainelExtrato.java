@@ -29,7 +29,7 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 	private JXTable table;
 	private Object[][] linhasDaTabela;
 
-	private String[] tituloDaTabela = { "Valor", "Data", "Tipo", "Novo Saldo" };
+	private String[] tituloDaTabela = { "Data", "Tipo", "Valor", "Novo Saldo" };
 
 	private JXButton imprimiExtrato = new JXButton("Imprimir Extrato");
 	private JXButton imprimiSaldo = new JXButton("Imprimir Saldo");

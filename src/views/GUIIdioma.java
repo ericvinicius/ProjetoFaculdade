@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import modelos.Cliente;
 import utilities.Logger;
 import utilities.Utilites;
 
@@ -47,6 +48,11 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 			Utilites.local = new Locale("pt", "BR");
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
 			Logger.logInfo("Idioma", "Portugues");
+			//TODO: Remover no final do projeto
+			user = new Cliente();
+			user.setId(1L);
+			redirect(this, "principal");
+			
 			
 		} else if(click == us){
 			Utilites.local = Locale.US;
@@ -58,9 +64,7 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
 			Logger.logInfo("Idioma", "Espanhol");
 		}
-		this.dispose();
-		new GUILogin();
-		
+		//redirect(this, "login");
 	}
 
 	@Override

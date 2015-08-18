@@ -46,6 +46,11 @@ public class Cliente  /* anotations.Observable */{
 		this.debitosAutomaticos = debitosAutomaticos;
 	}
 
+	@Deprecated
+	public Cliente() {
+		// TODO: Este metodo deve ser removido no fim do projeto
+	}
+
 	public Long getId() {
 		return id;
 	}

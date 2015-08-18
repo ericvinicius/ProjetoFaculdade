@@ -39,16 +39,8 @@ public class Transferencia extends Movimentacao {
 		this.agenciaDestino = agencia;
 	}
 
-	public static Transferencia criaTransferencia(BigDecimal valor, BigDecimal saldoAtual, Cliente userDestino, Long idCliente) {
-		BigDecimal novoSaldo = saldoAtual.subtract(valor);
-		String contaDestino = userDestino.getConta();
-		String agenciaDestino = userDestino.getAgencia();
-		LocalDateTime data = LocalDateTime.now();
-		
-		return new Transferencia(valor, data, novoSaldo, contaDestino, agenciaDestino, idCliente);
-	}
-
 	public void efetuaTransferencia() {
+		//TODO: Neste metodo a GUI deve ser recarregada
 		MovimentacaoDao dao = new MovimentacaoDao();
 		dao.salva(this);
 	}

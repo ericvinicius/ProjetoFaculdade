@@ -17,8 +17,6 @@ public class ValidadorDeClientes implements Acesso {
 
 	@Override
 	public boolean validaClienteExistente(Cliente u, Cliente u2) {
-		System.out.println(u.getDadosAgenciaConta());
-		System.out.println(u2.getDadosAgenciaConta());
 		return u.getDadosAgenciaConta().equals(u2.getDadosAgenciaConta());
 	}
 	

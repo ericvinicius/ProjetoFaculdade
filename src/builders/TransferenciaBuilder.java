@@ -15,6 +15,10 @@ public class TransferenciaBuilder {
 	private Long id;
 	
 	public Transferencia constroi(){
+		if(data == null){
+			data = LocalDateTime.now();
+		}
+		
 		if(id != null){
 			return new Transferencia(id, valor, data, novoSaldo, contaDestino, agenciaDestino, idCliente);
 		}

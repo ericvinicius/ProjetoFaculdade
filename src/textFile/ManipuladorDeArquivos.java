@@ -98,7 +98,7 @@ public class ManipuladorDeArquivos {
 				usuarioCadastrado.toLog("Leitura Transf");
 
 				if (validador.validaClienteExistente(usuarioCadastrado, usuarioTentativa)) {
-					usuarioCadastrado.toLog("Usuario");
+					usuarioCadastrado.toLog("Usuario Transf");
 					leitor.close();
 					return true;
 				}
