@@ -162,11 +162,11 @@ public class Cliente  /* anotations.Observable */{
 		Movimentacao mov = movimentacoes.get(0);
 		Object[][] extrato = new Object[size + 1][5];
 		
-		BigDecimal saldoAnterior = mov.getNovoSaldo().subtract(mov.getValor());
-		extrato[0][0] = "Saldo Anterior";
-		extrato[0][1] = mov.getData().minusDays(1).format(DateTimeFormatter.ofPattern(utilites.maskDia));
-		extrato[0][2] = "=======>";
-		extrato[0][3] = utilites.getValorComMoeda(Double.parseDouble(saldoAnterior + ""));
+		BigDecimal saldoAnterior = mov.getNovoSaldo().add(mov.getValor());
+		extrato[0][0] = mov.getData().minusDays(1).format(DateTimeFormatter.ofPattern(utilites.maskDia));
+		extrato[0][1] = "Saldo Anterior";
+		extrato[0][2] = utilites.getValorComMoeda(Double.parseDouble(saldoAnterior + ""));
+		extrato[0][3] = " - ";
 		
 		int i = 1;
 		for (Movimentacao movimentacao : movimentacoes) {
@@ -174,9 +174,9 @@ public class Cliente  /* anotations.Observable */{
 			String valorMov = utilites.getValorComMoeda(Double.parseDouble(movimentacao.getValor() + ""));
 			String novoSaldoMov = utilites.getValorComMoeda(Double.parseDouble(movimentacao.getNovoSaldo() + ""));
 			
-			extrato[i][0] = valorMov;
-			extrato[i][1] = movimentacao.getData().format(DateTimeFormatter.ofPattern(utilites.maskDiaHora));
-			extrato[i][2] = movimentacao.getTipo();
+			extrato[i][0] = movimentacao.getData().format(DateTimeFormatter.ofPattern(utilites.maskDiaHora));
+			extrato[i][1] = movimentacao.getTipo();
+			extrato[i][2] = valorMov;
 			extrato[i][3] = novoSaldoMov;
 			i++;
 		}

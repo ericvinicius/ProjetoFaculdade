@@ -8,4 +8,4 @@ select * from Cliente where idCliente = 1;
 update Cliente set saldo = 89 where idCliente = 1;
 
 
-select * from Cliente c right join Movimentacao m on c.idCliente = m.idClienteRemetente where c.idCliente = 1
+select * from Cliente c join Movimentacao m on c.idCliente = m.idCliente where c.idCliente = 1

@@ -96,16 +96,22 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	private void pegaInformacoesEVerificaLogin() {
 		try{
 			pegaInformacoesDeLogin();
-			
-			//TODO: Falta verificar se é admin
-			verificaLogin();
-
+			if (verificaAdmin()) {
+				opcaoAdmin.setText("Quero ir para Braavos!");
+				opcoes.add(opcaoAdmin);
+			} else {
+				verificaLogin();
+			}
 		} catch (NullPointerException en){
 			Logger.logWarn("Em Branco", "Algum campo esta em branco!");
 			utilites.tremeTelaComMensagemDeErro(this);
-			en.printStackTrace();
 		}
 		
+	}
+
+	private boolean verificaAdmin() {
+		//TODO: Este Metodo deve verificar se o usuario é admin ou nao
+		return false;
 	}
 
 	private void verificaLogin() {

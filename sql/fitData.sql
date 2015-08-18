@@ -1,8 +1,6 @@
 #Fit Data
-
-truncate Movimentacao;
-
 SET FOREIGN_KEY_CHECKS = 0; 
+truncate Movimentacao;
 TRUNCATE Cliente; 
 SET FOREIGN_KEY_CHECKS = 1;
 
