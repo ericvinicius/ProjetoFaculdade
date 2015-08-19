@@ -114,9 +114,13 @@ public class Cliente  /* anotations.Observable */{
 		log.append("id(" + id + ")");
 		log.append(" agencia( " + getAgencia() + " )");
 		log.append(" conta( " + getConta() + " )");
-		log.append(" senha( " + getSenha().toString() + " )");
+		if(getSenha() == null){
+			log.append(" senha( null )");
+		} else {
+			log.append(" senha( " + getSenha().toString() + " )");
+		}
 		log.append(" admin( " + isAdmin() + " )");
-		Logger.logInfo(tag, log.toString());
+		Logger.info(tag, log.toString());
 
 	}
 

@@ -22,8 +22,8 @@ public class ValidadorDeClientes implements Acesso {
 	
 	@Override
 	public boolean validaCodigoDeAcesso(Cliente u, Cliente u2) {
-		Logger.logInfo("Tentativa", utilites.converteCodigoDeAcessoParaString(u2.getCodigoDeAcesso()));
-		Logger.logInfo("Correto", utilites.converteCodigoDeAcessoParaString(u.getCodigoDeAcesso()));
+		Logger.info("Tentativa", utilites.converteCodigoDeAcessoParaString(u2.getCodigoDeAcesso()));
+		Logger.info("Correto", utilites.converteCodigoDeAcessoParaString(u.getCodigoDeAcesso()));
 		return Arrays.equals(u.getCodigoDeAcesso(), u2.getCodigoDeAcesso());
 	}
 	

@@ -21,7 +21,7 @@ public class ManipuladorDeArquivos {
 	private ClienteBuilder clienteBuilder = new ClienteBuilder();
 
 	public Cliente fazLeituraDoArquivoParaLogin(Cliente usuarioTentativa) {
-
+		usuarioTentativa.toLog("Tentata Login");
 		try {
 			leitor = new Scanner(new FileReader(Utilites.CAMINHO_PARA_ACESSO_TXT));
 			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
@@ -40,11 +40,11 @@ public class ManipuladorDeArquivos {
 			}
 
 		} catch (FileNotFoundException ef) {
-			Logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
+			Logger.error(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (NumberFormatException en) {
 			// Se cair nesta exception quer dizer que o leitor chegou na linha
 			// do meu texto no arquivo de ACESSO
-			Logger.logWarn("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
+			Logger.warn("Sem Cadastro", "Usuario não encontrado no arquivo ACESSO.txt");
 		} finally {
 			if (leitor != null) {
 				leitor.close();
@@ -80,13 +80,14 @@ public class ManipuladorDeArquivos {
 			handler.close();
 
 		} catch (FileNotFoundException ef) {
-			Logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
+			Logger.error(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (IOException eio) {
-			Logger.logError(eio, "Nao conseguiu gravar no arquivo, erro de permissao");
+			Logger.error(eio, "Nao conseguiu gravar no arquivo, erro de permissao");
 		}
 	}
 
 	public boolean usuarioExiste(Cliente usuarioTentativa) {
+		usuarioTentativa.toLog("Tentat Transf");
 		try {
 			leitor = new Scanner(new FileReader(Utilites.CAMINHO_PARA_ACESSO_TXT));
 			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
@@ -105,9 +106,9 @@ public class ManipuladorDeArquivos {
 			}
 
 		} catch (FileNotFoundException ef) {
-			Logger.logError(ef, "Arquivo ACESSO.txt nao encontrado");
+			Logger.error(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (NumberFormatException en) {
-			Logger.logWarn("Sem Cadastro", "Usuario da transferencia não foi encontrado no arquivo ACESSO.txt");
+			Logger.warn("Sem Cadastro", "Usuario da transferencia não foi encontrado no arquivo ACESSO.txt");
 		} finally {
 			if (leitor != null) {
 				leitor.close();

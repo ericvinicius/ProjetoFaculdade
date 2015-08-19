@@ -29,7 +29,7 @@ class Relogio extends Thread {
 			 try {
 				Thread.sleep(450);
 			} catch (InterruptedException ei) {
-				Logger.logError(ei, "Erro na espera da thread do relogio");
+				Logger.error(ei, "Erro na espera da thread do relogio");
 			}
 			this.hr.revalidate();
 		}

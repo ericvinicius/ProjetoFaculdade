@@ -13,7 +13,7 @@ public class ConnectionFactory {
 			//Para conexao local = jdbc:mysql://localhost:3307/projetoIntegrado", "root", ""
 			return DriverManager.getConnection("jdbc:mysql://localhost:3307/projetoIntegrado", "root", "");
 		} catch (SQLException se) {
-			Logger.logError(se, "Erro na criacao de conexao");
+			Logger.error(se, "Erro na criacao de conexao");
 			throw new RuntimeException(se);
 		}
 	}

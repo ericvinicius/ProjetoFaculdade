@@ -103,7 +103,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 				verificaLogin();
 			}
 		} catch (NullPointerException en){
-			Logger.logWarn("Em Branco", "Algum campo esta em branco!");
+			Logger.warn("Em Branco", "Algum campo esta em branco!");
 			utilites.tremeTelaComMensagemDeErro(this);
 		}
 		

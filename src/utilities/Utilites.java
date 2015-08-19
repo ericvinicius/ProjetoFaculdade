@@ -102,7 +102,7 @@ public class Utilites {
 
 			}
 		} catch (InterruptedException ei) {
-			Logger.logError(ei, "Erro da thread que treme tela");
+			Logger.error(ei, "Erro da thread que treme tela");
 		}
 
 		frame.setLocation(originalX, originalY);
@@ -137,7 +137,7 @@ public class Utilites {
 			janela.setLocation(originalX, originalY);
 
 		} catch (InterruptedException ei) {
-			Logger.logError(ei, "Erro da thread que treme tela");
+			Logger.error(ei, "Erro da thread que treme tela");
 		}
 	}
 
@@ -150,7 +150,7 @@ public class Utilites {
 		try {
 			mascara.setMask(mask);
 		} catch (ParseException ep) {
-			Logger.logError(ep, "Erro ao criar uma mascara");
+			Logger.error(ep, "Erro ao criar uma mascara");
 		}
 		return mascara;
 

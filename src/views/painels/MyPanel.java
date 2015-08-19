@@ -14,7 +14,9 @@ import modelos.Cliente;
 
 import org.jdesktop.swingx.JXPanel;
 
+import dao.ClienteDao;
 import textFile.ManipuladorDeArquivos;
+import utilities.Logger;
 import utilities.Utilites;
 import views.GUIMyFrame;
 import views.GUIPrincipal;
@@ -82,6 +84,22 @@ public class MyPanel extends JXPanel {
 		GUIMyFrame tela = (GUIMyFrame) SwingUtilities.getAncestorOfClass(GUIMyFrame.class, this);
 		tela.dispose();
 		new GUIPrincipal();
+	}
+	
+	protected void tremeTela() {
+		utilites.tremeTela((GUIMyFrame) SwingUtilities.getAncestorOfClass(GUIMyFrame.class, this));
+	}
+	
+	protected BigDecimal atualizaSaldoCliente(BigDecimal valor) {
+		BigDecimal novoSaldo = user.getSaldo().subtract(valor);
+		user.setSaldo(novoSaldo);
+		
+		ClienteDao dao = new ClienteDao();
+		dao.atualizaClientePorId(user);
+		
+		Logger.info("Atualização", "O saldo do cliente foi atualizado");
+		
+		return novoSaldo;
 	}
 	
 }

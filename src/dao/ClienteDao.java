@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import builders.TransferenciaBuilder;
 import modelos.Cliente;
 import modelos.Movimentacao;
 import modelos.Saque;
@@ -20,8 +21,8 @@ public class ClienteDao extends MyDao {
 			stmt = connection.prepareStatement("select * from Cliente c join Movimentacao m on c.idCliente = m.idCliente where c.idCliente = ?");
 			stmt.setLong(1, cliente.getId());
 			rs = stmt.executeQuery();
-			
-			if(rs.next()){
+
+			if (rs.next()) {
 				cliente.setNome(rs.getString("nome"));
 				cliente.setSaldo(rs.getBigDecimal("saldo"));
 			}
@@ -33,22 +34,29 @@ public class ClienteDao extends MyDao {
 				LocalDateTime data = rs.getTimestamp("data").toLocalDateTime();
 				BigDecimal novoSaldo = rs.getBigDecimal("novoSaldo");
 				String tipo = rs.getString("tipo");
+
 				long idCliente = cliente.getId();
-				if(tipo.equals("transferencia")){
+				if (tipo.equals("transferencia")) {
 					String agenciaDestino = rs.getString("agenciaDestino");
 					String contaDestino = rs.getString("contaDestino");
-					Transferencia transferencia = new Transferencia(id, valor, data, novoSaldo, contaDestino, agenciaDestino, idCliente);
-					movimentacoes.add(transferencia);
+					tipo = "Transferencia";
 					
+					TransferenciaBuilder builder = new TransferenciaBuilder();
+					Transferencia transferencia = builder.comId(id).comValor(valor).naData(data).comNovoSaldo(novoSaldo).comContaDestino(contaDestino)
+							.comAgenciaDestino(agenciaDestino).comIdDoCliente(idCliente).constroi();
+					
+					movimentacoes.add(transferencia);
+
 				} else {
+					tipo = "Saque";
 					Saque saque = new Saque(id, valor, data, novoSaldo, idCliente);
 					movimentacoes.add(saque);
-				}	
+				}
 			}
 			cliente.setMovimentacoes(movimentacoes);
 
 		} catch (SQLException se) {
-			Logger.logError(se, "Erro na busca de cliente por id");
+			Logger.error(se, "Erro na busca de cliente por id");
 		}
 
 		fechaConexao();
@@ -61,10 +69,10 @@ public class ClienteDao extends MyDao {
 			stmt = connection.prepareStatement("update Cliente set saldo = ? where idCliente = ?");
 			stmt.setBigDecimal(1, cliente.getSaldo());
 			stmt.setLong(2, cliente.getId());
-			stmt.executeQuery();
+			stmt.executeUpdate();
 
 		} catch (SQLException se) {
-			Logger.logError(se, "Erro na busca de cliente por id");
+			Logger.error(se, "Erro na busca de cliente por id");
 		}
 		fechaConexao();
 

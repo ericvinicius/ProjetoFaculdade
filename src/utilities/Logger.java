@@ -12,7 +12,7 @@ public class Logger {
 
 	private static StringBuilder builder = new StringBuilder();
 
-	public static void logError(Exception e, String myMessage) {
+	public static void error(Exception e, String myMessage) {
 		Throwable t = new Throwable();
 		StackTraceElement[] trace = t.getStackTrace();
 
@@ -39,17 +39,17 @@ public class Logger {
 		JOptionPane.showMessageDialog(null, "Erro na Aplicação", tagError, JOptionPane.ERROR_MESSAGE);
 	}
 
-	public static void logWarn(String tag, String myMessage) {
+	public static void warn(String tag, String myMessage) {
 		builder.append(tagWarn);
 		print(tag, myMessage);
 	}
 
-	public static void logDebug(String tag, String myMessage) {
+	public static void debug(String tag, String myMessage) {
 		builder.append(tagDebug);
 		print(tag, myMessage);
 	}
 
-	public static void logInfo(String tag, String myMessage) {
+	public static void info(String tag, String myMessage) {
 		builder.append(tagInfo);
 		print(tag, myMessage);
 

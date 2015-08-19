@@ -19,14 +19,14 @@ public class MovimentacaoDao extends MyDao {
 			stmt.setBigDecimal(1, transferencia.getValor());
 			stmt.setTimestamp(2, new Timestamp(Date.from(transferencia.getData().atZone(ZoneId.systemDefault()).toInstant()).getTime()));
 			stmt.setBigDecimal(3, transferencia.getNovoSaldo());
-			stmt.setString(4, transferencia.getTipo());
+			stmt.setString(4, "transferencia");
 			stmt.setString(5, transferencia.getAgenciaDestino());
 			stmt.setString(6, transferencia.getContaDestino());
 			stmt.setLong(7, transferencia.getIdCliente());
 			stmt.executeUpdate();
 			
 		} catch(SQLException se){
-			Logger.logError(se, "Erro ao salvar a movimentacao");
+			Logger.error(se, "Erro ao salvar a movimentacao");
 		}
 		fechaConexao();
 	}

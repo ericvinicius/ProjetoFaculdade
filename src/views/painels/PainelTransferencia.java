@@ -105,16 +105,14 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 			if (fileHandler.usuarioExiste(userDestino)) {
 				efetuaTransferencia();
 			} else {
-				//TODO: Criar mensagem de erro
+				tremeTela();
 			}
 		}
 	}
 
 	private void efetuaTransferencia() {
 		//TODO: Esta logica deve sair daqui
-		//TODO: Falta salvar o cliente no banco
-		BigDecimal novoSaldo = user.getSaldo().subtract(valor);
-		user.setSaldo(novoSaldo);
+		BigDecimal novoSaldo = atualizaSaldoCliente(valor);
 		
 		TransferenciaBuilder builder = new TransferenciaBuilder();
 		builder.comValor(valor).comAgenciaDestino(userDestino.getAgencia()).comContaDestino(userDestino.getConta()).comIdDoCliente(user.getId()).comNovoSaldo(novoSaldo);
@@ -176,5 +174,5 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	public void keyReleased(KeyEvent e) {
 
 	}
-
+	
 }

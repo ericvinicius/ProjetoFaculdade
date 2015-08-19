@@ -47,7 +47,7 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 		if(click == br){
 			Utilites.local = new Locale("pt", "BR");
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
-			Logger.logInfo("Idioma", "Portugues");
+			Logger.info("Idioma", "Portugues");
 			//TODO: Remover no final do projeto
 			user = new Cliente();
 			user.setId(1L);
@@ -57,14 +57,15 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 		} else if(click == us){
 			Utilites.local = Locale.US;
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
-			Logger.logInfo("Idioma", "Ingles");
+			Logger.info("Idioma", "Ingles");
+			//TODO: Mover isto para o final do metodo no fim do projeto
+			redirect(this, "login");
 			
 		} else if(click == es){
 			Utilites.local = new Locale("es", "ES");
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
-			Logger.logInfo("Idioma", "Espanhol");
+			Logger.info("Idioma", "Espanhol");
 		}
-		//redirect(this, "login");
 	}
 
 	@Override

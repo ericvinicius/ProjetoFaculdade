@@ -37,7 +37,7 @@ public class MyDao {
 				connection.close();
 			}
 		} catch (SQLException se) {
-			Logger.logError(se, "Erro ao fechar a conexao");
+			Logger.error(se, "Erro ao fechar a conexao");
 		}
 	}
 	
