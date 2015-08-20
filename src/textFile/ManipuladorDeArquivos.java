@@ -32,7 +32,7 @@ public class ManipuladorDeArquivos {
 
 				usuarioCadastrado.toLog("Leitura Atual");
 
-				if (validador.validaLogin(usuarioCadastrado, usuarioTentativa)) {
+				if (validador.possuemLoginIgual(usuarioCadastrado, usuarioTentativa)) {
 					usuarioCadastrado.toLog("Usuario");
 					leitor.close();
 					return usuarioCadastrado;
@@ -98,7 +98,7 @@ public class ManipuladorDeArquivos {
 
 				usuarioCadastrado.toLog("Leitura Transf");
 
-				if (validador.validaClienteExistente(usuarioCadastrado, usuarioTentativa)) {
+				if (validador.possuemAgenciaEContaIguais(usuarioCadastrado, usuarioTentativa)) {
 					usuarioCadastrado.toLog("Usuario Transf");
 					leitor.close();
 					return true;

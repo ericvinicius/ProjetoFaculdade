@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import modelos.Cliente;
+import modelos.ValidadorDeClientes;
 
 import org.jdesktop.swingx.JXPanel;
 
@@ -25,6 +26,7 @@ public class MyPanel extends JXPanel {
 	protected Cliente user;
 	protected Utilites utilites;
 	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();
+	protected ValidadorDeClientes validador = new ValidadorDeClientes();
 	
 	protected JXPanel painelN = new JXPanel(new BorderLayout());
 	protected JXPanel painelS = new JXPanel(new BorderLayout());

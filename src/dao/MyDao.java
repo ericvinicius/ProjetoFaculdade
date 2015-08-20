@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import modelos.Movimentacao;
 import utilities.Logger;
 import utilities.Utilites;
 
@@ -16,8 +14,6 @@ public class MyDao {
 	protected PreparedStatement stmt = null;
 	protected ResultSet rs = null;
 
-	protected ArrayList<Movimentacao> movimentacoes;
-	
 	protected Utilites utilites = new Utilites();
 	//TODO: adicionar tudo aos log
 	

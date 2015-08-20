@@ -11,24 +11,24 @@ public class ValidadorDeClientes implements Acesso {
 	private Utilites utilites = new Utilites();
 
 	@Override
-	public boolean validaLogin(Cliente u, Cliente u2) {
+	public boolean possuemLoginIgual(Cliente u, Cliente u2) {
 		return u.getDadosDeLogin().equals(u2.getDadosDeLogin());
 	}
 
 	@Override
-	public boolean validaClienteExistente(Cliente u, Cliente u2) {
+	public boolean possuemAgenciaEContaIguais(Cliente u, Cliente u2) {
 		return u.getDadosAgenciaConta().equals(u2.getDadosAgenciaConta());
 	}
 	
 	@Override
-	public boolean validaCodigoDeAcesso(Cliente u, Cliente u2) {
+	public boolean possuemCodigoDeAcessoIguais(Cliente u, Cliente u2) {
 		Logger.info("Tentativa", utilites.converteCodigoDeAcessoParaString(u2.getCodigoDeAcesso()));
 		Logger.info("Correto", utilites.converteCodigoDeAcessoParaString(u.getCodigoDeAcesso()));
 		return Arrays.equals(u.getCodigoDeAcesso(), u2.getCodigoDeAcesso());
 	}
 	
 	@Override
-	public boolean verificaAdmin(Cliente u) {
+	public boolean possuiDadosDeAdmin(Cliente u) {
 		return u.getDadosDeLogin().equals(getDadosDoAdmin());
 	}
 	

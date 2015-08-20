@@ -50,6 +50,7 @@ public class Utilites {
 	public final ImageIcon es = new ImageIcon("images/Spain-icon.png");
 	public final ImageIcon us = new ImageIcon("images/USA-icon.png");
 	public final ImageIcon brgif = new ImageIcon("images/brazil_gifs");
+	public final BigDecimal saldoInicial = new BigDecimal(2000.00);
 
 	// boolean
 	public static boolean temMensagemDeErro = false;
@@ -200,6 +201,7 @@ public class Utilites {
 	}
 
 	public String getValorComMoeda(BigDecimal valor) {
+		//TODO: Este metodo esta perdendo os valores apos a virgula
 		NumberFormat moedaFormat = NumberFormat.getCurrencyInstance(local);
 		return moedaFormat.format(valor);
 	}

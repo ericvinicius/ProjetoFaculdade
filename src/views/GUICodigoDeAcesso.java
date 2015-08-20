@@ -126,7 +126,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 			criaCodiggoDeAcesso();
 			redirect(this, "principal");
 
-		} else if (validador.validaCodigoDeAcesso(user, usuarioTentativa)) {
+		} else if (validador.possuemCodigoDeAcessoIguais(user, usuarioTentativa)) {
 			redirect(this, "principal");
 			
 		} else if(tentativa >= Utilites.MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO){

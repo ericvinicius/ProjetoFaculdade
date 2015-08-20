@@ -3,6 +3,9 @@ package modelos;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import utilities.Logger;
+import dao.MovimentacaoDao;
+
 public class Movimentacao {
 
 	private Long id;
@@ -16,23 +19,27 @@ public class Movimentacao {
 	private String tipo;
 	
 	private Long idCliente;
+	
+	private Long idClienteDestino;
 
-	public Movimentacao(Long id, BigDecimal valor, LocalDateTime data, BigDecimal novoSaldo, String tipo, Long idCliente){
+	public Movimentacao(Long id, BigDecimal valor, LocalDateTime data, BigDecimal novoSaldo, Long idCliente, String tipo, Long idClienteDestino){
 		setId(id);
 		setValor(valor);
 		setData(data);
 		setNovoSaldo(novoSaldo);
 		setTipo(tipo);
 		setIdCliente(idCliente);
+		setIdClienteDestino(idClienteDestino);
 		//TODO: aqui deve ir para o log
 	}
 
-	public Movimentacao(BigDecimal valor, LocalDateTime data, BigDecimal novoSaldo, String tipo, Long idCliente) {
+	public Movimentacao(BigDecimal valor, LocalDateTime data, BigDecimal novoSaldo, Long idCliente, String tipo, Long idClienteDestino) {
 		setValor(valor);
 		setData(data);
 		setNovoSaldo(novoSaldo);
 		setTipo(tipo);
 		setIdCliente(idCliente);
+		setIdClienteDestino(idClienteDestino);
 		//TODO: aqui deve ir para o log
 	}
 
@@ -82,6 +89,32 @@ public class Movimentacao {
 
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
+	}
+
+	public Long getIdClienteDestino() {
+		return idClienteDestino;
+	}
+
+	public void setIdClienteDestino(Long idClienteDestino) {
+		this.idClienteDestino = idClienteDestino;
+	}
+	
+	public void efetua() {
+		MovimentacaoDao dao = new MovimentacaoDao();
+		dao.salva(this);
+		Logger.info(getTipo(), this.toString());
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder builder = new StringBuilder();
+		builder.append("id( "+ getId() +" ) ");
+		builder.append("tipo( "+ getTipo() +" ) ");
+		builder.append("data( "+ getData() +" ) ");
+		builder.append("novoSaldo( "+ getNovoSaldo() +" ) ");
+		builder.append("idCliente( "+ getIdCliente() +" ) ");
+		builder.append("idClienteDestino( "+ getIdClienteDestino() +" ) ");
+		return builder.toString();
 	}
 
 }

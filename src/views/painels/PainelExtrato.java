@@ -79,10 +79,10 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 		table = new JXTable(linhasDaTabela, tituloDaTabela);
 		table.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		TableColumnModel modeloDeColunas = table.getColumnModel();
-		modeloDeColunas.getColumn(0).setPreferredWidth(165);
-		modeloDeColunas.getColumn(1).setPreferredWidth(125);
-		modeloDeColunas.getColumn(2).setPreferredWidth(93);
-		modeloDeColunas.getColumn(3).setPreferredWidth(93);
+		modeloDeColunas.getColumn(0).setPreferredWidth(155);
+		modeloDeColunas.getColumn(1).setPreferredWidth(149);
+		modeloDeColunas.getColumn(2).setPreferredWidth(86);
+		modeloDeColunas.getColumn(3).setPreferredWidth(86);
 		table.setColumnModel(modeloDeColunas);
 		table.setEditable(false);
 		table.getTableHeader().setReorderingAllowed(false);

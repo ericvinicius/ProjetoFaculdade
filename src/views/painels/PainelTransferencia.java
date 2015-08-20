@@ -13,15 +13,16 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 
 import modelos.Cliente;
-import modelos.Transferencia;
+import modelos.Movimentacao;
 
 import org.jdesktop.swingx.JXButton;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTextField;
 
+import utilities.Logger;
 import utilities.Utilites;
 import builders.ClienteBuilder;
-import builders.TransferenciaBuilder;
+import builders.MovimentacaoBuilder;
 
 public class PainelTransferencia extends MyPanel implements KeyListener, MouseListener {
 
@@ -101,8 +102,7 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource().equals(btefetuaTranferencia)) {
-			verificaCampos();
-			if (fileHandler.usuarioExiste(userDestino)) {
+			if (dadosValidos() && fileHandler.usuarioExiste(userDestino)) {
 				efetuaTransferencia();
 			} else {
 				tremeTela();
@@ -111,34 +111,43 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	}
 
 	private void efetuaTransferencia() {
-		//TODO: Esta logica deve sair daqui
-		BigDecimal novoSaldo = atualizaSaldoCliente(valor);
-		
-		TransferenciaBuilder builder = new TransferenciaBuilder();
-		builder.comValor(valor).comAgenciaDestino(userDestino.getAgencia()).comContaDestino(userDestino.getConta()).comIdDoCliente(user.getId()).comNovoSaldo(novoSaldo);
-		Transferencia transferencia = builder.constroi();
+		MovimentacaoBuilder builder = new MovimentacaoBuilder();
+		builder.comValor(valor).comIdDoCliente(user.getId()).comIdClienteDestino(/*Tenho que pegar o id do cliente*/1L);
+		Movimentacao transferencia = builder.constroi();
 
-		transferencia.efetuaTransferencia();
+		transferencia.efetua();
 
 		user.addMovimentacao(transferencia);
 		recreate();
 	}
 
-	private void verificaCampos() {
+	private boolean dadosValidos() {
 		try {
 			pegaInformacoesDeLogin();
-			valor = new BigDecimal(Double.parseDouble(txtvalor.getText()));
+			
+			 /*
+			 * TODO: Aqui pode ser feita a verificacao do saldo do cliente
+			 */
+			if (!validador.possuemAgenciaEContaIguais(user, userDestino)) {
+				return true;
+			}
+
+			Logger.warn("invalido", "Cliente entrou com os dados dele mesmo");
 		} catch (NumberFormatException ne) {
 			// TODO: Esta exception é esperada quando o usuario digita uma letra
 			// no campo do valor
+			Logger.warn("invalido", "Cliente digitou letra no campo do valor");
 		}
+		return false;
 	}
 
-	public void pegaInformacoesDeLogin() {
+	public void pegaInformacoesDeLogin() throws NumberFormatException {
 		String agenciaDestino = txtagencia.getValue().toString();
 		String contaDestino = txtconta.getValue().toString();
 		ClienteBuilder builder = new ClienteBuilder();
 		userDestino = builder.comAgencia(agenciaDestino).comConta(contaDestino).constroi();
+
+		valor = new BigDecimal(Double.parseDouble(txtvalor.getText()));
 	}
 
 	@Override
@@ -174,5 +183,5 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	public void keyReleased(KeyEvent e) {
 
 	}
-	
+
 }

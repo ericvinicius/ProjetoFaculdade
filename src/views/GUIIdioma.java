@@ -50,7 +50,7 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 			Logger.info("Idioma", "Portugues");
 			//TODO: Remover no final do projeto
 			user = new Cliente();
-			user.setId(1L);
+			user.setId(2L);
 			redirect(this, "principal");
 			
 			
@@ -65,6 +65,9 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 			Utilites.local = new Locale("es", "ES");
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
 			Logger.info("Idioma", "Espanhol");
+			user = new Cliente();
+			user.setId(1L);
+			redirect(this, "principal");
 		}
 	}
 

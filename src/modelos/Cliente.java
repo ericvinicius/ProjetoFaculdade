@@ -114,11 +114,13 @@ public class Cliente  /* anotations.Observable */{
 		log.append("id(" + id + ")");
 		log.append(" agencia( " + getAgencia() + " )");
 		log.append(" conta( " + getConta() + " )");
+		
 		if(getSenha() == null){
 			log.append(" senha( null )");
 		} else {
 			log.append(" senha( " + getSenha().toString() + " )");
 		}
+		
 		log.append(" admin( " + isAdmin() + " )");
 		Logger.info(tag, log.toString());
 
@@ -166,29 +168,47 @@ public class Cliente  /* anotations.Observable */{
 	}
 	
 	public Object[][] getExtrato(){
-		int size = movimentacoes.size();
 		
-		Movimentacao mov = movimentacoes.get(0);
-		Object[][] extrato = new Object[size + 1][5];
-		
-		BigDecimal saldoAnterior = mov.getNovoSaldo().add(mov.getValor());
-		extrato[0][0] = mov.getData().minusDays(1).format(DateTimeFormatter.ofPattern(utilites.maskDia));
-		extrato[0][1] = "Saldo Anterior";
-		extrato[0][2] = utilites.getValorComMoeda(Double.parseDouble(saldoAnterior + ""));
-		extrato[0][3] = " - ";
+		Object[][] extrato = criaExtratoPadraoComOSaldoAnterior();
 		
 		int i = 1;
 		for (Movimentacao movimentacao : movimentacoes) {
 			
 			String valorMov = utilites.getValorComMoeda(Double.parseDouble(movimentacao.getValor() + ""));
-			String novoSaldoMov = utilites.getValorComMoeda(Double.parseDouble(movimentacao.getNovoSaldo() + ""));
+			String novoSaldoMov;
+			if(movimentacao.getNovoSaldo() == null){
+				novoSaldoMov = " - ";
+			} else {
+				novoSaldoMov = utilites.getValorComMoeda(Double.parseDouble(movimentacao.getNovoSaldo() + ""));
+			}
 			
 			extrato[i][0] = movimentacao.getData().format(DateTimeFormatter.ofPattern(utilites.maskDiaHora));
 			extrato[i][1] = movimentacao.getTipo();
 			extrato[i][2] = valorMov;
 			extrato[i][3] = novoSaldoMov;
+			
 			i++;
 		}
+		return extrato;
+	}
+
+	private Object[][] criaExtratoPadraoComOSaldoAnterior() {
+		int size = movimentacoes.size();
+		Object[][] extrato = new Object[size + 1][5];
+		BigDecimal saldoAnterior = BigDecimal.ZERO;
+		Movimentacao mov = movimentacoes.get(0);
+		
+		if(mov.getTipo().contains("Entrada")){
+			saldoAnterior = mov.getNovoSaldo().subtract(mov.getValor());
+		} else {
+			saldoAnterior = mov.getNovoSaldo().add(mov.getValor());
+		}
+		
+		extrato[0][0] = mov.getData().minusDays(1).format(DateTimeFormatter.ofPattern(utilites.maskDia));
+		extrato[0][1] = "Saldo Anterior";
+		extrato[0][2] = utilites.getValorComMoeda(Double.parseDouble(saldoAnterior + ""));
+		extrato[0][3] = " - ";
+		
 		return extrato;
 	}
 
