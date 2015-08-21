@@ -82,6 +82,7 @@ public class ClienteDao extends MyDao {
 			novoSaldoMov = saldoAnterior.subtract(valorDaMov);
 		}
 		mov.setTipo(tipoDaMov);
+		mov.setNovoSaldo(novoSaldoMov);
 		saldoAnterior = novoSaldoMov;
 	}
 

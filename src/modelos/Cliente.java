@@ -195,18 +195,12 @@ public class Cliente  /* anotations.Observable */{
 	private Object[][] criaExtratoPadraoComOSaldoAnterior() {
 		int size = movimentacoes.size();
 		Object[][] extrato = new Object[size + 1][5];
-		BigDecimal saldoAnterior = BigDecimal.ZERO;
+		BigDecimal saldoAnterior = utilites.saldoInicial;
 		Movimentacao mov = movimentacoes.get(0);
-		
-		if(mov.getTipo().contains("Entrada")){
-			saldoAnterior = mov.getNovoSaldo().subtract(mov.getValor());
-		} else {
-			saldoAnterior = mov.getNovoSaldo().add(mov.getValor());
-		}
 		
 		extrato[0][0] = mov.getData().minusDays(1).format(DateTimeFormatter.ofPattern(utilites.maskDia));
 		extrato[0][1] = "Saldo Anterior";
-		extrato[0][2] = utilites.getValorComMoeda(Double.parseDouble(saldoAnterior + ""));
+		extrato[0][2] = utilites.getValorComMoeda(saldoAnterior);
 		extrato[0][3] = " - ";
 		
 		return extrato;

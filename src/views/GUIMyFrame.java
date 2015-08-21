@@ -56,5 +56,10 @@ public class GUIMyFrame extends JXFrame {
 			new GUILogin();
 		}
 	}
+
+	public void destroyAndInit() {
+		user = clienteDao.carregaCliente(user);
+		new GUIPrincipal();
+	}
 	
 }

@@ -27,8 +27,15 @@ public class ManipuladorDeArquivos {
 			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
 
 			while (leitor.hasNext()) {
-				usuarioCadastrado = clienteBuilder.comId(Long.parseLong(leitor.next())).comStatus(Integer.parseInt(leitor.next())).comConta(leitor.next())
-						.comAgencia(leitor.next()).comSenha(leitor.next()).comCodigoDeAcesso(leituraDoCodigoDeAcesso()).constroi();
+				long id = Long.parseLong(leitor.next());
+				int status = Integer.parseInt(leitor.next());
+				String conta = leitor.next();
+				String agencia = leitor.next();
+				String senha = leitor.next();
+				int[] codigoDeAcesso = leituraDoCodigoDeAcesso();
+				
+				usuarioCadastrado = clienteBuilder.comId(id).comStatus(status).comConta(conta)
+						.comAgencia(agencia).comSenha(senha).comCodigoDeAcesso(codigoDeAcesso).constroi();
 
 				usuarioCadastrado.toLog("Leitura Atual");
 
@@ -86,22 +93,29 @@ public class ManipuladorDeArquivos {
 		}
 	}
 
-	public boolean usuarioExiste(Cliente usuarioTentativa) {
+	public Cliente usuarioExiste(Cliente usuarioTentativa) {
 		usuarioTentativa.toLog("Tentat Transf");
 		try {
 			leitor = new Scanner(new FileReader(Utilites.CAMINHO_PARA_ACESSO_TXT));
 			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
 
 			while (leitor.hasNext()) {
-				usuarioCadastrado = clienteBuilder.comId(Long.parseLong(leitor.next())).comStatus(Integer.parseInt(leitor.next())).comConta(leitor.next())
-						.comAgencia(leitor.next()).comSenha(leitor.next()).comCodigoDeAcesso(leituraDoCodigoDeAcesso()).constroi();
+				long id = Long.parseLong(leitor.next());
+				int status = Integer.parseInt(leitor.next());
+				String conta = leitor.next();
+				String agencia = leitor.next();
+				String senha = leitor.next();
+				int[] codigoDeAcesso = leituraDoCodigoDeAcesso();
+
+				usuarioCadastrado = clienteBuilder.comId(id).comStatus(status).comConta(conta)
+						.comAgencia(agencia).comSenha(senha).comCodigoDeAcesso(codigoDeAcesso).constroi();
 
 				usuarioCadastrado.toLog("Leitura Transf");
-
+				
 				if (validador.possuemAgenciaEContaIguais(usuarioCadastrado, usuarioTentativa)) {
 					usuarioCadastrado.toLog("Usuario Transf");
 					leitor.close();
-					return true;
+					return usuarioCadastrado;
 				}
 			}
 
@@ -114,6 +128,6 @@ public class ManipuladorDeArquivos {
 				leitor.close();
 			}
 		}
-		return false;
+		return null;
 	}
 }

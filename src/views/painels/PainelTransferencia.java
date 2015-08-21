@@ -102,8 +102,11 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource().equals(btefetuaTranferencia)) {
-			if (dadosValidos() && fileHandler.usuarioExiste(userDestino)) {
-				efetuaTransferencia();
+			if (verificaDados()) {
+				userDestino = fileHandler.usuarioExiste(userDestino);
+				if(userDestino != null && userDestino.getId() != user.getId()){
+					efetuaTransferencia();
+				}
 			} else {
 				tremeTela();
 			}
@@ -112,7 +115,7 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 
 	private void efetuaTransferencia() {
 		MovimentacaoBuilder builder = new MovimentacaoBuilder();
-		builder.comValor(valor).comIdDoCliente(user.getId()).comIdClienteDestino(/*Tenho que pegar o id do cliente*/1L);
+		builder.comValor(valor).comIdDoCliente(user.getId()).comIdClienteDestino(userDestino.getId()).comNovoSaldo(user.getSaldo().subtract(valor));
 		Movimentacao transferencia = builder.constroi();
 
 		transferencia.efetua();
@@ -121,11 +124,11 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 		recreate();
 	}
 
-	private boolean dadosValidos() {
+	private boolean verificaDados() {
 		try {
 			pegaInformacoesDeLogin();
-			
-			 /*
+
+			/*
 			 * TODO: Aqui pode ser feita a verificacao do saldo do cliente
 			 */
 			if (!validador.possuemAgenciaEContaIguais(user, userDestino)) {

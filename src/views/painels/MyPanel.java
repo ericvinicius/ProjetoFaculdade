@@ -84,8 +84,8 @@ public class MyPanel extends JXPanel {
 	
 	protected void recreate() {
 		GUIMyFrame tela = (GUIMyFrame) SwingUtilities.getAncestorOfClass(GUIMyFrame.class, this);
-		tela.dispose();
-		new GUIPrincipal();
+		tela.destroyAndInit();
+		
 	}
 	
 	protected void tremeTela() {
