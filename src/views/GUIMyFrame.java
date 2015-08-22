@@ -43,23 +43,19 @@ public class GUIMyFrame extends JXFrame {
 		setResizable(true);
 	}
 	
-	public void redirect(JFrame janelaAtual, String frame) {
+	public void redirect(JFrame janelaAtual, Class<? extends GUIMyFrame> clazz) {
 		janelaAtual.dispose();
 		Utilites.temMensagemDeErro = false;
-		
-		if(frame.equals("codigoDeAcesso")){
-			new GUICodigoDeAcesso();
-		} else if(frame.equals("principal")){
+		if(clazz.equals(GUIPrincipal.class)){
 			user = clienteDao.carregaCliente(user);
-			new GUIPrincipal();
-		} else if(frame.equals("login")){
-			new GUILogin();
+		}
+		try {
+			clazz.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
 		}
 	}
 
-	public void destroyAndInit() {
-		user = clienteDao.carregaCliente(user);
-		new GUIPrincipal();
-	}
-	
 }

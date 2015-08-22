@@ -44,7 +44,7 @@ public class ClienteDao extends MyDao {
 
 				movimentacoes.add(movimentacao);
 			}
-			cliente.setMovimentacoes(movimentacoes);
+			cliente.getConta().setMovimentacoes(movimentacoes);
 
 		} catch (SQLException se) {
 			Logger.error(se, "Erro na busca de cliente por id");
@@ -57,7 +57,7 @@ public class ClienteDao extends MyDao {
 	}
 
 	private void atualizaSaldoCliente() {
-		cliente.setSaldo(novoSaldoMov);
+		cliente.getConta().setSaldo(novoSaldoMov);
 		atualizaClientePorId(cliente);
 	}
 
@@ -103,14 +103,14 @@ public class ClienteDao extends MyDao {
 
 	private void fazLoadDoCliente() throws SQLException {
 		cliente.setNome(rs.getString("nome"));
-		cliente.setSaldo(rs.getBigDecimal("saldo"));
+		cliente.getConta().setSaldo(rs.getBigDecimal("saldo"));
 	}
 
 	public void atualizaClientePorId(Cliente cliente) {
 		criaConexao();
 		try {
 			stmt = connection.prepareStatement("update Cliente set saldo = ? where id = ?");
-			stmt.setBigDecimal(1, cliente.getSaldo());
+			stmt.setBigDecimal(1, cliente.getConta().getSaldo());
 			stmt.setLong(2, cliente.getId());
 			stmt.executeUpdate();
 

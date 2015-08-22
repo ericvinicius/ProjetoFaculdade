@@ -18,6 +18,7 @@ public class GUIPrincipal extends GUIMyFrame {
 	private PainelDebitoAutomatico painelDebitoAutomatico = new PainelDebitoAutomatico(user, utilites);
 	private PainelSaque painelSaque = new PainelSaque(user, utilites);
 
+	@Deprecated
 	public GUIPrincipal() {
 		configuraJanela();
 		

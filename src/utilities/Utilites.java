@@ -44,13 +44,15 @@ public class Utilites {
 	public final Font fontHover = new Font("Arial", Font.BOLD, 15);
 
 	// Images
-	public final ImageIcon imageLock = new ImageIcon("images/locked.png");
-	public final ImageIcon imageUnlock = new ImageIcon("images/unlocked.png");
-	public final ImageIcon br = new ImageIcon("images/Brazil-icon.png");
-	public final ImageIcon es = new ImageIcon("images/Spain-icon.png");
-	public final ImageIcon us = new ImageIcon("images/USA-icon.png");
-	public final ImageIcon brgif = new ImageIcon("images/brazil_gifs");
-	public final BigDecimal saldoInicial = new BigDecimal(2000.00);
+	public static final ImageIcon imageLock = new ImageIcon("images/locked.png");
+	public static final ImageIcon imageUnlock = new ImageIcon("images/unlocked.png");
+	public static final ImageIcon br = new ImageIcon("images/Brazil-icon.png");
+	public static final ImageIcon es = new ImageIcon("images/Spain-icon.png");
+	public static final ImageIcon us = new ImageIcon("images/USA-icon.png");
+	public static final ImageIcon brGray = new ImageIcon("images/Brazil-icon-gray.png");
+	public static final ImageIcon esGray = new ImageIcon("images/Spain-icon-gray.png");
+	public static final ImageIcon usGray = new ImageIcon("images/USA-icon-gray.png");
+	public static final ImageIcon brgif = new ImageIcon("images/brazil_gifs");
 
 	// boolean
 	public static boolean temMensagemDeErro = false;
@@ -58,6 +60,8 @@ public class Utilites {
 	// Idioma
 	public static ResourceBundle bn;
 	public static Locale local;
+	
+	public final BigDecimal saldoInicial = new BigDecimal(2000.00);
 	
 	public DecimalFormat getFormatacaoParaNumeros(){
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());

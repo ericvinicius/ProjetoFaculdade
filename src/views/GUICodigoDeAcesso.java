@@ -124,10 +124,10 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 		
 		if (user.isNovoCodigoDeAcesso()) {
 			criaCodiggoDeAcesso();
-			redirect(this, "principal");
+			redirect(this, GUIPrincipal.class);
 
 		} else if (validador.possuemCodigoDeAcessoIguais(user, usuarioTentativa)) {
-			redirect(this, "principal");
+			redirect(this, GUIPrincipal.class);
 			
 		} else if(tentativa >= Utilites.MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO){
 			JOptionPane.showMessageDialog(this, "Conta Bloqueada", "Maximo de tentativas atingido", JOptionPane.ERROR_MESSAGE);

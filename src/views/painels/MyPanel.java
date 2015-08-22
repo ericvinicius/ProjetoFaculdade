@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 import javax.swing.Box;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -15,12 +16,12 @@ import modelos.ValidadorDeClientes;
 
 import org.jdesktop.swingx.JXPanel;
 
-import dao.ClienteDao;
 import textFile.ManipuladorDeArquivos;
 import utilities.Logger;
 import utilities.Utilites;
 import views.GUIMyFrame;
 import views.GUIPrincipal;
+import dao.ClienteDao;
 
 public class MyPanel extends JXPanel {
 	protected Cliente user;
@@ -68,9 +69,9 @@ public class MyPanel extends JXPanel {
 	
 	protected JLabel atualizaSaldo() {
 		BigDecimal saldo = BigDecimal.TEN;
-		saldo = user.getSaldo();
+		saldo = user.getConta().getSaldo();
 		int compareTo = saldo.compareTo(BigDecimal.ZERO);
-		JLabel lsaldo = new JLabel(utilites.getValorComMoeda(user.getSaldo()));
+		JLabel lsaldo = new JLabel(utilites.getValorComMoeda(user.getConta().getSaldo()));
 
 		if (compareTo == -1) {
 			// Saldo Negativo
@@ -84,7 +85,7 @@ public class MyPanel extends JXPanel {
 	
 	protected void recreate() {
 		GUIMyFrame tela = (GUIMyFrame) SwingUtilities.getAncestorOfClass(GUIMyFrame.class, this);
-		tela.destroyAndInit();
+		tela.redirect(tela, GUIPrincipal.class);
 		
 	}
 	
@@ -92,9 +93,14 @@ public class MyPanel extends JXPanel {
 		utilites.tremeTela((GUIMyFrame) SwingUtilities.getAncestorOfClass(GUIMyFrame.class, this));
 	}
 	
+	protected void tremeTela(String mensagem) {
+		utilites.tremeTela((GUIMyFrame) SwingUtilities.getAncestorOfClass(GUIMyFrame.class, this));
+		JOptionPane.showMessageDialog(this, mensagem, "[ Erro ]", JOptionPane.ERROR_MESSAGE);
+	}
+	
 	protected BigDecimal atualizaSaldoCliente(BigDecimal valor) {
-		BigDecimal novoSaldo = user.getSaldo().subtract(valor);
-		user.setSaldo(novoSaldo);
+		BigDecimal novoSaldo = user.getConta().getSaldo().subtract(valor);
+		user.getConta().setSaldo(novoSaldo);
 		
 		ClienteDao dao = new ClienteDao();
 		dao.atualizaClientePorId(user);

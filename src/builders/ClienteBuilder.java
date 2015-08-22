@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import modelos.Cliente;
+import modelos.Conta;
 import modelos.DebitoAutomatico;
 import modelos.Movimentacao;
 import utilities.Utilites;
@@ -76,7 +77,8 @@ public class ClienteBuilder {
 	}
 	
 	public Cliente constroi() {
-		Cliente cliente = new Cliente(conta, agencia, senha, codigoDeAcesso, saldo, novoCodigoDeAcesso, admin, status, id, nome, movimentacoes, debitosAutomaticos);
+		Conta contaDoCliente = new Conta(conta, agencia, saldo, movimentacoes, debitosAutomaticos);
+		Cliente cliente = new Cliente(senha, codigoDeAcesso, novoCodigoDeAcesso, admin, status, id, nome, contaDoCliente);
 		return cliente;
 	}
 }

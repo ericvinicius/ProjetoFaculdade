@@ -3,6 +3,8 @@ package modelos;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.swing.JOptionPane;
+
 import utilities.Logger;
 import dao.MovimentacaoDao;
 
@@ -100,16 +102,17 @@ public class Movimentacao {
 	}
 	
 	public void efetua() {
+		//TODO: Criar tela de confirmacao
+		new JOptionPane();
 		MovimentacaoDao dao = new MovimentacaoDao();
 		dao.salva(this);
-		Logger.info(getTipo(), this.toString());
+		Logger.info("Movimentacao", this.toString());
 	}
 	
 	@Override
 	public String toString(){
 		StringBuilder builder = new StringBuilder();
 		builder.append("id( "+ getId() +" ) ");
-		builder.append("tipo( "+ getTipo() +" ) ");
 		builder.append("data( "+ getData() +" ) ");
 		builder.append("novoSaldo( "+ getNovoSaldo() +" ) ");
 		builder.append("idCliente( "+ getIdCliente() +" ) ");

@@ -3,8 +3,11 @@ package views;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import javafx.animation.Animation;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,15 +21,15 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 	private JLabel br, us, es;
 	
 	public GUIIdioma(){
-		br = new JLabel(utilites.br);
+		br = new JLabel(Utilites.brGray);
 		br.addMouseListener(this);
 		add(br);
 		
-		us = new JLabel(utilites.us);
+		us = new JLabel(Utilites.usGray);
 		us.addMouseListener(this);
 		add(us);
 		
-		es = new JLabel(utilites.es);
+		es = new JLabel(Utilites.esGray);
 		es.addMouseListener(this);
 		add(es);
 		
@@ -51,7 +54,7 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 			//TODO: Remover no final do projeto
 			user = new Cliente();
 			user.setId(2L);
-			redirect(this, "principal");
+			redirect(this, GUIPrincipal.class);
 			
 			
 		} else if(click == us){
@@ -59,7 +62,7 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 			Utilites.bn = ResourceBundle.getBundle("idioma", Utilites.local);
 			Logger.info("Idioma", "Ingles");
 			//TODO: Mover isto para o final do metodo no fim do projeto
-			redirect(this, "login");
+			redirect(this, GUILogin.class);
 			
 		} else if(click == es){
 			Utilites.local = new Locale("es", "ES");
@@ -67,7 +70,7 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 			Logger.info("Idioma", "Espanhol");
 			user = new Cliente();
 			user.setId(1L);
-			redirect(this, "principal");
+			redirect(this, GUIPrincipal.class);
 		}
 	}
 
@@ -81,9 +84,25 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		JLabel bandeira = (JLabel) e.getSource();
+		if(bandeira == br){
+			br.setIcon(Utilites.br);
+		} else if (bandeira == us){
+			us.setIcon(Utilites.us);
+		} else if(bandeira == es){
+			es.setIcon(Utilites.es);
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+		JLabel bandeira = (JLabel) e.getSource();
+		if(bandeira == br){
+			br.setIcon(Utilites.brGray);
+		} else if (bandeira == us){
+			us.setIcon(Utilites.usGray);
+		} else if(bandeira == es){
+			es.setIcon(Utilites.esGray);
+		}
 	}
 }

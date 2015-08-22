@@ -14,9 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-import builders.ClienteBuilder;
-import utilities.Logger;
 import modelos.Cliente;
+import utilities.Logger;
+import utilities.Utilites;
+import builders.ClienteBuilder;
 
 public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		ActionListener {
@@ -72,7 +73,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		add(txtsenha);
 
 		// botao login
-		btlogin = new JLabel(utilites.imageLock);
+		btlogin = new JLabel(Utilites.imageLock);
 		btlogin.addMouseListener(this);
 		add(btlogin);
 
@@ -117,7 +118,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	private void verificaLogin() {
 		user = fileHandler.fazLeituraDoArquivoParaLogin(usuarioTentativa);
 		if (user != null) {
-			super.redirect(this, "codigoDeAcesso");
+			super.redirect(this, GUICodigoDeAcesso.class);
 		} else {
 			utilites.tremeTelaComMensagemDeErro(this);
 		}
@@ -141,14 +142,14 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == btlogin) {
-			btlogin.setIcon(utilites.imageUnlock);
+			btlogin.setIcon(Utilites.imageUnlock);
 		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == btlogin) {
-			btlogin.setIcon(utilites.imageLock);
+			btlogin.setIcon(Utilites.imageLock);
 		}
 	}
 

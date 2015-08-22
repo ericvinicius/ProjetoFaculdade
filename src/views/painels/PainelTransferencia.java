@@ -1,8 +1,6 @@
 package views.painels;
 
 import java.awt.BorderLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
@@ -24,7 +22,7 @@ import utilities.Utilites;
 import builders.ClienteBuilder;
 import builders.MovimentacaoBuilder;
 
-public class PainelTransferencia extends MyPanel implements KeyListener, MouseListener {
+public class PainelTransferencia extends MyPanel implements MouseListener {
 
 	private JXButton btefetuaTranferencia;
 	private JLabel lblconta;
@@ -49,7 +47,6 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 		txtconta = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskConta, true));
 		txtconta.setSelectionStart(0);
 		txtconta.setColumns(12);
-		txtconta.addKeyListener(this);
 		painelConta.add(txtconta);
 
 		painelC.add(painelConta, BorderLayout.NORTH);
@@ -62,7 +59,6 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 		txtagencia = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskAgencia, true));
 		txtagencia.setSelectionStart(0);
 		txtagencia.setColumns(12);
-		txtagencia.addKeyListener(this);
 		painelAgencia.add(txtagencia);
 
 		painelC.add(painelAgencia, BorderLayout.CENTER);
@@ -102,11 +98,9 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource().equals(btefetuaTranferencia)) {
-			if (verificaDados()) {
-				userDestino = fileHandler.usuarioExiste(userDestino);
-				if(userDestino != null && userDestino.getId() != user.getId()){
+			if (carregaEVerificaDados()) {
 					efetuaTransferencia();
-				}
+					
 			} else {
 				tremeTela();
 			}
@@ -115,7 +109,7 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 
 	private void efetuaTransferencia() {
 		MovimentacaoBuilder builder = new MovimentacaoBuilder();
-		builder.comValor(valor).comIdDoCliente(user.getId()).comIdClienteDestino(userDestino.getId()).comNovoSaldo(user.getSaldo().subtract(valor));
+		builder.comValor(valor).comIdDoCliente(user.getId()).comIdClienteDestino(userDestino.getId()).comNovoSaldo(user.getConta().getSaldo().subtract(valor));
 		Movimentacao transferencia = builder.constroi();
 
 		transferencia.efetua();
@@ -124,27 +118,29 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 		recreate();
 	}
 
-	private boolean verificaDados() {
+	private boolean carregaEVerificaDados() {
 		try {
 			pegaInformacoesDeLogin();
-
-			/*
-			 * TODO: Aqui pode ser feita a verificacao do saldo do cliente
-			 */
-			if (!validador.possuemAgenciaEContaIguais(user, userDestino)) {
+			if(valor.compareTo(BigDecimal.ZERO) <= 0){
+				return false;
+			}
+			
+			userDestino = fileHandler.usuarioExiste(userDestino);
+			if (userDestino != null && userDestino.getId() != user.getId()) {
 				return true;
 			}
-
 			Logger.warn("invalido", "Cliente entrou com os dados dele mesmo");
-		} catch (NumberFormatException ne) {
+		} catch (NumberFormatException nfe) {
 			// TODO: Esta exception é esperada quando o usuario digita uma letra
-			// no campo do valor
+			// no campo do valor tenho que impedir isto
 			Logger.warn("invalido", "Cliente digitou letra no campo do valor");
+		} catch (NullPointerException npe) {
+			Logger.warn("Em Branco", "Cliente deixou campos da transferencia em branco");
 		}
 		return false;
 	}
 
-	public void pegaInformacoesDeLogin() throws NumberFormatException {
+	public void pegaInformacoesDeLogin() throws NumberFormatException, NullPointerException {
 		String agenciaDestino = txtagencia.getValue().toString();
 		String contaDestino = txtconta.getValue().toString();
 		ClienteBuilder builder = new ClienteBuilder();
@@ -172,19 +168,4 @@ public class PainelTransferencia extends MyPanel implements KeyListener, MouseLi
 	public void mouseExited(MouseEvent e) {
 
 	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-
-	}
-
 }
