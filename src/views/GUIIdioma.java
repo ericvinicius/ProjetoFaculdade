@@ -3,11 +3,8 @@ package views;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.AffineTransform;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import javafx.animation.Animation;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,7 +33,8 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 		configuraPagina();
 	}
 	
-	private void configuraPagina() {
+	@Override
+	public void configuraPagina() {
 		setLayout(new FlowLayout());
 		setSize(450, 160);
 		setVisible(true);

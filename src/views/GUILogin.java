@@ -82,7 +82,8 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		configuraPagina();
 	}
 
-	private void configuraPagina() {
+	@Override
+	public void configuraPagina() {
 		setLayout(new FlowLayout());
 		setSize(250, 200);
 		setLocationRelativeTo(null);

@@ -44,11 +44,12 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 		bt90.addMouseListener(this);
 
 		atualizaBotoes();
-		configuraJanela();
+		configuraPagina();
 
 	}
 	
-	public void configuraJanela() {
+	@Override
+	public void configuraPagina() {
 		setLayout(new GridLayout());
 		setSize(300, 90);
 		setLocationRelativeTo(null);

@@ -1,5 +1,7 @@
 package views;
 
+import interfaces.MyConfiguration;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -13,7 +15,7 @@ import textFile.ManipuladorDeArquivos;
 import utilities.Utilites;
 import dao.ClienteDao;
 
-public class GUIMyFrame extends JXFrame {
+public abstract class GUIMyFrame extends JXFrame implements MyConfiguration {
 
 	private JMenuBar barraDeMenu;
 	protected JMenu opcoes;
@@ -27,7 +29,7 @@ public class GUIMyFrame extends JXFrame {
 
 	public GUIMyFrame() {
 		super("", true);
-		configuraJanela();
+		configuraPagina();
 		
 		barraDeMenu = new JMenuBar();
 		opcoes = new JMenu("Opcoes");
@@ -38,7 +40,7 @@ public class GUIMyFrame extends JXFrame {
 		setJMenuBar(barraDeMenu);
 	}
 
-	public void configuraJanela() {
+	public void globalConfig() {
 		// TODO: Trocar para false no fim do projeto
 		setResizable(true);
 	}

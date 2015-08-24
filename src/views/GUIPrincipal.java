@@ -20,7 +20,7 @@ public class GUIPrincipal extends GUIMyFrame {
 
 	@Deprecated
 	public GUIPrincipal() {
-		configuraJanela();
+		configuraPagina();
 		
 		// Nome - data - hora
 		JLabel lnome = new JLabel(user.getNome());
@@ -36,8 +36,9 @@ public class GUIPrincipal extends GUIMyFrame {
 		getContentPane().add(abas, BorderLayout.CENTER);
 
 	}
-
-	public void configuraJanela() {
+	
+	@Override
+	public void configuraPagina() {
 		setSize(500, 500);
 		getContentPane().setLayout(new BorderLayout());
 		setLocationRelativeTo(null);
