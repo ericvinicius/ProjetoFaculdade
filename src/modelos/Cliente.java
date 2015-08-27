@@ -1,7 +1,6 @@
 package modelos;
 
 import java.math.BigDecimal;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import utilities.Logger;
@@ -116,7 +115,7 @@ public class Cliente /* anotations.Observable */{
 				novoSaldoMov = utilites.getValorComMoeda(Double.parseDouble(movimentacao.getNovoSaldo() + ""));
 			}
 
-			extrato[i][0] = movimentacao.getData().format(DateTimeFormatter.ofPattern(utilites.maskDiaHora));
+			extrato[i][0] = movimentacao.getData().format(Utilites.formatDia);
 			extrato[i][1] = movimentacao.getTipo();
 			extrato[i][2] = valorMov;
 			extrato[i][3] = novoSaldoMov;
@@ -132,7 +131,7 @@ public class Cliente /* anotations.Observable */{
 		BigDecimal saldoAnterior = utilites.saldoInicial;
 		Movimentacao mov = getConta().getMovimentacoes().get(0);
 
-		extrato[0][0] = mov.getData().minusDays(1).format(DateTimeFormatter.ofPattern(utilites.maskDia));
+		extrato[0][0] = mov.getData().minusDays(1).format(Utilites.formatDia);
 		extrato[0][1] = "Saldo Anterior";
 		extrato[0][2] = utilites.getValorComMoeda(saldoAnterior);
 		extrato[0][3] = " - ";

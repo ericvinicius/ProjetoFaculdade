@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.time.LocalDate;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -67,10 +68,12 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 
 	private void atualizaTabela(String periodo) {
 		try {
-			int dias = Integer.parseInt(periodo);
+			System.out.println("periodo = (" + periodo.trim() + ")");
+			int dias = Integer.parseInt(periodo.trim());
 			filtraTabela(dias);
 
 		} catch (NumberFormatException e) {
+			System.out.println("exception");
 			// Este exception é prevista para quando o periodo nao for int, por
 			// exemplo para carregar toda a tabela, passo "tudo"
 			// TODO: criar log que nao mostra erro na tela do usuario
@@ -96,7 +99,33 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 	}
 
 	private void filtraTabela(int periodo) {
-		//TODO: Este metodo nao esta funfando
+		LocalDate hoje = LocalDate.now();
+		LocalDate diaMaximoParaFiltrarTabela = hoje.minusDays(periodo);
+		getNovoExtrato(diaMaximoParaFiltrarTabela);
+	}
+
+	private void getNovoExtrato(LocalDate diaMaximoParaFiltrarTabela) {
+		Object tabela[][] = null;
+		Object novaTabela[][] = new Object[linhasDaTabela.length][linhasDaTabela.length];
+		
+		tabela = user.getExtrato();
+		
+		int j = 0;
+		for(int i = 0; i < tabela.length; i++){
+			String diaFormatado = (String) tabela[i][0];
+			LocalDate diaDaMovimentacao = LocalDate.parse(diaFormatado, Utilites.formatDia);
+			
+			if(diaDaMovimentacao.isAfter(diaMaximoParaFiltrarTabela)){
+				for(int k = 0; k <= 3; k++){
+					novaTabela[j][k] = tabela[i][k];
+				}
+				j++;
+			} 
+		}
+		
+		linhasDaTabela = novaTabela;
+		this.revalidate();
+		this.repaint();
 	}
 
 	@Override
@@ -106,6 +135,7 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 		} else if (e.getSource() == imprimiSaldo) {
 			// TODO: Imprimi Saldo
 		} else if (e.getSource() == bfiltrar) {
+			System.out.println("tfiltro = (" + tfiltro.getText() + ")");
 			atualizaTabela(tfiltro.getText());
 		}
 	}

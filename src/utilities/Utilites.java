@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -35,6 +36,7 @@ public class Utilites {
 	public final String maskHora = "HH:mm:ss";
 	public final String maskDiaHora = "dd/MM/yyyy - HH:mm:ss";
 	public final static SimpleDateFormat formatDiaHora = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+	public final static DateTimeFormatter formatDia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
 	//Cores
 	public static final Color corCinzaEscuro = new Color(212, 212, 212);
