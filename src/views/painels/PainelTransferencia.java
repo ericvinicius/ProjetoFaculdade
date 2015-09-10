@@ -5,8 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -78,20 +76,11 @@ public class PainelTransferencia extends MyPanel implements MouseListener {
 		painelS.add(btefetuaTranferencia, BorderLayout.CENTER);
 
 		// Cria painel que vai possuir a borda
-		JPanel painelDeTransferencia = new JPanel();
-		painelDeTransferencia.setLayout(new BoxLayout(painelDeTransferencia, BoxLayout.PAGE_AXIS));
-		painelDeTransferencia.setBorder(BorderFactory.createLoweredBevelBorder());
-		painelDeTransferencia.setBackground(Utilites.corAzul);
+		JPanel painelDeTransferencia = criaPainelCentral("Transferencia");
 
 		// Adiciona conteudo a este painel
-		JLabel titulo = new JLabel("Debito Automatico: ");
-		titulo.setForeground(Utilites.corBranco);
-		painelDeTransferencia.add(titulo);
 		painelDeTransferencia.add(painelC);
 		painelDeTransferencia.add(painelS);
-
-		// forca o painel ficar no centro da tela
-		colocaPainelNoCentro(painelDeTransferencia);
 
 	}
 

@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.math.BigDecimal;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -47,7 +49,7 @@ public class MyPanel extends JPanel {
 		configuraPainel();
 	}
 	
-	protected void colocaPainelNoCentro(JPanel painel) {
+	private void colocaPainelNoCentro(JPanel painel) {
 		painel.add(Box.createVerticalGlue());
 		painel.add(Box.createHorizontalGlue());
 		JPanel centerPanel = new JPanel(new GridBagLayout());
@@ -105,6 +107,16 @@ public class MyPanel extends JPanel {
 		Logger.info("Atualização", "O saldo do cliente foi atualizado");
 		
 		return novoSaldo;
+	}
+	
+	protected JPanel criaPainelCentral(String titulo) {
+		JPanel painel = new JPanel();
+		painel.setLayout(new BoxLayout(painel, BoxLayout.PAGE_AXIS));
+		painel.setBorder(BorderFactory.createTitledBorder(titulo));
+		
+		colocaPainelNoCentro(painel);
+		
+		return painel;
 	}
 	
 }

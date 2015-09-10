@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -20,15 +18,14 @@ import com.toedter.calendar.JDateChooser;
 
 public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 
-	private JButton btefetuaTranferencia;
-	private JLabel lblconta;
-	private JLabel lblagencia;
-	private JLabel lblvalor;
+	private JButton btdebitoAutomatico;
+	private JLabel lbloperadora;
+	private JLabel lblconsumidor;
+	private JLabel lbldata;
 
 	private JFormattedTextField txtoperadora;
 	private JFormattedTextField txtconsumidor;
-	private JDateChooser combodia;
-	private JRadioButton radiotipo;
+	private JDateChooser dateChooser;
 	private JRadioButton radioluz;
 	private JRadioButton radioagua;
 	private JRadioButton radiotel;
@@ -38,8 +35,8 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 
 		//Cod Operadora
 		JPanel paineloperadora = new JPanel();
-		lblconta = new JLabel(" Cod. Operadora:  ");
-		paineloperadora.add(lblconta);
+		lbloperadora = new JLabel(" Cod. Operadora:  ");
+		paineloperadora.add(lbloperadora);
 
 		txtoperadora = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskConta, true));
 		txtoperadora.setSelectionStart(0);
@@ -50,8 +47,8 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 
 		// Cod Consumidor
 		JPanel painelconsumidor = new JPanel();
-		lblagencia = new JLabel("Cod. Consumidor:");
-		painelconsumidor.add(lblagencia);
+		lblconsumidor = new JLabel("Cod. Consumidor:");
+		painelconsumidor.add(lblconsumidor);
 
 		txtconsumidor = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskAgencia, true));
 		txtconsumidor.setSelectionStart(0);
@@ -62,11 +59,11 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 
 		// Data
 		JPanel painelData = new JPanel();
-		lblvalor = new JLabel("Data ");
-		painelData.add(lblvalor);
+		lbldata = new JLabel("Data ");
+		painelData.add(lbldata);
 
-		combodia = new JDateChooser();
-		painelData.add(combodia);
+		dateChooser = new JDateChooser();
+		painelData.add(dateChooser);
 		
 		painelC.add(painelData, BorderLayout.SOUTH);
 		
@@ -88,26 +85,14 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 		
 		painelS.add(painelRadio, BorderLayout.NORTH);
 
-		// botao transferencia
-		btefetuaTranferencia = new JButton("Autorizar Debido Automatico");
-		btefetuaTranferencia.addMouseListener(this);
-		painelS.add(btefetuaTranferencia, BorderLayout.CENTER);
+		// botao debito automatico
+		btdebitoAutomatico = new JButton("Autorizar Debido Automatico");
+		btdebitoAutomatico.addMouseListener(this);
+		painelS.add(btdebitoAutomatico, BorderLayout.CENTER);
 
-		// Cria painel que vai possuir a borda
-		JPanel painelDeTransferencia = new JPanel();
-		painelDeTransferencia.setLayout(new BoxLayout(painelDeTransferencia, BoxLayout.PAGE_AXIS));
-		painelDeTransferencia.setBorder(BorderFactory.createLoweredBevelBorder());
-		painelDeTransferencia.setBackground(Utilites.corAzul);
-
-		// Adiciona conteudo a este painel
-		JLabel titulo = new JLabel("Debito Automatico: ");
-		titulo.setForeground(Utilites.corBranco);
-		painelDeTransferencia.add(titulo);
-		painelDeTransferencia.add(painelC);
-		painelDeTransferencia.add(painelS);
-
-		// forca o painel ficar no centro da tela
-		colocaPainelNoCentro(painelDeTransferencia);
+		JPanel painelDeDebitoAutomatico = criaPainelCentral("Debito Automatico");
+		painelDeDebitoAutomatico.add(painelC);
+		painelDeDebitoAutomatico.add(painelS);
 	}
 
 
