@@ -7,16 +7,14 @@ import java.math.BigDecimal;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import modelos.Cliente;
 import modelos.Movimentacao;
-
-import org.jdesktop.swingx.JXButton;
-import org.jdesktop.swingx.JXPanel;
-import org.jdesktop.swingx.JXTextField;
-
 import utilities.Logger;
 import utilities.Utilites;
 import builders.ClienteBuilder;
@@ -24,14 +22,14 @@ import builders.MovimentacaoBuilder;
 
 public class PainelTransferencia extends MyPanel implements MouseListener {
 
-	private JXButton btefetuaTranferencia;
+	private JButton btefetuaTranferencia;
 	private JLabel lblconta;
 	private JLabel lblagencia;
 	private JLabel lblvalor;
 
 	private JFormattedTextField txtconta;
 	private JFormattedTextField txtagencia;
-	private JXTextField txtvalor;
+	private JTextField txtvalor;
 
 	private Cliente userDestino;
 	private BigDecimal valor;
@@ -40,7 +38,7 @@ public class PainelTransferencia extends MyPanel implements MouseListener {
 		super(u, ut);
 
 		// Conta
-		JXPanel painelConta = new JXPanel();
+		JPanel painelConta = new JPanel();
 		lblconta = new JLabel("Conta   ");
 		painelConta.add(lblconta);
 
@@ -52,7 +50,7 @@ public class PainelTransferencia extends MyPanel implements MouseListener {
 		painelC.add(painelConta, BorderLayout.NORTH);
 
 		// Agencia
-		JXPanel painelAgencia = new JXPanel();
+		JPanel painelAgencia = new JPanel();
 		lblagencia = new JLabel("Agencia");
 		painelAgencia.add(lblagencia);
 
@@ -64,29 +62,31 @@ public class PainelTransferencia extends MyPanel implements MouseListener {
 		painelC.add(painelAgencia, BorderLayout.CENTER);
 
 		// Valor
-		JXPanel painelValor = new JXPanel();
+		JPanel painelValor = new JPanel();
 		lblvalor = new JLabel("Valor    ");
 		painelValor.add(lblvalor);
 
-		txtvalor = new JXTextField();
+		txtvalor = new JTextField();
 		txtvalor.setColumns(12);
 		painelValor.add(txtvalor);
 
 		painelC.add(painelValor, BorderLayout.SOUTH);
 
-		// botao login
-		btefetuaTranferencia = new JXButton("Realizar Transferencia");
+		// botao transferencia
+		btefetuaTranferencia = new JButton("Realizar Transferencia");
 		btefetuaTranferencia.addMouseListener(this);
 		painelS.add(btefetuaTranferencia, BorderLayout.CENTER);
 
 		// Cria painel que vai possuir a borda
-		JXPanel painelDeTransferencia = new JXPanel();
+		JPanel painelDeTransferencia = new JPanel();
 		painelDeTransferencia.setLayout(new BoxLayout(painelDeTransferencia, BoxLayout.PAGE_AXIS));
 		painelDeTransferencia.setBorder(BorderFactory.createLoweredBevelBorder());
-		painelDeTransferencia.setBackground(Utilites.corCinzaEscuro);
+		painelDeTransferencia.setBackground(Utilites.corAzul);
 
 		// Adiciona conteudo a este painel
-		painelDeTransferencia.add(new JLabel("Transferencia: "));
+		JLabel titulo = new JLabel("Debito Automatico: ");
+		titulo.setForeground(Utilites.corBranco);
+		painelDeTransferencia.add(titulo);
 		painelDeTransferencia.add(painelC);
 		painelDeTransferencia.add(painelS);
 

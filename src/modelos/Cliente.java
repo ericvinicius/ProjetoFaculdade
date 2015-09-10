@@ -3,12 +3,11 @@ package modelos;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import dao.ClienteDao;
 import utilities.Logger;
 import utilities.Utilites;
 
-//TODO: Esta classe possui codigo comentado para a implementacao de observers
-
-public class Cliente /* anotations.Observable */{
+public class Cliente{
 
 	private boolean admin;
 	private int status;
@@ -199,5 +198,9 @@ public class Cliente /* anotations.Observable */{
 
 	public void setNovoCodigoDeAcesso(boolean novoCodigoDeAcesso) {
 		this.novoCodigoDeAcesso = novoCodigoDeAcesso;
+	}
+
+	public Cliente carregaCliente() {
+		return new ClienteDao().carregaCliente(this);
 	}
 }

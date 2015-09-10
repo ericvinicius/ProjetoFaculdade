@@ -8,36 +8,34 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDate;
 
+import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.TableColumnModel;
 
 import modelos.Cliente;
-
-import org.jdesktop.swingx.JXButton;
-import org.jdesktop.swingx.JXTable;
-
 import utilities.Utilites;
 
 public class PainelExtrato extends MyPanel implements MouseListener, KeyListener {
 
 	private JScrollPane scroll = new JScrollPane();
 
-	private JXTable table;
+	private JTable table;
 	private Object[][] linhasDaTabela;
 
 	private String[] tituloDaTabela = { "Data", "Tipo", "Valor", "Novo Saldo" };
 
-	private JXButton imprimiExtrato = new JXButton("Imprimir Extrato");
-	private JXButton imprimiSaldo = new JXButton("Imprimir Saldo");
+	private JButton imprimiExtrato = new JButton("Imprimir Extrato");
+	private JButton imprimiSaldo = new JButton("Imprimir Saldo");
 
 	private JLabel lfiltros = new JLabel("Filtrar dias atras:");
 	private JFormattedTextField tfiltro = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskFiltraTabela, false));
-	private JXButton bfiltrar = new JXButton("Aplicar filtro");
+	private JButton bfiltrar = new JButton("Aplicar filtro");
 
 	public PainelExtrato(Cliente u, Utilites ut) {
 		super(u, ut);
@@ -79,15 +77,14 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 			// TODO: criar log que nao mostra erro na tela do usuario
 		}
 
-		table = new JXTable(linhasDaTabela, tituloDaTabela);
+		table = new JTable(linhasDaTabela, tituloDaTabela);
 		table.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		TableColumnModel modeloDeColunas = table.getColumnModel();
-		modeloDeColunas.getColumn(0).setPreferredWidth(155);
-		modeloDeColunas.getColumn(1).setPreferredWidth(149);
-		modeloDeColunas.getColumn(2).setPreferredWidth(86);
-		modeloDeColunas.getColumn(3).setPreferredWidth(86);
+		modeloDeColunas.getColumn(0).setPreferredWidth(87);
+		modeloDeColunas.getColumn(1).setPreferredWidth(147);
+		modeloDeColunas.getColumn(2).setPreferredWidth(121);
+		modeloDeColunas.getColumn(3).setPreferredWidth(120);
 		table.setColumnModel(modeloDeColunas);
-		table.setEditable(false);
 		table.getTableHeader().setReorderingAllowed(false);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -105,10 +102,8 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 	}
 
 	private void getNovoExtrato(LocalDate diaMaximoParaFiltrarTabela) {
-		Object tabela[][] = null;
-		Object novaTabela[][] = new Object[linhasDaTabela.length][linhasDaTabela.length];
-		
-		tabela = user.getExtrato();
+		Object tabela[][] = user.getExtrato();
+		Object novaTabela[][] = new Object[linhasDaTabela.length][4];
 		
 		int j = 0;
 		for(int i = 0; i < tabela.length; i++){
@@ -122,7 +117,6 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 				j++;
 			} 
 		}
-		
 		linhasDaTabela = novaTabela;
 		this.revalidate();
 		this.repaint();

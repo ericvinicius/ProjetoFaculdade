@@ -6,85 +6,110 @@ import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 import modelos.Cliente;
-
-import org.jdesktop.swingx.JXButton;
-import org.jdesktop.swingx.JXPanel;
-import org.jdesktop.swingx.JXTextField;
-
 import utilities.Utilites;
+
+import com.toedter.calendar.JDateChooser;
 
 public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 
-	private JXButton btefetuaTranferencia;
+	private JButton btefetuaTranferencia;
 	private JLabel lblconta;
 	private JLabel lblagencia;
 	private JLabel lblvalor;
 
-	private JFormattedTextField txtconta;
-	private JFormattedTextField txtagencia;
-	private JXTextField txtvalor;
+	private JFormattedTextField txtoperadora;
+	private JFormattedTextField txtconsumidor;
+	private JDateChooser combodia;
+	private JRadioButton radiotipo;
+	private JRadioButton radioluz;
+	private JRadioButton radioagua;
+	private JRadioButton radiotel;
 
 	public PainelDebitoAutomatico(Cliente u, Utilites ut) {
 		super(u, ut);
 
-		// Conta
-		JXPanel painelConta = new JXPanel();
-		lblconta = new JLabel("Conta   ");
-		painelConta.add(lblconta);
+		//Cod Operadora
+		JPanel paineloperadora = new JPanel();
+		lblconta = new JLabel(" Cod. Operadora:  ");
+		paineloperadora.add(lblconta);
 
-		txtconta = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskConta, true));
-		txtconta.setSelectionStart(0);
-		txtconta.setColumns(12);
-		painelConta.add(txtconta);
+		txtoperadora = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskConta, true));
+		txtoperadora.setSelectionStart(0);
+		txtoperadora.setColumns(12);
+		paineloperadora.add(txtoperadora);
 
-		painelC.add(painelConta, BorderLayout.NORTH);
+		painelC.add(paineloperadora, BorderLayout.NORTH);
 
-		// Agencia
-		JXPanel painelAgencia = new JXPanel();
-		lblagencia = new JLabel("Agencia");
-		painelAgencia.add(lblagencia);
+		// Cod Consumidor
+		JPanel painelconsumidor = new JPanel();
+		lblagencia = new JLabel("Cod. Consumidor:");
+		painelconsumidor.add(lblagencia);
 
-		txtagencia = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskAgencia, true));
-		txtagencia.setSelectionStart(0);
-		txtagencia.setColumns(12);
-		painelAgencia.add(txtagencia);
+		txtconsumidor = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskAgencia, true));
+		txtconsumidor.setSelectionStart(0);
+		txtconsumidor.setColumns(12);
+		painelconsumidor.add(txtconsumidor);
 
-		painelC.add(painelAgencia, BorderLayout.CENTER);
+		painelC.add(painelconsumidor, BorderLayout.CENTER);
 
-		// Valor
-		JXPanel painelValor = new JXPanel();
-		lblvalor = new JLabel("Valor    ");
-		painelValor.add(lblvalor);
+		// Data
+		JPanel painelData = new JPanel();
+		lblvalor = new JLabel("Data ");
+		painelData.add(lblvalor);
 
-		txtvalor = new JXTextField();
-		txtvalor.setColumns(12);
-		painelValor.add(txtvalor);
+		combodia = new JDateChooser();
+		painelData.add(combodia);
+		
+		painelC.add(painelData, BorderLayout.SOUTH);
+		
+		// Radios type
+		JPanel painelRadio = new JPanel();
+		ButtonGroup radioGroup = new ButtonGroup();
+		
+		radioagua = new JRadioButton("Agua");
+		radioluz = new JRadioButton("Luz");
+		radiotel = new JRadioButton("Telefone");
+		
+		radioGroup.add(radioagua);
+		radioGroup.add(radioluz);
+		radioGroup.add(radiotel);
+		
+		painelRadio.add(radioagua);
+		painelRadio.add(radioluz);
+		painelRadio.add(radiotel);
+		
+		painelS.add(painelRadio, BorderLayout.NORTH);
 
-		painelC.add(painelValor, BorderLayout.SOUTH);
-
-		// botao login
-		btefetuaTranferencia = new JXButton("Realizar Transferencia");
+		// botao transferencia
+		btefetuaTranferencia = new JButton("Autorizar Debido Automatico");
 		btefetuaTranferencia.addMouseListener(this);
 		painelS.add(btefetuaTranferencia, BorderLayout.CENTER);
 
 		// Cria painel que vai possuir a borda
-		JXPanel painelDeTransferencia = new JXPanel();
+		JPanel painelDeTransferencia = new JPanel();
 		painelDeTransferencia.setLayout(new BoxLayout(painelDeTransferencia, BoxLayout.PAGE_AXIS));
 		painelDeTransferencia.setBorder(BorderFactory.createLoweredBevelBorder());
-		painelDeTransferencia.setBackground(Utilites.corCinzaEscuro);
+		painelDeTransferencia.setBackground(Utilites.corAzul);
 
 		// Adiciona conteudo a este painel
-		painelDeTransferencia.add(new JLabel("Transferencia: "));
+		JLabel titulo = new JLabel("Debito Automatico: ");
+		titulo.setForeground(Utilites.corBranco);
+		painelDeTransferencia.add(titulo);
 		painelDeTransferencia.add(painelC);
 		painelDeTransferencia.add(painelS);
 
 		// forca o painel ficar no centro da tela
 		colocaPainelNoCentro(painelDeTransferencia);
 	}
+
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

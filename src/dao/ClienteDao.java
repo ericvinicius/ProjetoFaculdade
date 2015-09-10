@@ -91,6 +91,7 @@ public class ClienteDao extends MyDao {
 		Long idClienteDaMov = rs.getLong("idCliente");
 		Long idClienteDestinoDaMov = rs.getLong("idClienteDestino");
 		BigDecimal valorDaMov = rs.getBigDecimal("valor");
+		System.out.println(valorDaMov);
 		LocalDateTime dataDaMov = rs.getTimestamp("data").toLocalDateTime();
 		
 		builder = new MovimentacaoBuilder();

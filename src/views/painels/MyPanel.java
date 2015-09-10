@@ -13,9 +13,6 @@ import javax.swing.SwingUtilities;
 
 import modelos.Cliente;
 import modelos.ValidadorDeClientes;
-
-import org.jdesktop.swingx.JXPanel;
-
 import textFile.ManipuladorDeArquivos;
 import utilities.Logger;
 import utilities.Utilites;
@@ -23,22 +20,22 @@ import views.GUIMyFrame;
 import views.GUIPrincipal;
 import dao.ClienteDao;
 
-public class MyPanel extends JXPanel {
+public class MyPanel extends JPanel {
 	protected Cliente user;
 	protected Utilites utilites;
 	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();
 	protected ValidadorDeClientes validador = new ValidadorDeClientes();
 	
-	protected JXPanel painelN = new JXPanel(new BorderLayout());
-	protected JXPanel painelS = new JXPanel(new BorderLayout());
-	protected JXPanel painelE = new JXPanel(new BorderLayout());
-	protected JXPanel painelW = new JXPanel(new BorderLayout());
-	protected JXPanel painelC = new JXPanel(new BorderLayout());
+	protected JPanel painelN = new JPanel(new BorderLayout());
+	protected JPanel painelS = new JPanel(new BorderLayout());
+	protected JPanel painelE = new JPanel(new BorderLayout());
+	protected JPanel painelW = new JPanel(new BorderLayout());
+	protected JPanel painelC = new JPanel(new BorderLayout());
 	
 	public MyPanel(Cliente u, Utilites ut){
 		user = u;
 		utilites = ut;
-		JXPanel containerSaldo = new JXPanel();
+		JPanel containerSaldo = new JPanel();
 		
 		JLabel lsaldos = new JLabel("Saldo: ");
 		JLabel lvalSaldos = atualizaSaldo();
@@ -53,7 +50,7 @@ public class MyPanel extends JXPanel {
 	protected void colocaPainelNoCentro(JPanel painel) {
 		painel.add(Box.createVerticalGlue());
 		painel.add(Box.createHorizontalGlue());
-		JXPanel centerPanel = new JXPanel(new GridBagLayout());
+		JPanel centerPanel = new JPanel(new GridBagLayout());
 		centerPanel.add(painel);
 		add(centerPanel);
 	}

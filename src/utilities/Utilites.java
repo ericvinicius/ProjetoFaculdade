@@ -8,6 +8,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -40,6 +41,9 @@ public class Utilites {
 	
 	//Cores
 	public static final Color corCinzaEscuro = new Color(212, 212, 212);
+	public static final Color corBranco = new Color(255, 255, 255);
+	public static final Color corAzul = new Color(148, 200, 252);
+	
 
 	// Fonts
 	public final Font fontNormal = new Font("Arial", Font.PLAIN, 12);
@@ -207,13 +211,16 @@ public class Utilites {
 	}
 
 	public String getValorComMoeda(BigDecimal valor) {
-		//TODO: Este metodo esta perdendo os valores apos a virgula
-		NumberFormat moedaFormat = NumberFormat.getCurrencyInstance(local);
-		return moedaFormat.format(valor);
+		NumberFormat usdCostFormat = NumberFormat.getCurrencyInstance(local);
+		return usdCostFormat.format(valor.doubleValue());
 	}
 
 	public String getValorComMoeda(double parseDouble) {
 		BigDecimal bigDecimal = new BigDecimal(parseDouble);
 		return getValorComMoeda(bigDecimal);
+	}
+	
+	public static Calendar hojeEmCalendar(){
+		return Calendar.getInstance();
 	}
 }

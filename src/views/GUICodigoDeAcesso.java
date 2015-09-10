@@ -9,15 +9,12 @@ import javax.swing.JOptionPane;
 
 import modelos.Cliente;
 import modelos.ValidadorDeClientes;
-
-import org.jdesktop.swingx.JXButton;
-
 import utilities.Utilites;
 import builders.ClienteBuilder;
 
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 
-	private JXButton bt12, bt34, bt56, bt78, bt90;
+	private JButton bt12, bt34, bt56, bt78, bt90;
 	
 	private int contadorDeClicks = 0;
 	private int[] codigo = new int[Utilites.TAMANHO_CODIGO_DE_ACESSO];
@@ -28,19 +25,19 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 			JOptionPane.showMessageDialog(this, "Voce nao possui codigo de acesso, por favor cadestre um novo com 3 numeros");
 		}
 		
-		bt12 = new JXButton("1 ou 2");
+		bt12 = new JButton("1 ou 2");
 		bt12.addMouseListener(this);
 
-		bt34 = new JXButton("3 ou 4");
+		bt34 = new JButton("3 ou 4");
 		bt34.addMouseListener(this);
 
-		bt56 = new JXButton("5 ou 6");
+		bt56 = new JButton("5 ou 6");
 		bt56.addMouseListener(this);
 
-		bt78 = new JXButton("7 ou 8");
+		bt78 = new JButton("7 ou 8");
 		bt78.addMouseListener(this);
 
-		bt90 = new JXButton("9 ou 0");
+		bt90 = new JButton("9 ou 0");
 		bt90.addMouseListener(this);
 
 		atualizaBotoes();
