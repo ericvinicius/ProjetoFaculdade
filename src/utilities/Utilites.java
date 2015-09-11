@@ -17,9 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.MaskFormatter;
 
-import anotations.Log;
-
-@Log
 public class Utilites {
 
 	// Variaveis globais
@@ -27,7 +24,6 @@ public class Utilites {
 	public static final int MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO = 3;
 	public static final String DELIMITADOR_DO_ARQUIVO_DE_TEXTO = "\\||\\n";
 	public static final String CAMINHO_PARA_ACESSO_TXT = "acesso/ACESSO.txt";
-
 	
 	// Mascaras
 	public final String maskFiltraTabela = "###";
@@ -43,7 +39,6 @@ public class Utilites {
 	public static final Color corCinzaEscuro = new Color(212, 212, 212);
 	public static final Color corBranco = new Color(255, 255, 255);
 	public static final Color corAzul = new Color(148, 200, 252);
-	
 
 	// Fonts
 	public final Font fontNormal = new Font("Arial", Font.PLAIN, 12);

@@ -24,7 +24,7 @@ public abstract class GUIMyFrame extends JFrame implements MyConfiguration {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	public void redirect(JFrame janelaAtual, Class<? extends GUIMyFrame> clazz) {
+	public void redirect(JFrame janelaAtual, Class<? extends JFrame> clazz) {
 		janelaAtual.dispose();
 		Utilites.temMensagemDeErro = false;
 		if(clazz.equals(GUIPrincipal.class)){
