@@ -18,7 +18,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.table.TableColumnModel;
 
-import modelos.Cliente;
 import utilities.Utilites;
 
 public class PainelExtrato extends MyPanel implements MouseListener, KeyListener {
@@ -37,8 +36,7 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 	private JFormattedTextField tfiltro = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskFiltraTabela, false));
 	private JButton bfiltrar = new JButton("Aplicar filtro");
 
-	public PainelExtrato(Cliente u, Utilites ut) {
-		super(u, ut);
+	public PainelExtrato() {
 		linhasDaTabela = user.getExtrato();
 
 		painelN.add(lfiltros, BorderLayout.WEST);

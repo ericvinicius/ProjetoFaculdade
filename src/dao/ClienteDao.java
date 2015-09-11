@@ -33,8 +33,7 @@ public class ClienteDao extends MyDao {
 				builder = new MovimentacaoBuilder();
 				//TODO: melhorar esta logica do i
 				int i = 0;
-				//TODO: Talvez seja melhor trocar o nome da coluna para idCliente
-				if (idDoCliente == rs.getLong("id") && i == 0) {
+				if (i == 0 && idDoCliente == rs.getLong("id")) {
 					fazLoadDoCliente();
 					i++;
 				}
@@ -91,7 +90,6 @@ public class ClienteDao extends MyDao {
 		Long idClienteDaMov = rs.getLong("idCliente");
 		Long idClienteDestinoDaMov = rs.getLong("idClienteDestino");
 		BigDecimal valorDaMov = rs.getBigDecimal("valor");
-		System.out.println(valorDaMov);
 		LocalDateTime dataDaMov = rs.getTimestamp("data").toLocalDateTime();
 		
 		builder = new MovimentacaoBuilder();
@@ -99,7 +97,6 @@ public class ClienteDao extends MyDao {
 				.comIdDoCliente(idClienteDaMov).comIdClienteDestino(idClienteDestinoDaMov).constroi();
 		
 		return mov;
-		
 	}
 
 	private void fazLoadDoCliente() throws SQLException {
@@ -119,6 +116,5 @@ public class ClienteDao extends MyDao {
 			Logger.error(se, "Erro na busca de cliente por id");
 		}
 		fechaConexao();
-
 	}
 }

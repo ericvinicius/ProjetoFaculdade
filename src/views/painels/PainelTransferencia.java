@@ -8,13 +8,13 @@ import java.math.BigDecimal;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import modelos.Cliente;
 import modelos.Movimentacao;
 import utilities.Logger;
-import utilities.Utilites;
 import builders.ClienteBuilder;
 import builders.MovimentacaoBuilder;
 
@@ -32,9 +32,7 @@ public class PainelTransferencia extends MyPanel implements MouseListener {
 	private Cliente userDestino;
 	private BigDecimal valor;
 
-	public PainelTransferencia(Cliente u, Utilites ut) {
-		super(u, ut);
-
+	public PainelTransferencia() {
 		// Conta
 		JPanel painelConta = new JPanel();
 		lblconta = new JLabel("Conta   ");
@@ -120,10 +118,10 @@ public class PainelTransferencia extends MyPanel implements MouseListener {
 			}
 			Logger.warn("invalido", "Cliente entrou com os dados dele mesmo");
 		} catch (NumberFormatException nfe) {
-			// TODO: Esta exception é esperada quando o usuario digita uma letra
-			// no campo do valor tenho que impedir isto
+			JOptionPane.showMessageDialog(this, "Valor invalido!");
 			Logger.warn("invalido", "Cliente digitou letra no campo do valor");
 		} catch (NullPointerException npe) {
+			JOptionPane.showMessageDialog(this, "Campos em branco!");
 			Logger.warn("Em Branco", "Cliente deixou campos da transferencia em branco");
 		}
 		return false;

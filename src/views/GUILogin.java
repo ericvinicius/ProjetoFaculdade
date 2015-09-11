@@ -1,8 +1,6 @@
 package views;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,7 +9,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
 import modelos.Cliente;
@@ -19,8 +16,7 @@ import utilities.Logger;
 import utilities.Utilites;
 import builders.ClienteBuilder;
 
-public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
-		ActionListener {
+public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener {
 
 	private JLabel btlogin;
 	private JLabel lblconta;
@@ -77,8 +73,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 		btlogin.addMouseListener(this);
 		add(btlogin);
 
-		opcaoAdmin.addActionListener(this);
-		
 		configuraPagina();
 	}
 
@@ -98,9 +92,8 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	private void pegaInformacoesEVerificaLogin() {
 		try{
 			pegaInformacoesDeLogin();
-			if (verificaAdmin()) {
-				opcaoAdmin.setText("Quero ir para Braavos!");
-				opcoes.add(opcaoAdmin);
+			if (usuarioTentativa.verificaAdmin()) {
+				redirect(this, GUIAdmin.class);
 			} else {
 				verificaLogin();
 			}
@@ -109,11 +102,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 			utilites.tremeTelaComMensagemDeErro(this);
 		}
 		
-	}
-
-	private boolean verificaAdmin() {
-		//TODO: Este Metodo deve verificar se o usuario é admin ou nao
-		return false;
 	}
 
 	private void verificaLogin() {
@@ -166,21 +154,9 @@ public class GUILogin extends GUIMyFrame implements MouseListener, KeyListener,
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-	}
+	public void keyPressed(KeyEvent e) {}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-	}
+	public void keyReleased(KeyEvent e) {}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		String passe = JOptionPane.showInputDialog(this,
-				"Quem é voce? para ir para Braavos.");
-
-		if (passe.equals("got")) {
-			JOptionPane.showMessageDialog(this, "Valar Dohaeris");
-			// TODO: Criar tela de Administrador
-		}
-	}
 }

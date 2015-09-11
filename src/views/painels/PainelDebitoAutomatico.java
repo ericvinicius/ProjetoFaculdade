@@ -30,8 +30,7 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 	private JRadioButton radioagua;
 	private JRadioButton radiotel;
 
-	public PainelDebitoAutomatico(Cliente u, Utilites ut) {
-		super(u, ut);
+	public PainelDebitoAutomatico() {
 
 		//Cod Operadora
 		JPanel paineloperadora = new JPanel();

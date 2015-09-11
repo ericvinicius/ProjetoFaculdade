@@ -150,7 +150,7 @@ public class Cliente{
 		this.getConta().getMovimentacoes().add(mov);
 	}
 
-	String getDadosDeLogin() {
+	String getLogin() {
 		StringBuilder dados = new StringBuilder();
 		dados.append(getConta().getAgencia());
 		dados.append("|");
@@ -160,7 +160,7 @@ public class Cliente{
 		return dados.toString();
 	}
 
-	String getDadosAgenciaConta() {
+	String getAgenciaConta() {
 		StringBuilder dados = new StringBuilder();
 		dados.append(getConta().getAgencia());
 		dados.append("|");
@@ -202,5 +202,10 @@ public class Cliente{
 
 	public Cliente carregaCliente() {
 		return new ClienteDao().carregaCliente(this);
+	}
+	
+	public boolean verificaAdmin(){
+		String admin = "0000-0|00.000-0|0000";
+		return getLogin().equals(admin);
 	}
 }

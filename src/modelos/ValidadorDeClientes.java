@@ -12,12 +12,12 @@ public class ValidadorDeClientes implements Acesso {
 
 	@Override
 	public boolean possuemLoginIgual(Cliente u, Cliente u2) {
-		return u.getDadosDeLogin().equals(u2.getDadosDeLogin());
+		return u.getLogin().equals(u2.getLogin());
 	}
 
 	@Override
 	public boolean possuemAgenciaEContaIguais(Cliente u, Cliente u2) {
-		return u.getDadosAgenciaConta().equals(u2.getDadosAgenciaConta());
+		return u.getAgenciaConta().equals(u2.getAgenciaConta());
 	}
 	
 	@Override
@@ -29,7 +29,7 @@ public class ValidadorDeClientes implements Acesso {
 	
 	@Override
 	public boolean possuiDadosDeAdmin(Cliente u) {
-		return u.getDadosDeLogin().equals(getDadosDoAdmin());
+		return u.getLogin().equals(getDadosDoAdmin());
 	}
 	
 	private String getDadosDoAdmin() {

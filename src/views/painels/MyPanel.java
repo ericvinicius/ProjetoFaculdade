@@ -23,32 +23,34 @@ import views.GUIPrincipal;
 import dao.ClienteDao;
 
 public class MyPanel extends JPanel {
-	protected Cliente user;
-	protected Utilites utilites;
+	protected static Cliente user;
+	protected static Utilites utilites;
+
 	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();
 	protected ValidadorDeClientes validador = new ValidadorDeClientes();
-	
+
 	protected JPanel painelN = new JPanel(new BorderLayout());
 	protected JPanel painelS = new JPanel(new BorderLayout());
 	protected JPanel painelE = new JPanel(new BorderLayout());
 	protected JPanel painelW = new JPanel(new BorderLayout());
 	protected JPanel painelC = new JPanel(new BorderLayout());
-	
-	public MyPanel(Cliente u, Utilites ut){
-		user = u;
-		utilites = ut;
+
+	protected JLabel vazio = new JLabel("                    ");
+
+	public MyPanel() {
+
 		JPanel containerSaldo = new JPanel();
-		
+
 		JLabel lsaldos = new JLabel("Saldo: ");
 		JLabel lvalSaldos = atualizaSaldo();
 
 		containerSaldo.add(lsaldos);
 		containerSaldo.add(lvalSaldos);
 		painelN.add(containerSaldo, BorderLayout.NORTH);
-		
+
 		configuraPainel();
 	}
-	
+
 	private void colocaPainelNoCentro(JPanel painel) {
 		painel.add(Box.createVerticalGlue());
 		painel.add(Box.createHorizontalGlue());
@@ -56,8 +58,8 @@ public class MyPanel extends JPanel {
 		centerPanel.add(painel);
 		add(centerPanel);
 	}
-	
-	private void configuraPainel(){
+
+	private void configuraPainel() {
 		setLayout(new BorderLayout());
 		add(painelN, BorderLayout.NORTH);
 		add(painelS, BorderLayout.SOUTH);
@@ -65,7 +67,7 @@ public class MyPanel extends JPanel {
 		add(painelW, BorderLayout.WEST);
 		add(painelC, BorderLayout.CENTER);
 	}
-	
+
 	protected JLabel atualizaSaldo() {
 		BigDecimal saldo = BigDecimal.TEN;
 		saldo = user.getConta().getSaldo();
@@ -81,42 +83,50 @@ public class MyPanel extends JPanel {
 		}
 		return lsaldo;
 	}
-	
+
 	protected void recreate() {
 		GUIMyFrame tela = (GUIMyFrame) SwingUtilities.getAncestorOfClass(GUIMyFrame.class, this);
 		tela.redirect(tela, GUIPrincipal.class);
-		
+
 	}
-	
+
 	protected void tremeTela() {
 		utilites.tremeTela((GUIMyFrame) SwingUtilities.getAncestorOfClass(GUIMyFrame.class, this));
 	}
-	
+
 	protected void tremeTela(String mensagem) {
 		utilites.tremeTela((GUIMyFrame) SwingUtilities.getAncestorOfClass(GUIMyFrame.class, this));
 		JOptionPane.showMessageDialog(this, mensagem, "[ Erro ]", JOptionPane.ERROR_MESSAGE);
 	}
-	
+
 	protected BigDecimal atualizaSaldoCliente(BigDecimal valor) {
 		BigDecimal novoSaldo = user.getConta().getSaldo().subtract(valor);
 		user.getConta().setSaldo(novoSaldo);
-		
+
 		ClienteDao dao = new ClienteDao();
 		dao.atualizaClientePorId(user);
-		
+
 		Logger.info("Atualização", "O saldo do cliente foi atualizado");
-		
+
 		return novoSaldo;
 	}
-	
+
 	protected JPanel criaPainelCentral(String titulo) {
 		JPanel painel = new JPanel();
 		painel.setLayout(new BoxLayout(painel, BoxLayout.PAGE_AXIS));
 		painel.setBorder(BorderFactory.createTitledBorder(titulo));
-		
+
 		colocaPainelNoCentro(painel);
-		
+
 		return painel;
 	}
-	
+
+	public static void setUser(Cliente user) {
+		MyPanel.user = user;
+	}
+
+	public static void setUtilites(Utilites utilites) {
+		MyPanel.utilites = utilites;
+	}
+
 }

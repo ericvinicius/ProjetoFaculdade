@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
+import views.painels.MyPanel;
 import views.painels.PainelDebitoAutomatico;
 import views.painels.PainelExtrato;
 import views.painels.PainelSaque;
@@ -13,14 +14,21 @@ import views.painels.PainelTransferencia;
 public class GUIPrincipal extends GUIMyFrame {
 
 	private JTabbedPane abas = new JTabbedPane();
-	private PainelExtrato painelExtrato = new PainelExtrato(user, utilites);
-	private PainelTransferencia painelTransferencia = new PainelTransferencia(user, utilites);
-	private PainelDebitoAutomatico painelDebitoAutomatico = new PainelDebitoAutomatico(user, utilites);
-	private PainelSaque painelSaque = new PainelSaque(user, utilites);
+	private PainelExtrato painelExtrato;
+	private PainelTransferencia painelTransferencia;
+	private PainelDebitoAutomatico painelDebitoAutomatico;
+	private PainelSaque painelSaque;
 
-	@Deprecated
 	public GUIPrincipal() {
 		configuraPagina();
+		
+		MyPanel.setUser(user);
+		MyPanel.setUtilites(utilites);
+		
+		painelExtrato = new PainelExtrato();
+		painelTransferencia = new PainelTransferencia();
+		painelDebitoAutomatico = new PainelDebitoAutomatico();
+		painelSaque = new PainelSaque();
 		
 		// Nome - data - hora
 		JLabel lnome = new JLabel(user.getNome());
