@@ -33,7 +33,7 @@ public class GUIAdmin extends GUIMyFrame {
 	}
 
 	public void configuraPagina() {
-		setSize(332, 288);
+		setSize(330, 290);
 		getContentPane().setLayout(new BorderLayout());
 		setLocationRelativeTo(null);
 		setVisible(true);
