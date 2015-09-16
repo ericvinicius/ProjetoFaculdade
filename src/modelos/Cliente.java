@@ -204,8 +204,4 @@ public class Cliente{
 		return new ClienteDao().carregaCliente(this);
 	}
 	
-	public boolean verificaAdmin(){
-		String admin = "0000-0|00.000-0|0000";
-		return getLogin().equals(admin);
-	}
 }

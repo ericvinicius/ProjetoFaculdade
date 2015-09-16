@@ -5,7 +5,7 @@ import java.util.Date;
 
 import utilities.Logger;
 import utilities.Utilites;
-import views.GUIIdioma;
+import controllers.IdiomaControler;
 
 
 public class Main {
@@ -18,6 +18,6 @@ public class Main {
 		System.setProperty("apple.laf.useScreenMenuBar", "true");
 
 		//Inicia a tela de idioma
-		new GUIIdioma();
+		new IdiomaControler();
 	}
 }

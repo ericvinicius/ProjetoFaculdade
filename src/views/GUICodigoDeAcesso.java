@@ -129,7 +129,8 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 			
 		} else if(tentativa >= Utilites.MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO){
 			JOptionPane.showMessageDialog(this, "Conta Bloqueada", "Maximo de tentativas atingido", JOptionPane.ERROR_MESSAGE);
-			//TODO: Verificar se eh necessario bloquear conta
+			user.setStatus(1);
+			//TODO: escrever no arquivo de texto usuario bloqueado
 		}
 		tentativa++;
 		contadorDeClicks = 0;
