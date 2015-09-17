@@ -11,9 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import modelos.Cliente;
-import utilities.Utilites;
-
 import com.toedter.calendar.JDateChooser;
 
 public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
@@ -62,6 +59,7 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 		painelData.add(lbldata);
 
 		dateChooser = new JDateChooser();
+		dateChooser.setToolTipText("seila");
 		painelData.add(dateChooser);
 		
 		painelC.add(painelData, BorderLayout.SOUTH);

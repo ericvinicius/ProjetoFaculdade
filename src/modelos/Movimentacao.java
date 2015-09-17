@@ -5,7 +5,10 @@ import java.time.LocalDateTime;
 
 import javax.swing.JOptionPane;
 
+import popups.MyJOptionPane;
 import utilities.Logger;
+import utilities.Utilites;
+import dao.ClienteDao;
 import dao.MovimentacaoDao;
 
 public class Movimentacao {
@@ -23,6 +26,8 @@ public class Movimentacao {
 	private Long idCliente;
 	
 	private Long idClienteDestino;
+	
+	private Utilites utilites = new Utilites();
 
 	public Movimentacao(Long id, BigDecimal valor, LocalDateTime data, BigDecimal novoSaldo, Long idCliente, String tipo, Long idClienteDestino){
 		setId(id);
@@ -102,11 +107,19 @@ public class Movimentacao {
 	}
 	
 	public void efetua() {
-		//TODO: Criar tela de confirmacao
-		new JOptionPane();
+		ClienteDao daoCliente = new ClienteDao();
 		MovimentacaoDao dao = new MovimentacaoDao();
-		dao.salva(this);
-		Logger.info("Movimentacao", this.toString());
+		
+		String nome = daoCliente.loadName(idClienteDestino);
+		int resp = MyJOptionPane.createConfirmDialog("Transferencia no valor de " + utilites.getValorComMoeda(getValor()) + " para o cliente: " + nome,
+														  "Transferencia", Utilites.creditCard);
+		if(resp == JOptionPane.OK_OPTION){
+			dao.salva(this);
+			Logger.info("Movimentacao", this.toString());
+		} else {
+			Logger.warn("Movimentacao", "NAO SALVA " + this.toString());
+		}
+		
 	}
 	
 	@Override

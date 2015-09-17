@@ -47,6 +47,7 @@ public class Utilites {
 	// Images
 	public static final ImageIcon imageLock = new ImageIcon("images/locked.png");
 	public static final ImageIcon imageUnlock = new ImageIcon("images/unlocked.png");
+	public static final ImageIcon creditCard = new ImageIcon("images/creditcard.png");
 	public static final ImageIcon br = new ImageIcon("images/Brazil-icon.png");
 	public static final ImageIcon es = new ImageIcon("images/Spain-icon.png");
 	public static final ImageIcon us = new ImageIcon("images/USA-icon.png");

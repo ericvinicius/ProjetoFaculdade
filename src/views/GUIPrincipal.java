@@ -2,6 +2,7 @@ package views;
 
 import java.awt.BorderLayout;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
@@ -51,6 +52,7 @@ public class GUIPrincipal extends GUIMyFrame {
 		getContentPane().setLayout(new BorderLayout());
 		setLocationRelativeTo(null);
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }

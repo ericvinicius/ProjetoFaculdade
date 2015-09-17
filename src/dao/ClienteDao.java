@@ -117,4 +117,21 @@ public class ClienteDao extends MyDao {
 		}
 		fechaConexao();
 	}
+
+	public String loadName(Long idCliente) {
+		criaConexao();
+		String nome = "";
+		try{
+			stmt = connection.prepareStatement("select nome from Cliente where id = ?");
+			stmt.setLong(1, idCliente);
+			rs = stmt.executeQuery();
+			rs.next();
+			
+			nome = rs.getString("nome");
+		} catch (SQLException se) {
+			Logger.error(se, "Erro na busca de cliente por id");
+		}
+		fechaConexao();
+		return nome;
+	}
 }
