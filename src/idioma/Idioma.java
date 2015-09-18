@@ -15,8 +15,8 @@ public class Idioma {
 		this.pacoteAtual = clazz.getSimpleName();
 	}
 	
-	public String translate(String frase){
-		return bn.getString(pacoteAtual + "." + frase);
+	public String translate(String texto){
+		return bn.getString(pacoteAtual + "." + texto);
 	}
 	
 	public static String getValorComMoeda(BigDecimal valor) {
@@ -27,5 +27,9 @@ public class Idioma {
 	public static String getValorComMoeda(double parseDouble) {
 		BigDecimal bigDecimal = new BigDecimal(parseDouble);
 		return getValorComMoeda(bigDecimal);
+	}
+
+	public String translateToPopUp(String texto) {
+		return bn.getString(pacoteAtual + ".popup" + texto);
 	}
 }

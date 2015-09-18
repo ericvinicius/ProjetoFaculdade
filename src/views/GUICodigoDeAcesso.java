@@ -16,7 +16,7 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	public GUICodigoDeAcesso() {
 		if (user.isNovoCodigoDeAcesso()) {
-			JOptionPane.showMessageDialog(this, "Voce nao possui codigo de acesso, por favor cadestre um novo com 3 numeros");
+			JOptionPane.showMessageDialog(this, idioma.translateToPopUp("novoCodigo"));
 		}
 		
 		String ou = idioma.translate("ou");
