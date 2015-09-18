@@ -1,5 +1,7 @@
 package modelos;
 
+import idioma.Idioma;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -106,12 +108,12 @@ public class Cliente{
 		int i = 1;
 		for (Movimentacao movimentacao : getConta().getMovimentacoes()) {
 
-			String valorMov = utilites.getValorComMoeda(Double.parseDouble(movimentacao.getValor() + ""));
+			String valorMov = Idioma.getValorComMoeda(Double.parseDouble(movimentacao.getValor() + ""));
 			String novoSaldoMov;
 			if (movimentacao.getNovoSaldo() == null) {
 				novoSaldoMov = " - ";
 			} else {
-				novoSaldoMov = utilites.getValorComMoeda(Double.parseDouble(movimentacao.getNovoSaldo() + ""));
+				novoSaldoMov = Idioma.getValorComMoeda(Double.parseDouble(movimentacao.getNovoSaldo() + ""));
 			}
 
 			extrato[i][0] = movimentacao.getData().format(Utilites.formatDia);
@@ -132,7 +134,7 @@ public class Cliente{
 
 		extrato[0][0] = mov.getData().minusDays(1).format(Utilites.formatDia);
 		extrato[0][1] = "Saldo Anterior";
-		extrato[0][2] = utilites.getValorComMoeda(saldoAnterior);
+		extrato[0][2] = Idioma.getValorComMoeda(saldoAnterior);
 		extrato[0][3] = " - ";
 
 		return extrato;

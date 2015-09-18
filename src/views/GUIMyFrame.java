@@ -13,7 +13,7 @@ public abstract class GUIMyFrame extends JFrame implements MyConfiguration {
 	protected static Cliente user;
 	protected Utilites utilites = new Utilites();
 	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();
-
+			
 	public GUIMyFrame() {
 		super("");
 		configuraPagina();

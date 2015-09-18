@@ -1,5 +1,7 @@
 package modelos;
 
+import idioma.Idioma;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -111,7 +113,7 @@ public class Movimentacao {
 		MovimentacaoDao dao = new MovimentacaoDao();
 		
 		String nome = daoCliente.loadName(idClienteDestino);
-		int resp = MyJOptionPane.createConfirmDialog("Transferencia no valor de " + utilites.getValorComMoeda(getValor()) + " para o cliente: " + nome,
+		int resp = MyJOptionPane.createConfirmDialog("Transferencia no valor de " + Idioma.getValorComMoeda(getValor()) + " para o cliente: " + nome,
 														  "Transferencia", Utilites.creditCard);
 		if(resp == JOptionPane.OK_OPTION){
 			dao.salva(this);

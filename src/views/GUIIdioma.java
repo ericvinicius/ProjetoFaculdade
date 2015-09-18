@@ -18,21 +18,18 @@ public class GUIIdioma extends GUIMyFrame implements MouseListener {
 		br.setOpaque(false);
 		br.setContentAreaFilled(false);
 		br.setBorderPainted(false);
-		br.addMouseListener(this);
 		add(br);
 		
 		us = new JButton(Utilites.usGray);
 		us.setOpaque(false);
 		us.setContentAreaFilled(false);
 		us.setBorderPainted(false);
-		us.addMouseListener(this);
 		add(us);
 		
 		es = new JButton(Utilites.esGray);
 		es.setOpaque(false);
 		es.setContentAreaFilled(false);
 		es.setBorderPainted(false);
-		es.addMouseListener(this);
 		add(es);
 		
 		configuraPagina();

@@ -1,5 +1,7 @@
 package views;
 
+import idioma.Idioma;
+
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -7,59 +9,43 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import modelos.Cliente;
-import modelos.ValidadorDeClientes;
-import utilities.Utilites;
-import builders.ClienteBuilder;
+public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
-public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
-
-	private JButton bt12, bt34, bt56, bt78, bt90;
-	
-	private int contadorDeClicks = 0;
-	private int[] codigo = new int[Utilites.TAMANHO_CODIGO_DE_ACESSO];
-	private int tentativa = 0;
+	protected JButton bt12, bt34, bt56, bt78, bt90;
+	protected Idioma idioma = new Idioma(GUICodigoDeAcesso.class);
 
 	public GUICodigoDeAcesso() {
-		if(user.isNovoCodigoDeAcesso()){
+		if (user.isNovoCodigoDeAcesso()) {
 			JOptionPane.showMessageDialog(this, "Voce nao possui codigo de acesso, por favor cadestre um novo com 3 numeros");
 		}
 		
-		bt12 = new JButton("1 ou 2");
-		bt12.addMouseListener(this);
+		String ou = idioma.translate("ou");
+		bt12 = new JButton("1 " + ou + " 2");
+		bt34 = new JButton("3 " + ou + " 4");
+		bt56 = new JButton("5 " + ou + " 6");
+		bt78 = new JButton("7 " + ou + " 8");
+		bt90 = new JButton("9 " + ou + " 0");
 
-		bt34 = new JButton("3 ou 4");
-		bt34.addMouseListener(this);
-
-		bt56 = new JButton("5 ou 6");
-		bt56.addMouseListener(this);
-
-		bt78 = new JButton("7 ou 8");
-		bt78.addMouseListener(this);
-
-		bt90 = new JButton("9 ou 0");
-		bt90.addMouseListener(this);
-
-		atualizaBotoes();
+		adicionaBotoesEmbaralhados();
 		configuraPagina();
 
 	}
-	
+
 	@Override
 	public void configuraPagina() {
 		setLayout(new GridLayout());
 		setSize(300, 90);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
-		if(user.isNovoCodigoDeAcesso()){
+
+		if (user.isNovoCodigoDeAcesso()) {
 			setTitle("Crie seu Codigo de acesso");
 		} else {
 			setTitle("Digite o seu Codigo de Acesso");
 		}
 	}
 
-	private void atualizaBotoes() {
+	protected void adicionaBotoesEmbaralhados() {
 		remove(bt12);
 		remove(bt34);
 		remove(bt56);
@@ -96,61 +82,13 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == bt12) {
-			codigo[contadorDeClicks] = 12;
-		} else if (e.getSource() == bt34) {
-			codigo[contadorDeClicks] = 34;
-		} else if (e.getSource() == bt56) {
-			codigo[contadorDeClicks] = 56;
-		} else if (e.getSource() == bt78) {
-			codigo[contadorDeClicks] = 78;
-		} else if (e.getSource() == bt90) {
-			codigo[contadorDeClicks] = 90;
-		}
-		atualizaBotoes();
-		contadorDeClicks++;
-		
-		if (contadorDeClicks == Utilites.TAMANHO_CODIGO_DE_ACESSO) {
-			verificaCodigo();
-		}
-	}
-	
-	private void verificaCodigo() {
-		ValidadorDeClientes validador = new ValidadorDeClientes();
-		Cliente usuarioTentativa = new ClienteBuilder().comCodigoDeAcesso(codigo).constroi();
-		
-		if (user.isNovoCodigoDeAcesso()) {
-			criaCodiggoDeAcesso();
-			redirect(this, GUIPrincipal.class);
-
-		} else if (validador.possuemCodigoDeAcessoIguais(user, usuarioTentativa)) {
-			redirect(this, GUIPrincipal.class);
-			
-		} else if(tentativa >= Utilites.MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO){
-			JOptionPane.showMessageDialog(this, "Conta Bloqueada", "Maximo de tentativas atingido", JOptionPane.ERROR_MESSAGE);
-			user.setStatus(1);
-			//TODO: escrever no arquivo de texto usuario bloqueado
-		}
-		tentativa++;
-		contadorDeClicks = 0;
-		utilites.tremeTela(this);
-	}
-
-	private void criaCodiggoDeAcesso() {
-		user.setCodigoDeAcesso(codigo);
-		JOptionPane.showMessageDialog(this, utilites.converteCodigoDeAcessoParaString(codigo));
-		fileHandler.cadastraNovoCodigoDeAcessoParaUsuario(user);
-		user.setNovoCodigoDeAcesso(false);
-	}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-	}
+	public void mousePressed(MouseEvent e) {}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-	}
+	public void mouseReleased(MouseEvent e) {}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
@@ -161,5 +99,5 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener{
 	public void mouseExited(MouseEvent e) {
 		((JButton) e.getSource()).setFont(utilites.fontNormal);
 	}
-	
+
 }

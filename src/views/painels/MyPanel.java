@@ -1,5 +1,7 @@
 package views.painels;
 
+import idioma.Idioma;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagLayout;
@@ -72,7 +74,7 @@ public class MyPanel extends JPanel {
 		BigDecimal saldo = BigDecimal.TEN;
 		saldo = user.getConta().getSaldo();
 		int compareTo = saldo.compareTo(BigDecimal.ZERO);
-		JLabel lsaldo = new JLabel(utilites.getValorComMoeda(user.getConta().getSaldo()));
+		JLabel lsaldo = new JLabel(Idioma.getValorComMoeda(user.getConta().getSaldo()));
 
 		if (compareTo == -1) {
 			// Saldo Negativo

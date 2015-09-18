@@ -9,7 +9,6 @@ import modelos.Cliente;
 import modelos.ValidadorDeClientes;
 import utilities.Logger;
 import views.GUIAdmin;
-import views.GUICodigoDeAcesso;
 import views.GUILogin;
 import builders.ClienteBuilder;
 
@@ -21,6 +20,7 @@ public class LoginController extends GUILogin implements KeyListener {
 	public LoginController(){
 		super();
 		btlogin.addMouseListener(this);
+		
 		txtconta.addKeyListener(this);
 		txtagencia.addKeyListener(this);
 		
@@ -58,7 +58,7 @@ public class LoginController extends GUILogin implements KeyListener {
 	private void verificaLogin() {
 		user = fileHandler.fazLeituraDoArquivoParaLogin(usuarioTentativa);
 		if (user != null) {
-			super.redirect(this, GUICodigoDeAcesso.class);
+			super.redirect(this, CodigoDeAcessoController.class);
 		} else {
 			utilites.tremeTelaComMensagemDeErro(this);
 		}

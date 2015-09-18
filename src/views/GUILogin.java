@@ -1,5 +1,7 @@
 package views;
 
+import idioma.Idioma;
+
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -21,10 +23,12 @@ public class GUILogin extends GUIMyFrame implements MouseListener {
 	protected JFormattedTextField txtconta;
 	protected JFormattedTextField txtagencia;
 	protected JPasswordField txtsenha;
-
+	
+	private Idioma idioma = new Idioma(GUILogin.class);
+	
 	public GUILogin() {
 		// Conta
-		lblconta = new JLabel("Conta   ");
+		lblconta = new JLabel(idioma.translate("conta"));
 		add(lblconta);
 
 		txtconta = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskConta, true));
@@ -33,7 +37,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener {
 		add(txtconta);
 
 		// Agencia
-		lblagencia = new JLabel("Agencia");
+		lblagencia = new JLabel(idioma.translate("agencia"));
 		add(lblagencia);
 
 		txtagencia = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskAgencia, true));
@@ -42,7 +46,7 @@ public class GUILogin extends GUIMyFrame implements MouseListener {
 		add(txtagencia);
 
 		// Senha
-		lblsenha = new JLabel("Senha    ");
+		lblsenha = new JLabel(idioma.translate("senha"));
 		add(lblsenha);
 
 		txtsenha = new JPasswordField();

@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -24,6 +23,7 @@ public class Utilites {
 	public static final int MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO = 3;
 	public static final String DELIMITADOR_DO_ARQUIVO_DE_TEXTO = "\\||\\n";
 	public static final String CAMINHO_PARA_ACESSO_TXT = "acesso/ACESSO.txt";
+	public final BigDecimal saldoInicial = new BigDecimal(2000.00);
 	
 	// Mascaras
 	public final String maskFiltraTabela = "###";
@@ -58,12 +58,7 @@ public class Utilites {
 
 	// boolean
 	public static boolean temMensagemDeErro = false;
-
-	// Idioma
-	public static ResourceBundle bn;
-	public static Locale local;
 	
-	public final BigDecimal saldoInicial = new BigDecimal(2000.00);
 	
 	public DecimalFormat getFormatacaoParaNumeros(){
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
@@ -206,16 +201,6 @@ public class Utilites {
 		return ordemDosBotoes;
 	}
 
-	public String getValorComMoeda(BigDecimal valor) {
-		NumberFormat usdCostFormat = NumberFormat.getCurrencyInstance(local);
-		return usdCostFormat.format(valor.doubleValue());
-	}
-
-	public String getValorComMoeda(double parseDouble) {
-		BigDecimal bigDecimal = new BigDecimal(parseDouble);
-		return getValorComMoeda(bigDecimal);
-	}
-	
 	public static Calendar hojeEmCalendar(){
 		return Calendar.getInstance();
 	}
