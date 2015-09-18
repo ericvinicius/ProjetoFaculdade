@@ -36,12 +36,6 @@ public class Cliente{
 		this.setNome(nome);
 	}
 
-	@Deprecated
-	public Cliente() {
-		setConta(new Conta());
-		// TODO: Este metodo deve ser removido no fim do projeto
-	}
-
 	public Cliente(String senha2, int[] codigoDeAcesso2, boolean novoCodigoDeAcesso2, boolean admin2, int status2, Long id2, String nome2, Conta contaDoCliente) {
 		setConta(contaDoCliente);
 		setSenha(senha2);
