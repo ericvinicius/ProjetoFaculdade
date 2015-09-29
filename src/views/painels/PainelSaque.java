@@ -1,5 +1,7 @@
 package views.painels;
 
+import idioma.Idioma;
+
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -18,13 +20,13 @@ public class PainelSaque extends MyPanel implements MouseListener {
 	private JButton btsacar;
 	private JLabel lblou;
 	
-	private String valores[] = {"Valor", "10 reais", "20 reais", "50 reais", "100 reais"}; 
+	private String valores[]; 
 
 	public PainelSaque() {
-
+		idioma = new Idioma();
 		// Saque textField
 		JPanel paineSaqueTxt = new JPanel();
-		lblsaque = new JLabel("Saque");
+		lblsaque = new JLabel(idioma.translate("saque"));
 		paineSaqueTxt.add(lblsaque);
 
 		txtsaque = new JTextField();
@@ -34,7 +36,7 @@ public class PainelSaque extends MyPanel implements MouseListener {
 
 		painelC.add(paineSaqueTxt, BorderLayout.NORTH);
 		
-		lblou = new JLabel("ou");
+		lblou = new JLabel(idioma.translate("ou"));
 		lblou.setHorizontalAlignment(JLabel.CENTER);
 		
 		painelC.add(lblou, BorderLayout.CENTER);
@@ -43,17 +45,19 @@ public class PainelSaque extends MyPanel implements MouseListener {
 		JPanel panelValores = new JPanel();
 		panelValores.add(vazio);
 		
+		valores = idioma.getOpcoesDeSaque();
 		compoValorFixo = new JComboBox<String>(valores);
 		panelValores.add(compoValorFixo);
 		
+		valores = idioma.getOpcoesDeSaque();
 		painelC.add(panelValores, BorderLayout.SOUTH);
 
 		// botao debito automatico
-		btsacar = new JButton("Sacar");
+		btsacar = new JButton(idioma.translate("sacar"));
 		btsacar.addMouseListener(this);
 		painelS.add(btsacar, BorderLayout.CENTER);
 
-		JPanel painelDeSaque = criaPainelCentral("Saque");
+		JPanel painelDeSaque = criaPainelCentral(idioma.translate("saque"));
 		painelDeSaque.add(painelC);
 		painelDeSaque.add(painelS);
 	}

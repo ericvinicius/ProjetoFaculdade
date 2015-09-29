@@ -1,5 +1,7 @@
 package views.painels;
 
+import idioma.Idioma;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -27,29 +29,36 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 	private JTable table;
 	private Object[][] linhasDaTabela;
 
-	private String[] tituloDaTabela = { "Data", "Tipo", "Valor", "Novo Saldo" };
+	private String[] tituloDaTabela;
 
-	private JButton imprimiExtrato = new JButton("Imprimir Extrato");
-	private JButton imprimiSaldo = new JButton("Imprimir Saldo");
+	private JButton imprimiExtrato;
+	private JButton imprimiSaldo;
 
-	private JLabel lfiltros = new JLabel("Filtrar dias atras:");
+	private JLabel lfiltros;
 	private JFormattedTextField tfiltro = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskFiltraTabela, false));
-	private JButton bfiltrar = new JButton("Aplicar filtro");
+	private JButton bfiltrar;
 
 	public PainelExtrato() {
+		idioma = new Idioma();
+		
+		tituloDaTabela = idioma.getTitulasDaTabela();
 		linhasDaTabela = user.getExtrato();
 
+		lfiltros = new JLabel(idioma.translate("filtrarDias"));
 		painelN.add(lfiltros, BorderLayout.WEST);
 
 		tfiltro.setSelectionStart(0);
 		tfiltro.addKeyListener(this);
 		painelN.add(tfiltro, BorderLayout.CENTER);
-
+		
+		bfiltrar = new JButton(idioma.translate("filtrar"));
 		bfiltrar.addMouseListener(this);
 		painelN.add(bfiltrar, BorderLayout.EAST);
 
 		criaEAdicionaTabela();
 
+		imprimiExtrato = new JButton(idioma.translate("impExtrato"));
+		imprimiSaldo = new JButton(idioma.translate("impSaldo"));
 		painelS.add(imprimiExtrato, BorderLayout.WEST);
 		painelS.add(imprimiSaldo, BorderLayout.EAST);
 
@@ -64,7 +73,6 @@ public class PainelExtrato extends MyPanel implements MouseListener, KeyListener
 
 	private void atualizaTabela(String periodo) {
 		try {
-			System.out.println("periodo = (" + periodo.trim() + ")");
 			int dias = Integer.parseInt(periodo.trim());
 			filtraTabela(dias);
 

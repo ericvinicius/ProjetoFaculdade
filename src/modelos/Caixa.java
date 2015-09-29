@@ -24,13 +24,7 @@ public class Caixa {
 	private static int qtdSaldo = 0;
 	
 	public static boolean podeSacar(Movimentacao movimentacao) {
-		BigDecimal valor = movimentacao.getValor();
-		
-		while(valor.subtract(v50).compareTo(zero) == 1){
-			
-		}
-		//TODO: este metodo
-		return false;
+		return true;
 	}
 	
 	private static double getPorcentagemDeOperacoes(int valor){

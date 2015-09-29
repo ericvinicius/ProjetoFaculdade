@@ -5,9 +5,9 @@ import idioma.Idioma;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import dao.ClienteDao;
 import utilities.Logger;
 import utilities.Utilites;
+import dao.ClienteDao;
 
 public class Cliente{
 
@@ -198,6 +198,10 @@ public class Cliente{
 
 	public Cliente carregaCliente() {
 		return new ClienteDao().carregaCliente(this);
+	}
+	
+	public int contaEmInt(){
+		return Integer.parseInt(getConta().getConta().replace(".", "").replace("-", ""));
 	}
 	
 }

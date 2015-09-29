@@ -24,8 +24,6 @@ public class GUILogin extends GUIMyFrame implements MouseListener {
 	protected JFormattedTextField txtagencia;
 	protected JPasswordField txtsenha;
 	
-	private Idioma idioma = new Idioma(GUILogin.class);
-	
 	public GUILogin() {
 		// Conta
 		lblconta = new JLabel(idioma.translate("conta"));
@@ -62,8 +60,9 @@ public class GUILogin extends GUIMyFrame implements MouseListener {
 
 	@Override
 	public void configuraPagina() {
+		idioma = new Idioma();
 		setLayout(new FlowLayout());
-		setSize(250, 200);
+		setSize(260, 200);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}

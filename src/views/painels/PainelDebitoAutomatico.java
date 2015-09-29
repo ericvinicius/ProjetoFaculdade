@@ -1,5 +1,7 @@
 package views.painels;
 
+import idioma.Idioma;
+
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -28,10 +30,10 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 	private JRadioButton radiotel;
 
 	public PainelDebitoAutomatico() {
-
+		idioma = new Idioma();
 		//Cod Operadora
 		JPanel paineloperadora = new JPanel();
-		lbloperadora = new JLabel(" Cod. Operadora:  ");
+		lbloperadora = new JLabel(idioma.translate("operadora"));
 		paineloperadora.add(lbloperadora);
 
 		txtoperadora = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskConta, true));
@@ -43,7 +45,7 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 
 		// Cod Consumidor
 		JPanel painelconsumidor = new JPanel();
-		lblconsumidor = new JLabel("Cod. Consumidor:");
+		lblconsumidor = new JLabel(idioma.translate("consumidor"));
 		painelconsumidor.add(lblconsumidor);
 
 		txtconsumidor = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskAgencia, true));
@@ -55,11 +57,10 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 
 		// Data
 		JPanel painelData = new JPanel();
-		lbldata = new JLabel("Data ");
+		lbldata = new JLabel(idioma.translate("data"));
 		painelData.add(lbldata);
 
 		dateChooser = new JDateChooser();
-		dateChooser.setToolTipText("seila");
 		painelData.add(dateChooser);
 		
 		painelC.add(painelData, BorderLayout.SOUTH);
@@ -68,9 +69,9 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 		JPanel painelRadio = new JPanel();
 		ButtonGroup radioGroup = new ButtonGroup();
 		
-		radioagua = new JRadioButton("Agua");
-		radioluz = new JRadioButton("Luz");
-		radiotel = new JRadioButton("Telefone");
+		radioagua = new JRadioButton(idioma.translate("agua"));
+		radioluz = new JRadioButton(idioma.translate("luz"));
+		radiotel = new JRadioButton(idioma.translate("telefone"));
 		
 		radioGroup.add(radioagua);
 		radioGroup.add(radioluz);
@@ -83,11 +84,11 @@ public class PainelDebitoAutomatico extends MyPanel implements MouseListener {
 		painelS.add(painelRadio, BorderLayout.NORTH);
 
 		// botao debito automatico
-		btdebitoAutomatico = new JButton("Autorizar Debido Automatico");
+		btdebitoAutomatico = new JButton(idioma.translate("autorizar"));
 		btdebitoAutomatico.addMouseListener(this);
 		painelS.add(btdebitoAutomatico, BorderLayout.CENTER);
 
-		JPanel painelDeDebitoAutomatico = criaPainelCentral("Debito Automatico");
+		JPanel painelDeDebitoAutomatico = criaPainelCentral(idioma.translate("debito"));
 		painelDeDebitoAutomatico.add(painelC);
 		painelDeDebitoAutomatico.add(painelS);
 	}

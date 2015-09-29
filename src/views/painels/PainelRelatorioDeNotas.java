@@ -1,5 +1,7 @@
 package views.painels;
 
+import idioma.Idioma;
+
 import java.awt.BorderLayout;
 
 import javax.swing.BorderFactory;
@@ -12,9 +14,10 @@ import modelos.Caixa;
 public class PainelRelatorioDeNotas extends JPanel {
 	
 	public PainelRelatorioDeNotas() {
+		Idioma idioma = new Idioma();
 		setLayout(new BorderLayout());
 		
-		JPanel painelCentral = criaPainelCentral("Quantidade de Notas");
+		JPanel painelCentral = criaPainelCentral(idioma.translate("qtdNotas"));
 		painelCentral.setLayout(new BorderLayout());
 		painelCentral.setSize(300, 280);
 		
@@ -32,7 +35,7 @@ public class PainelRelatorioDeNotas extends JPanel {
 		
 		add(painelCentral, BorderLayout.CENTER);
 		
-		JButton btImprimir = new JButton("Imprimir");
+		JButton btImprimir = new JButton(idioma.translate("imp"));
 		add(btImprimir, BorderLayout.SOUTH);
 		
 	}

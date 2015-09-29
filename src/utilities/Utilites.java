@@ -23,6 +23,7 @@ public class Utilites {
 	public static final int MAXIMO_DE_TENTATIVAS_PARA_CODIGO_DE_ACESSO = 3;
 	public static final String DELIMITADOR_DO_ARQUIVO_DE_TEXTO = "\\||\\n";
 	public static final String CAMINHO_PARA_ACESSO_TXT = "acesso/ACESSO.txt";
+	public static final String i18n = "ISO-8859-1";
 	public final BigDecimal saldoInicial = new BigDecimal(2000.00);
 	
 	// Mascaras
@@ -203,5 +204,24 @@ public class Utilites {
 
 	public static Calendar hojeEmCalendar(){
 		return Calendar.getInstance();
+	}
+
+	public static String removeJava(String arquivo) {
+		char[] letras = arquivo.toCharArray();
+		
+		char letra = letras[0];
+		String saida = "";
+		
+		for(int i = 0; i < letras.length; i++) {
+			letra = letras[i];
+			if(letra == '.'){
+				break;
+			} else {
+				saida += letra;
+			}
+			
+		}
+		
+		return saida;
 	}
 }

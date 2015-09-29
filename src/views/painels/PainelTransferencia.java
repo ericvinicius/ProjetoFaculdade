@@ -1,5 +1,7 @@
 package views.painels;
 
+import idioma.Idioma;
+
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -33,9 +35,10 @@ public class PainelTransferencia extends MyPanel implements MouseListener {
 	private BigDecimal valor;
 
 	public PainelTransferencia() {
+		idioma = new Idioma();
 		// Conta
 		JPanel painelConta = new JPanel();
-		lblconta = new JLabel("Conta   ");
+		lblconta = new JLabel(idioma.translate("conta"));
 		painelConta.add(lblconta);
 
 		txtconta = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskConta, true));
@@ -47,7 +50,7 @@ public class PainelTransferencia extends MyPanel implements MouseListener {
 
 		// Agencia
 		JPanel painelAgencia = new JPanel();
-		lblagencia = new JLabel("Agencia");
+		lblagencia = new JLabel(idioma.translate("agencia"));
 		painelAgencia.add(lblagencia);
 
 		txtagencia = new JFormattedTextField(utilites.criadorDeMascara(utilites.maskAgencia, true));
@@ -59,7 +62,7 @@ public class PainelTransferencia extends MyPanel implements MouseListener {
 
 		// Valor
 		JPanel painelValor = new JPanel();
-		lblvalor = new JLabel("Valor    ");
+		lblvalor = new JLabel(idioma.translate("valor"));
 		painelValor.add(lblvalor);
 
 		txtvalor = new JTextField();
@@ -69,12 +72,12 @@ public class PainelTransferencia extends MyPanel implements MouseListener {
 		painelC.add(painelValor, BorderLayout.SOUTH);
 
 		// botao transferencia
-		btefetuaTranferencia = new JButton("Realizar Transferencia");
+		btefetuaTranferencia = new JButton(idioma.translate("realTransf"));
 		btefetuaTranferencia.addMouseListener(this);
 		painelS.add(btefetuaTranferencia, BorderLayout.CENTER);
 
 		// Cria painel que vai possuir a borda
-		JPanel painelDeTransferencia = criaPainelCentral("Transferencia");
+		JPanel painelDeTransferencia = criaPainelCentral(idioma.translate("transferencia"));
 
 		// Adiciona conteudo a este painel
 		painelDeTransferencia.add(painelC);

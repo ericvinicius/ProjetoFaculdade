@@ -1,5 +1,7 @@
 package views;
 
+import idioma.Idioma;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
@@ -25,6 +27,7 @@ public class GUIPrincipal extends GUIMyFrame {
 		
 		MyPanel.setUser(user);
 		MyPanel.setUtilites(utilites);
+		MyPanel.setIdioma(idioma);
 		
 		painelExtrato = new PainelExtrato();
 		painelTransferencia = new PainelTransferencia();
@@ -38,16 +41,17 @@ public class GUIPrincipal extends GUIMyFrame {
 		getContentPane().add(lnome, BorderLayout.NORTH);
 
 		// Adiciona as abas
-		abas.addTab("Extrato", painelExtrato);
-		abas.addTab("Transferencia", painelTransferencia);
-		abas.addTab("Debito Automatico", painelDebitoAutomatico);
-		abas.addTab("Saque", painelSaque);
+		abas.addTab(idioma.translate("extrato"), painelExtrato);
+		abas.addTab(idioma.translate("transferencia"), painelTransferencia);
+		abas.addTab(idioma.translate("debito"), painelDebitoAutomatico);
+		abas.addTab(idioma.translate("saque"), painelSaque);
 		getContentPane().add(abas, BorderLayout.CENTER);
 
 	}
 	
 	@Override
 	public void configuraPagina() {
+		idioma = new Idioma();
 		setSize(500, 500);
 		getContentPane().setLayout(new BorderLayout());
 		setLocationRelativeTo(null);

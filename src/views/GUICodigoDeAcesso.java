@@ -12,11 +12,10 @@ import javax.swing.JOptionPane;
 public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	protected JButton bt12, bt34, bt56, bt78, bt90;
-	protected Idioma idioma = new Idioma(GUICodigoDeAcesso.class);
 
 	public GUICodigoDeAcesso() {
 		if (user.isNovoCodigoDeAcesso()) {
-			JOptionPane.showMessageDialog(this, idioma.translateToPopUp("novoCodigo"));
+			JOptionPane.showMessageDialog(this, idioma.translatePopUp("novoCodigo"));
 		}
 		
 		String ou = idioma.translate("ou");
@@ -33,15 +32,17 @@ public class GUICodigoDeAcesso extends GUIMyFrame implements MouseListener {
 
 	@Override
 	public void configuraPagina() {
+		idioma = new Idioma();
 		setLayout(new GridLayout());
 		setSize(300, 90);
 		setLocationRelativeTo(null);
 		setVisible(true);
 
 		if (user.isNovoCodigoDeAcesso()) {
-			setTitle("Crie seu Codigo de acesso");
+			setTitle(idioma.getTitle("novoCodigo"));
 		} else {
-			setTitle("Digite o seu Codigo de Acesso");
+			System.out.println(idioma);
+			setTitle(idioma.getTitle("comCodigo"));
 		}
 	}
 

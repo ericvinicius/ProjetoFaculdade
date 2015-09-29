@@ -1,5 +1,7 @@
 package views;
 
+import idioma.Idioma;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
@@ -17,18 +19,19 @@ public class GUIAdmin extends GUIMyFrame {
 	private JLabel admin;
 
 	public GUIAdmin() {
+		idioma = new Idioma();
 		configuraPagina();
 
 		painelRelatorioDeNotas = new PainelRelatorioDeNotas();
 		painelRelatorioDeOperacoes = new PainelRelatorioDeOperacoes();
 		
-		admin = new JLabel("ADMINISTRADOR");
+		admin = new JLabel(idioma.translate("admin"));
 		admin.setHorizontalAlignment(JLabel.CENTER);
 		add(admin, BorderLayout.NORTH);
 		
 		// Adiciona as abas
-		abas.addTab("Relatorio de Notas", painelRelatorioDeNotas);
-		abas.addTab("Relatorio de Operacoes", painelRelatorioDeOperacoes);
+		abas.addTab(idioma.translate("notas"), painelRelatorioDeNotas);
+		abas.addTab(idioma.translate("operacao"), painelRelatorioDeOperacoes);
 		add(abas, BorderLayout.CENTER);
 	}
 

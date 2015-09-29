@@ -27,6 +27,7 @@ import dao.ClienteDao;
 public class MyPanel extends JPanel {
 	protected static Cliente user;
 	protected static Utilites utilites;
+	protected static Idioma idioma;
 
 	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();
 	protected ValidadorDeClientes validador = new ValidadorDeClientes();
@@ -43,7 +44,7 @@ public class MyPanel extends JPanel {
 
 		JPanel containerSaldo = new JPanel();
 
-		JLabel lsaldos = new JLabel("Saldo: ");
+		JLabel lsaldos = new JLabel(idioma.translateSaldo());
 		JLabel lvalSaldos = atualizaSaldo();
 
 		containerSaldo.add(lsaldos);
@@ -129,6 +130,10 @@ public class MyPanel extends JPanel {
 
 	public static void setUtilites(Utilites utilites) {
 		MyPanel.utilites = utilites;
+	}
+
+	public static void setIdioma(Idioma idioma) {
+		MyPanel.idioma = idioma;
 	}
 
 }

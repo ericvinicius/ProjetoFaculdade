@@ -1,5 +1,7 @@
 package dao;
 
+import idioma.Idioma;
+
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -67,13 +69,13 @@ public class ClienteDao extends MyDao {
 		String tipoDaMov = "";
 		
 		if (idClienteDaMov != idClienteDestinoDaMov) {
-			tipoDaMov = "Transferencia";
+			tipoDaMov = Idioma.getTransferencia();
 
 			if (idClienteDaMov == cliente.getId()) {
-				tipoDaMov += " - Saida";
+				tipoDaMov += " - " + Idioma.getSaida();
 				novoSaldoMov = saldoAnterior.subtract(valorDaMov);
 			} else {
-				tipoDaMov += " - Entrada";
+				tipoDaMov += " - " + Idioma.getEntrada();
 				novoSaldoMov = saldoAnterior.add(valorDaMov);
 			}
 		} else {

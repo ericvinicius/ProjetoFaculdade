@@ -49,6 +49,7 @@ public class LoginController extends GUILogin implements KeyListener {
 				verificaLogin();
 			}
 		} catch (NullPointerException en){
+			en.printStackTrace();
 			Logger.warn("Em Branco", "Algum campo esta em branco!");
 			utilites.tremeTelaComMensagemDeErro(this);
 		}

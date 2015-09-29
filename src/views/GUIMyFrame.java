@@ -1,5 +1,6 @@
 package views;
 
+import idioma.Idioma;
 import interfaces.MyConfiguration;
 
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ public abstract class GUIMyFrame extends JFrame implements MyConfiguration {
 	protected static Cliente user;
 	protected Utilites utilites = new Utilites();
 	protected ManipuladorDeArquivos fileHandler = new ManipuladorDeArquivos();
+	protected Idioma idioma;
 			
 	public GUIMyFrame() {
 		super("");
