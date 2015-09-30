@@ -31,7 +31,6 @@ public class ManipuladorDeArquivos {
 		usuarioTentativa.toLog("Tentativa Login");
 		
 		String arquivoTodo = criptografador.decriptografaAcesso();
-		System.out.println(arquivoTodo);
 		
 		try {
 			leitor = new Scanner(arquivoTodo);
