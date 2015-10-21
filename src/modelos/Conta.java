@@ -8,6 +8,8 @@ public class Conta {
 	private String conta;
 	private String agencia;
 	private BigDecimal saldo = BigDecimal.ZERO;
+	
+	private int id;
 
 	private ArrayList<Movimentacao> movimentacoes;
 	private ArrayList<DebitoAutomatico> debitosAutomaticos;
@@ -19,8 +21,7 @@ public class Conta {
 		this.movimentacoes = movimentacoes;
 		this.debitosAutomaticos = debitosAutomaticos;
 	}
-	public Conta() {
-	}
+	public Conta() {}
 	
 	public String getConta() {
 		return conta;
@@ -52,6 +53,12 @@ public class Conta {
 	}
 	public void setDebitosAutomaticos(ArrayList<DebitoAutomatico> debitosAutomaticos) {
 		this.debitosAutomaticos = debitosAutomaticos;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

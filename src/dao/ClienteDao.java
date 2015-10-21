@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import modelos.Cliente;
+import modelos.Conta;
 import modelos.Movimentacao;
 import utilities.Logger;
 import builders.MovimentacaoBuilder;
@@ -20,26 +21,29 @@ public class ClienteDao extends MyDao {
 	private BigDecimal saldoAnterior = utilites.saldoInicial;
 	private BigDecimal novoSaldoMov = BigDecimal.ZERO;
 
-	public Cliente carregaCliente(Cliente cliente) {
+	public Cliente carregaClienteComMovimentacoes(Cliente cliente) {
 		criaConexao();
 		this.cliente = cliente;
 		Long idDoCliente = cliente.getId();
 		try {
-			stmt = connection.prepareStatement("select * from Cliente c join Movimentacao m on c.id = m.idCliente where m.idCliente = ? "
-					+ "or m.idClienteDestino = ? order by m.data ASC;");
+			stmt = connection.prepareStatement("select * from Cliente c "
+					+ "join Movimentacao m on c.id = m.idCliente "
+					+ "join Conta co on co.idCliente = c.id "
+					+ "where m.idCliente = ? or m.idClienteDestino = ? "
+					+ "order by m.data ASC;");
+			
 			stmt.setLong(1, idDoCliente);
 			stmt.setLong(2, idDoCliente);
 			rs = stmt.executeQuery();
 
+			boolean precisaCarregarCliente = true;
 			while (rs.next()) {
-				builder = new MovimentacaoBuilder();
-				//TODO: melhorar esta logica do i
-				int i = 0;
-				if (i == 0 && idDoCliente == rs.getLong("id")) {
+				if (precisaCarregarCliente && idDoCliente == rs.getLong("id")) {
 					fazLoadDoCliente();
-					i++;
+					precisaCarregarCliente = false;
 				}
 
+				builder = new MovimentacaoBuilder();
 				Movimentacao movimentacao = constroiMovimentacao();
 				pegaTipoDeMov(movimentacao);
 
@@ -52,12 +56,12 @@ public class ClienteDao extends MyDao {
 		}
 
 		fechaConexao();
-		atualizaSaldoCliente();
+		atualizaCliente();
 		
 		return cliente;
 	}
 
-	private void atualizaSaldoCliente() {
+	private void atualizaCliente() {
 		cliente.getConta().setSaldo(novoSaldoMov);
 		atualizaClientePorId(cliente);
 	}
@@ -104,14 +108,18 @@ public class ClienteDao extends MyDao {
 	private void fazLoadDoCliente() throws SQLException {
 		cliente.setNome(rs.getString("nome"));
 		cliente.getConta().setSaldo(rs.getBigDecimal("saldo"));
+		
+		Conta conta = new Conta();
+		conta.setId(rs.getInt("idConta"));
+		cliente.setConta(conta);
 	}
 
 	public void atualizaClientePorId(Cliente cliente) {
 		criaConexao();
 		try {
-			stmt = connection.prepareStatement("update Cliente set saldo = ? where id = ?");
+			stmt = connection.prepareStatement("update Conta set saldo = ? where idConta = ?");
 			stmt.setBigDecimal(1, cliente.getConta().getSaldo());
-			stmt.setLong(2, cliente.getId());
+			stmt.setLong(2, cliente.getConta().getId());
 			stmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -119,7 +127,7 @@ public class ClienteDao extends MyDao {
 		}
 		fechaConexao();
 	}
-
+	
 	public String loadName(Long idCliente) {
 		criaConexao();
 		String nome = "";

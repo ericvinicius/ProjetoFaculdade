@@ -197,7 +197,7 @@ public class Cliente{
 	}
 
 	public Cliente carregaCliente() {
-		return new ClienteDao().carregaCliente(this);
+		return new ClienteDao().carregaClienteComMovimentacoes(this);
 	}
 	
 	public int contaEmInt(){

@@ -1,15 +1,14 @@
+drop database `projetoIntegrado`;
 #Create database
-CREATE DATABASE `projetoIntegrado` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE `projetoIntegrado`;
 
 use projetoIntegrado;
 
 CREATE TABLE `Cliente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
-  `saldo` decimal(18,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `Movimentacao` (
   `idMovimentacao` int(11) NOT NULL AUTO_INCREMENT,
@@ -22,6 +21,14 @@ CREATE TABLE `Movimentacao` (
   CONSTRAINT `idCliente` FOREIGN KEY (`idCliente`) REFERENCES `Cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
+CREATE TABLE `Conta` (
+  `idConta` int(11) NOT NULL AUTO_INCREMENT,
+  `idCliente` int(11) NOT NULL,
+  `conta` varchar(45) DEFAULT NULL,
+  `agencia` varchar(45) DEFAULT NULL,
+  `saldo` decimal(18,2) DEFAULT NULL,
+  PRIMARY KEY (`idConta`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 
 

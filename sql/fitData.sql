@@ -4,11 +4,18 @@ truncate Movimentacao;
 TRUNCATE Cliente; 
 SET FOREIGN_KEY_CHECKS = 1;
 
-INSERT INTO Cliente (nome, saldo) VALUES ('Mister Satan', 1704.20);
-INSERT INTO Cliente (nome, saldo) VALUES ('Carlinhos', 1704.20);
-INSERT INTO Cliente (nome, saldo) VALUES ('Joao Carlos', 1704.20);
-INSERT INTO Cliente (nome, saldo) VALUES ('Cara Fudido', 1704.20);
-INSERT INTO Cliente (nome, saldo) VALUES ('luck man', 1704.20);
+INSERT INTO Cliente (nome) VALUES ('Mister Satan');
+INSERT INTO Cliente (nome) VALUES ('Carlinhos');
+INSERT INTO Cliente (nome) VALUES ('Joao Carlos');
+INSERT INTO Cliente (nome) VALUES ('Cara Fudido');
+INSERT INTO Cliente (nome) VALUES ('luck man');
+
+insert into Conta (idCliente, conta, agencia, saldo) values (1, '12.345-6', '1234-5', 1704.20);
+insert into Conta (idCliente, conta, agencia, saldo) values (2, '23.456-7', '2345-5', 1704.20);
+insert into Conta (idCliente, conta, agencia, saldo) values (3, '34.567-8', '3456-7', 1704.20);
+insert into Conta (idCliente, conta, agencia, saldo) values (4, '45.678-9', '4567-8', 1704.20);
+insert into Conta (idCliente, conta, agencia, saldo) values (5, '11.111-1', '1111-1', 1704.20);
+insert into Conta (idCliente, conta, agencia, saldo) values (6, '22.222-2', '2222-2', 1704.20);
 
 DROP PROCEDURE IF EXISTS dowhile;
 delimiter //
@@ -42,8 +49,7 @@ delimiter ;
 
 call dowhile();
 
-INSERT INTO Cliente (nome, saldo) VALUES ('Sr. Saldo Negativo', -1704.20);
-
 select * from Cliente;
 select * from Movimentacao;
+select * from Conta;
 

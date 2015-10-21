@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -65,11 +64,9 @@ public class ManipuladorDeArquivos {
 		
 		int inicio = 0;
 		int fim = listaDeUsuarios.size() - 1;
-		System.out.println("Fim = " + fim);
 
 		while (inicio <= fim) {
 			int meio = (inicio + fim) / 2;
-			System.out.println(meio);
 			usuarioCadastrado = listaDeUsuarios.get(meio);
 
 			if (validador.possuemLoginIgual(usuarioCadastrado, usuarioTentativa)) {
@@ -89,21 +86,6 @@ public class ManipuladorDeArquivos {
 		}
 
 		return null;
-	}
-
-	public static String leArquivoTodo() {
-		byte[] encoded = null;
-		String saida = "";
-		try {
-			encoded = Files.readAllBytes(Paths.get(Utilites.CAMINHO_PARA_ACESSO_TXT));
-			saida = new String(encoded, Utilites.i18n);
-
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return saida;
 	}
 
 	public static byte[] leArquivoTodoEmBytes() {
@@ -165,8 +147,9 @@ public class ManipuladorDeArquivos {
 
 	public Cliente usuarioExiste(Cliente usuarioTentativa) {
 		usuarioTentativa.toLog("Tentat Transf");
+		String arquivoTodo = criptografador.decriptografaAcesso();
 		try {
-			leitor = new Scanner(new FileReader(Utilites.CAMINHO_PARA_ACESSO_TXT));
+			leitor = new Scanner(arquivoTodo);
 			leitor.useDelimiter(Utilites.DELIMITADOR_DO_ARQUIVO_DE_TEXTO);
 
 			while (leitor.hasNext()) {
@@ -189,8 +172,6 @@ public class ManipuladorDeArquivos {
 				}
 			}
 
-		} catch (FileNotFoundException ef) {
-			Logger.error(ef, "Arquivo ACESSO.txt nao encontrado");
 		} catch (NumberFormatException en) {
 			Logger.warn("Sem Cadastro", "Usuario da transferencia não foi encontrado no arquivo ACESSO.txt");
 		} finally {
